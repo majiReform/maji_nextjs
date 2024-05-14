@@ -1,0 +1,8 @@
+.sidebyside {
+    display: flex;
+}
+
+.sidebyside > div {
+    width: 50%;
+    
+}
