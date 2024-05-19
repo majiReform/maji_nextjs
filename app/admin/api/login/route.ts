@@ -1,7 +1,10 @@
 import { userCollection } from "@/models/Users";
 import bcrypt from "bcrypt";
+import { NextRequest, NextResponse } from "next/server";
+import { encrypt, logIt } from "../utils";
+import { cookies } from "next/headers";
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
     const { email, password } = await request.json();
 
     try {
@@ -11,7 +14,7 @@ export async function POST(request: Request) {
         console.log(admin);
 
         if (!admin) {
-            return Response.json({
+            return NextResponse.json({
                 isSuccessful: false,
                 message: "No user found"
             }, {
@@ -19,10 +22,10 @@ export async function POST(request: Request) {
             });
         }
 
-        const passwordsMatch = await bcrypt.compareSync(password, admin.password);
+        const passwordsMatch = bcrypt.compareSync(password, admin!!.password as string);
 
-        if(!passwordsMatch) {
-            return Response.json({
+        if (!passwordsMatch) {
+            return NextResponse.json({
                 isSuccessful: false,
                 message: "Passwords don't match"
             }, {
@@ -30,16 +33,33 @@ export async function POST(request: Request) {
             });
         }
 
-        // Login the user
 
-        return Response.json({
+        const session = await encrypt({
+            user: {
+                fullName: admin.fullName,
+                userId: admin!!._id as string,
+                email: admin.email,
+                role: "admin"
+            }
+        });
+
+        console.log("Ses", session, "ses");
+
+        cookies().set("session", session, {
+            httpOnly: true,
+            sameSite: "strict",
+            maxAge: 7 * 24 * 60 * 60
+        });
+
+        return NextResponse.json({
             isSuccessful: true,
-            res: "Hi"
+            message: "Loggedin successfully!"
         }, {
             status: 200
         });
     } catch (error) {
-        return Response.json({
+        logIt({ value: error, level: "error" });
+        return NextResponse.json({
             isSuccessful: false,
             error: "Internal server error"
         }, {

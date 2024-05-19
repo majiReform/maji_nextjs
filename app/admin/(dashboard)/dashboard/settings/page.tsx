@@ -8,7 +8,6 @@ import { EditProfile } from '@/components/admindashboard/EditProfile';
 import { ChangePassword } from '@/components/admindashboard/ChangePassword';
 
 
-
 interface TabPanelProps {
     children?: React.ReactNode;
     index: number;

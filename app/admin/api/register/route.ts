@@ -1,14 +1,15 @@
 import { userCollection } from "@/models/Users";
 import bcrypt from "bcrypt";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
     try {
-        const { fullName, email, password } = await request.json();
+        const { fullName, email, phoneNumber, password } = await request.json();
 
         const admin = await userCollection.findOne({ email });
 
         if (admin) {
-            return Response.json({
+            return NextResponse.json({
                 isSuccessful: false,
                 message: "Admin already exist"
             }, {
@@ -16,11 +17,11 @@ export async function POST(request: Request) {
             });
         }
 
-        const hashedPassword = bcrypt.hashSync(bcrypt.genSaltSync(10), password);
+        const hashedPassword = bcrypt.hashSync(password as string, bcrypt.genSaltSync(10));
 
-        await userCollection.create({ fullName, email, password: hashedPassword });
+        await userCollection.create({ fullName, email, phoneNumber, password: hashedPassword });
 
-        return Response.json({
+        return NextResponse.json({
             isSuccessful: true,
             res: "Registered"
         }, {
@@ -28,7 +29,8 @@ export async function POST(request: Request) {
         });
 
     } catch (error) {
-        return Response.json({
+        console.log(error);
+        return NextResponse.json({
             isSuccessful: false,
             error: "Internal server error"
         }, {

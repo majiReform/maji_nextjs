@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { PiPencilSimpleLine } from "react-icons/pi";
-
+import { RxAvatar } from "react-icons/rx";
 
 const labelStyle = {
     backgroundColor: "white",
@@ -19,7 +19,8 @@ function EditProfile() {
         <div>
             <div className="flex flex-col w-[800px] gap-10 mx-auto py-20">
 
-                <div className="relative w-[200px] h-[200px] rounded-full overflow-hidden mx-auto">
+                {true ? (
+                    <div className="relative w-[200px] h-[200px] rounded-full overflow-hidden mx-auto">
                     <Image src="/auth_pic.jpeg" fill={true} alt="Profile picture" style={{zIndex: "20"}} />
                     <div style={{zIndex: "120", position: "absolute", left: "50%"}} className="text-black bg-white bottom-[20px] translate-x-[-50%] px-4 py-1 rounded-[10px]">
                         <input
@@ -34,6 +35,24 @@ function EditProfile() {
                         </label>
                     </div>
                 </div>
+                ) : (
+                    <div className="relative w-[200px] h-[200px] rounded-full overflow-hidden mx-auto">
+                        <RxAvatar style={{zIndex: "20"}} />
+                    <div style={{zIndex: "120", position: "absolute", left: "50%"}} className="text-black bg-white bottom-[20px] translate-x-[-50%] px-4 py-1 rounded-[10px]">
+                        <input
+                            type="file"
+                            id="upload-file"
+                            accept=".jpg,.jpeg,.png"
+                            className='hidden'
+                            // onChange={handleFileUpload}
+                        />
+                        <label style={labelStyle} htmlFor="upload-file" className="upload-button-label">
+                            <PiPencilSimpleLine /> Edit
+                        </label>
+                    </div>
+                </div>
+                )}
+                
 
                 <div>
                     <label htmlFor="">Full Name</label>

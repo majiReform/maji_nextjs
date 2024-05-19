@@ -24,7 +24,7 @@ class MongoDBQueryHelper<T> {
         try {
             const db = await this.connect();
             const collection = db.collection(this.collectionName);
-            return await collection.findOne(query);
+            return await collection.findOne(query) as T;
         } catch (error) {
             throw new Error(`Error counting documents: ${error.message}`);
         }
@@ -34,7 +34,7 @@ class MongoDBQueryHelper<T> {
         try {
             const db = await this.connect();
             const collection = db.collection(this.collectionName);
-            return await collection.findOne({ _id: new ObjectId(id) });
+            return await collection.findOne({ _id: new ObjectId(id) }) as T;
         } catch (error: any) {
             throw new Error(`Error counting documents: ${error.message}`);
         }
@@ -45,7 +45,7 @@ class MongoDBQueryHelper<T> {
             const db = await this.connect();
             const collection = db.collection(this.collectionName);
             const { limit = 0, skip = 0 } = options;
-            return await collection.find(query).skip(skip).limit(limit).toArray();
+            return await collection.find(query).skip(skip).limit(limit).toArray() as T[];
         } catch (error: any) {
             throw new Error(`Error counting documents: ${error.message}`);
         }
@@ -58,7 +58,20 @@ class MongoDBQueryHelper<T> {
             data.createdAt = new Date();
             data.updatedAt = new Date();
             const result = await collection.insertOne(data);
-            return { ...data, _id: result.insertedId };
+            return { ...data, _id: result.insertedId } as T;
+        } catch (error: any) {
+            throw new Error(`Error counting documents: ${error.message}`);
+        }
+    }
+
+    async findByIdAndUpdate(id: string | ObjectId, data: T): Promise<any> {
+        try {
+            const db = await this.connect();
+            const collection = db.collection(this.collectionName);
+            data.updatedAt = new Date();
+
+
+            return await collection.updateOne({_id: typeof(id) == "string" ? (new ObjectId(id)) : id}, { $set: data }) as T;
         } catch (error: any) {
             throw new Error(`Error counting documents: ${error.message}`);
         }
@@ -69,7 +82,7 @@ class MongoDBQueryHelper<T> {
             const db = await this.connect();
             const collection = db.collection(this.collectionName);
             data.updatedAt = new Date();
-            return await collection.updateOne(query, { $set: data });
+            return await collection.updateOne(query, { $set: data }) as T;
         } catch (error: any) {
             throw new Error(`Error counting documents: ${error.message}`);
         }
@@ -79,7 +92,7 @@ class MongoDBQueryHelper<T> {
         try {
             const db = await this.connect();
             const collection = db.collection(this.collectionName);
-            return await collection.deleteOne(query);
+            return await collection.deleteOne(query) as T;
         } catch (error: any) {
             throw new Error(`Error counting documents: ${error.message}`);
         }
@@ -95,7 +108,7 @@ class MongoDBQueryHelper<T> {
         }
       }
 
-      async paginate(query: T, page = 1, limit = 10) {
+      async paginate(query: T, page:number = 1, limit: number = 10) {
         try {
           const count = await this.count(query);
           const totalPages = Math.ceil(count / limit);
@@ -107,11 +120,13 @@ class MongoDBQueryHelper<T> {
           const results = await collection
             .find(query)
             .skip(skip)
-            .limit(limit);
+            .limit(limit).toArray();
     
           return {
             totalPages,
             currentPage: page,
+            totalDocuments: count,
+            currentPageDocument: results.length,
             results,
           };
         } catch (error: any) {

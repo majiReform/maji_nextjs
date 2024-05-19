@@ -2,16 +2,18 @@ import { createAppSlice } from "@/lib/createAppSlice";
 import type { AppThunk } from "@/lib/store";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-export interface valueInterface {
-    _id?: string,
-    category: string,
-    title: string,
-    picture: string,
-    details: string
+export interface ThematicAreaInterface {
+    _id?: string
+    category?: string
+    title?: string
+    picture?: string
+    details?: string
+    createdAt?: Date
+    updatedAt?: Date
 }
 
 export interface thematicSliceState {
-    value: valueInterface[],
+    value: ThematicAreaInterface[],
     state: "idle" | "loading" | "failed"
 }
 
@@ -24,7 +26,7 @@ export const thematicSlice = createAppSlice({
     name: "thematic",
     initialState,
     reducers: (create) => ({
-        add: create.reducer((state, action: PayloadAction<valueInterface>) => {
+        add: create.reducer((state, action: PayloadAction<ThematicAreaInterface>) => {
             state.value.push(action.payload);
             console.log(state.value);
         }),

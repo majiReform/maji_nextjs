@@ -2,15 +2,15 @@ import { createAppSlice } from "@/lib/createAppSlice";
 import type { AppThunk } from "@/lib/store";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-export interface valueInterface {
+export interface VideoInterface {
     _id?: string,
-    title: string,
-    details: string,
-    youtubeURL: string
+    title?: string,
+    details?: string,
+    youtubeURL?: string
 }
 
 export interface videosSliceState {
-    value: valueInterface[],
+    value: VideoInterface[],
     state: "idle" | "loading" | "failed"
 }
 
@@ -23,7 +23,7 @@ export const videosSlice = createAppSlice({
     name: "videos",
     initialState,
     reducers: (create) => ({
-        add: create.reducer((state, action: PayloadAction<valueInterface>) => {
+        add: create.reducer((state, action: PayloadAction<VideoInterface>) => {
             state.value.push(action.payload);
             console.log(state.value);
         }),
