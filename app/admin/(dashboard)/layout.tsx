@@ -1,6 +1,10 @@
 import { AdminHeaderComponent } from "@/components/admindashboard/Header";
 import { AdminSidebarComponent } from "@/components/admindashboard/Sidebar";
+import { Metadata } from "next";
 import { ReactNode } from "react";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 interface Props {
     readonly children: ReactNode;
@@ -9,6 +13,7 @@ interface Props {
 export default function Layout({ children }: Props) {
     return (
         <div className="flex h-screen overflow-hidden">
+            <ToastContainer />
             <AdminSidebarComponent />
             <main className="w-[85%] overflow-y-hidden">
                 <AdminHeaderComponent />

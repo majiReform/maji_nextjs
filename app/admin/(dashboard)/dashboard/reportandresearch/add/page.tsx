@@ -9,7 +9,7 @@ import {
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 
- const labelStyle = {
+const labelStyle = {
     backgroundColor: "indigo",
     color: "white",
     padding: "0.5rem",
@@ -17,12 +17,14 @@ import Button from '@mui/material/Button';
     borderRadius: "0.3rem",
     cursor: "pointer",
     marginTop: "1rem"
-  }
+}
 
 import { Option, optionClasses } from '@mui/base/Option';
 import { useEffect, useState } from 'react';
-import { add, selectStatus, selectValue } from '@/lib/features/thematic/thematicSlice';
+import { add, selectStatus, selectValue } from '@/lib/features/research/researchSlice';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
+import { UploadFile } from '@/components/admindashboard/UploadFile';
+import { AddAreaHeader } from '@/components/admindashboard/AddAreaHeader';
 
 export default function Page() {
 
@@ -30,24 +32,26 @@ export default function Page() {
     const thematicarea = useAppSelector(selectValue);
     const status = useAppSelector(selectStatus);
 
-    const maxwords = 250;
+    const maxwords = 2500;
 
     const [buttonDisabled, setButtonDisabled] = useState(true);
 
-    const [semanticText, setSemanticText] = useState("");
+    const [details, setDetails] = useState("");
     const [category, setCategory] = useState("");
     const [title, setTitle] = useState("");
+    const [fileUrl, setFileUrl] = useState("");
+    const [pictureUrl, setPictureUrl] = useState("");
 
     const hasReachedLimit = () => {
-        console.log(semanticText.length, "of", maxwords);
-        if (semanticText.length > maxwords) {
+        console.log(details.length, "of", maxwords);
+        if (details.length > maxwords) {
             return true;
         }
         return false;
     }
 
     useEffect(() => {
-        if (semanticText != "" && category != "" && title != "") {
+        if (details != "" && category != "" && title != "" && fileUrl != "" && pictureUrl != "") {
             if (hasReachedLimit()) {
                 setButtonDisabled(true);
             } else {
@@ -59,17 +63,15 @@ export default function Page() {
 
         console.log(buttonDisabled);
 
-    }, [semanticText, category, title]);
+    }, [details, category, title]);
 
     const submitHandler = () => {
         dispatch(add({
-            _id: (Math.round(1000000000 + Math.random() * 1000000000)).toString(),
-            category,
             title,
-            picture: "/auth_pic.jpeg",
-            details: semanticText,
-            createdAt: Date.now(),
-            updatedAt: Date.now()
+            category,
+            pictureURL: pictureUrl,
+            document: fileUrl,
+            details,
         }))
     }
 
@@ -79,42 +81,48 @@ export default function Page() {
         <div>
             <div className='flex flex-col w-[800px] mx-auto py-20 gap-6'>
 
-                    <div>Upload Thematic Area</div>
+                <AddAreaHeader
+                    title='Upload Report and Research'
+                    key='report-and-research-upload-header'
+                />
 
-                <div>
-                    <div>
-                        <input
-                            type="file"
-                            id="upload-file"
-                            accept=".jpg,.jpeg,.png"
-                            className='hidden'
-                            // onChange={handleFileUpload}
-                        />
-                        <label style={labelStyle} htmlFor="upload-file" className="upload-button-label">
-                            Choose File
-                        </label>
-                    </div>
-                </div>
+                <UploadFile
+                    title='Drop your image file here or open gallery'
+                    body='Maximum upload files less than 30mb'
+                    buttonTitle='Browse file'
+                    iconType="picture"
+                    setFileUrl={setPictureUrl}
+                    key={"picture_upoload"}
+                />
+
+                <UploadFile
+                    title='Drop your document file here or browse files '
+                    body='Maximum upload files less than 30mb'
+                    buttonTitle='Browse file'
+                    setFileUrl={setFileUrl}
+                    iconType="file"
+                    key={"file_upoload"}
+                />
 
                 <div className='flex flex-col'>
                     <label htmlFor="select-category">Select category</label>
                     <select className={inputClass} onChange={(e) => { setCategory(e.target.value) }}>
-                        <option>Select a category for your thematic area</option>
-                        <option value="Human Rights">Human Rights</option>
-                        <option value="Human Liberty">Human Liberty</option>
+                        <option>Choose a category</option>
+                        <option value="research">Research</option>
+                        <option value="report">Report</option>
                     </select>
                 </div>
 
                 <div className='flex flex-col'>
-                    <label htmlFor="area-title">Semantic title area</label>
+                    <label htmlFor="area-title">Title</label>
                     <input type="text" className={inputClass} onChange={(e) => { setTitle(e.target.value) }} placeholder='Enter a semantic title' />
                 </div>
 
                 <div className='flex flex-col'>
-                    <label htmlFor="area-title">Semantic title details</label>
-                    <textarea className={inputClass} name="" id="" rows={12} placeholder='Type text here' value={semanticText} onChange={(e) => { setSemanticText(e.target.value) }}></textarea>
+                    <label htmlFor="area-title">Details</label>
+                    <textarea className={inputClass} name="" id="" rows={12} placeholder='Type text here' value={details} onChange={(e) => { setDetails(e.target.value) }}></textarea>
                     <div className='text-right'>
-                        <small>{semanticText.length}/{maxwords}</small>
+                        <small>{details.length}/{maxwords}</small>
                     </div>
                 </div>
 

@@ -3,28 +3,24 @@ import type { AppThunk } from "@/lib/store";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface valueInterface {
-    _id: string,
-    category: string,
+    _id?: string,
     title: string,
-    picture: string,
-    document: string,
     details: string,
-    createdAt: number,
-    updatedAt: number
+    youtubeURL: string
 }
 
-export interface researchSliceState {
+export interface videosSliceState {
     value: valueInterface[],
     state: "idle" | "loading" | "failed"
 }
 
-const initialState: researchSliceState = {
+const initialState: videosSliceState = {
     value: [],
     state: "idle"
 };
 
-export const researchSlice = createAppSlice({
-    name: "research",
+export const videosSlice = createAppSlice({
+    name: "videos",
     initialState,
     reducers: (create) => ({
         add: create.reducer((state, action: PayloadAction<valueInterface>) => {
@@ -44,6 +40,6 @@ export const researchSlice = createAppSlice({
     }
 });
 
-export const { add, remove } = researchSlice.actions;
+export const { add, remove } = videosSlice.actions;
 
-export const {selectValue, selectStatus} = researchSlice.selectors;
+export const {selectValue, selectStatus} = videosSlice.selectors;

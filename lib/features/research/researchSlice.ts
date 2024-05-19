@@ -3,14 +3,12 @@ import type { AppThunk } from "@/lib/store";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface valueInterface {
-    _id: string,
-    category: string,
+    _id?: string,
     title: string,
-    picture: string,
+    category: string,
+    pictureURL: string,
     document: string,
-    details: string,
-    createdAt: number,
-    updatedAt: number
+    details: string
 }
 
 export interface researchSliceState {

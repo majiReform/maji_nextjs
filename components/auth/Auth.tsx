@@ -1,7 +1,10 @@
+'use client'
 import styles from "./Auth.module.css";
 import Image from "next/image";
 import TextField from '@mui/material/TextField';
 import { Button } from "@mui/material";
+import { useState } from "react";
+import { SpinLoaderTwo } from "../LoadingAnimation/spinLoader";
 
 function LeftAreaComponent() {
   return (
@@ -14,6 +17,17 @@ function LeftAreaComponent() {
 
 
 function LoginComponent() {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [validationError, setValidationError] = useState("");
+  const [loginButtonState, setLoginButtonState] = useState("idle");
+
+
+  const handleLogin = () => {
+    setLoginButtonState("loading");
+  }
+
   return (
     <div className="flex justify-center items-center h-screen">
 
@@ -29,6 +43,8 @@ function LoginComponent() {
             type="email"
             label="Email"
             className="w-full bg-white"
+            value={email}
+            onChange={(e) => {setEmail(e.target.value)}}
           />
         </div>
 
@@ -38,6 +54,7 @@ function LoginComponent() {
             label="Password"
             type="password"
             className="w-full bg-white"
+            onChange={(e) => {setPassword(e.target.value)}}
           />
         </div>
 
@@ -45,7 +62,7 @@ function LoginComponent() {
           <Button
           variant="contained"
           className="w-full bg-yellow text-black shadow-none py-2"
-          >Login</Button>
+          >{loginButtonState == "loading" ? <SpinLoaderTwo /> : "Login"}</Button>
         </div>
 
       </div>

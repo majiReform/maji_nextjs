@@ -13,18 +13,18 @@ export interface valueInterface {
     updatedAt: number
 }
 
-export interface researchSliceState {
+export interface profileSliceState {
     value: valueInterface[],
     state: "idle" | "loading" | "failed"
 }
 
-const initialState: researchSliceState = {
+const initialState: profileSliceState = {
     value: [],
     state: "idle"
 };
 
-export const researchSlice = createAppSlice({
-    name: "research",
+export const profileSlice = createAppSlice({
+    name: "profile",
     initialState,
     reducers: (create) => ({
         add: create.reducer((state, action: PayloadAction<valueInterface>) => {
@@ -44,6 +44,6 @@ export const researchSlice = createAppSlice({
     }
 });
 
-export const { add, remove } = researchSlice.actions;
+export const { add, remove } = profileSlice.actions;
 
-export const {selectValue, selectStatus} = researchSlice.selectors;
+export const {selectValue, selectStatus} = profileSlice.selectors;

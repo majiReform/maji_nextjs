@@ -4,19 +4,11 @@ import { ThematicAreaList } from "@/components/admindashboard/ThematicArea";
 import { selectStatus, selectValue } from "@/lib/features/thematic/thematicSlice";
 import { useAppSelector } from "@/lib/hooks";
 
-export default function Layout() {
+
+
+export default function ThematicArea() {
 
     const thematicarea = useAppSelector(selectValue);
-    // const status = useAppSelector(selectStatus);
-
-    // const theList: any[] = [
-    //     {
-    //         picture: "/authpic",
-    //         category: "",
-    //         title: "",
-    //         details: ""
-    //     }
-    // ];
 
     if(thematicarea.length == 0) {
         return <EmptyDocument
@@ -31,3 +23,5 @@ export default function Layout() {
         <ThematicAreaList navigateTo="/admin/dashboard/thematicarea/add" />
     );
 }
+
+
