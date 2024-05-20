@@ -15,6 +15,8 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { RxExclamationTriangle } from "react-icons/rx";
 import { useState } from 'react';
+import { logoutFeature } from "@/lib/features/auth/logoutFeat";
+import { toast } from 'react-toastify';
 
 function selectAreaHeader() {
 
@@ -62,12 +64,22 @@ const style = {
 function LogoutModal({openState, setOpen}: openStateInterface) {
 
     console.log(openState);
+
+    const router = useRouter();
     
     const handleClose = () => {
         setOpen(false)
     }
 
-    const logout = () => {
+    const logout = async () => {
+        try {
+            await logoutFeature();
+
+            router.push("/admin/dashboard/thematicarea");
+            
+        } catch (error: any) {
+            toast.error(error.response.data.message);
+        }
 
     }
 
@@ -92,7 +104,7 @@ function LogoutModal({openState, setOpen}: openStateInterface) {
                 </Typography>
                 <div className="flex gap-4">
                     <button className="pointer-cursor w-full p-2 rounded-[10px] border" onClick={() => {handleClose()}}>Cancel</button>
-                    <button className="pointer-cursor w-full p-2 rounded-[10px] text-white bg-deletebutton" onClick={() => {logout()}}>Delete</button>
+                    <button className="pointer-cursor w-full p-2 rounded-[10px] text-white bg-deletebutton" onClick={() => {logout()}}>Logout</button>
                 </div>
             </Box>
         </Modal>

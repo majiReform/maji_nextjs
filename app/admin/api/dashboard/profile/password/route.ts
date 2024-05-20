@@ -7,14 +7,11 @@ import { ObjectId } from "mongodb";
 export async function PUT(request: NextRequest) {
     try {
 
-        // let cookie = request.cookies.get("session");
-
         const session = await getSesstion();
 
-        
         const {currentPassword, newPassword} = await request.json();
 
-        const admin = await userCollection.findOne({_id: new ObjectId(session?.user!!.userId)});
+        const admin = await userCollection.findById(session?.user!!.userId);
 
         if (!admin) {
             return NextResponse.json({
@@ -25,7 +22,7 @@ export async function PUT(request: NextRequest) {
             });
         }
 
-        const doPasswordsMatch = compareSync(currentPassword, admin.password);
+        const doPasswordsMatch = compareSync(currentPassword, admin.password as string);
 
         if (!doPasswordsMatch) {
             return NextResponse.json({
@@ -47,7 +44,7 @@ export async function PUT(request: NextRequest) {
 
         const hashedPassword = hashSync(newPassword, genSaltSync(10));
 
-        await userCollection.findByIdAndUpdate(admin?._id, {password: hashedPassword});
+        await userCollection.findByIdAndUpdate(admin?._id as string, {password: hashedPassword});
 
         return NextResponse.json({
             isSuccessful: true,

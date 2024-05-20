@@ -25,6 +25,9 @@ import { add, selectStatus, selectValue } from '@/lib/features/research/research
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { UploadFile } from '@/components/admindashboard/UploadFile';
 import { AddAreaHeader } from '@/components/admindashboard/AddAreaHeader';
+import { toast } from 'react-toastify';
+import { UploadFileTwo } from '@/components/admindashboard/UploadFileTwo';
+import { SpinLoaderTwo } from '@/components/LoadingAnimation/spinLoader';
 
 export default function Page() {
 
@@ -66,6 +69,7 @@ export default function Page() {
     }, [details, category, title]);
 
     const submitHandler = () => {
+
         dispatch(add({
             title,
             category,
@@ -74,6 +78,12 @@ export default function Page() {
             details,
         }))
     }
+
+    useEffect(() => {
+        if(status == "success") {
+            toast.success("Report and research added successfully");
+        }
+    }, [status]);
 
     const inputClass = "p-3 rounded-[5px] border border-[0.5px] bg-adminbg border-[#878787]";
 
@@ -86,20 +96,23 @@ export default function Page() {
                     key='report-and-research-upload-header'
                 />
 
+                <div>
+
                 <UploadFile
                     title='Drop your image file here or open gallery'
                     body='Maximum upload files less than 30mb'
-                    buttonTitle='Browse file'
+                    buttonTitle='Browse picture'
                     iconType="picture"
                     setFileUrl={setPictureUrl}
                     key={"picture_upoload"}
                 />
+                </div>
 
-                <UploadFile
+                <UploadFileTwo
                     title='Drop your document file here or browse files '
                     body='Maximum upload files less than 30mb'
                     buttonTitle='Browse file'
-                    setFileUrl={setFileUrl}
+                    setFileUrlTwo={setFileUrl}
                     iconType="file"
                     key={"file_upoload"}
                 />
@@ -127,7 +140,7 @@ export default function Page() {
                 </div>
 
                 <div>
-                    <button className={`${buttonDisabled ? "bg-[#E6E6E6] text-[#595959]" : "bg-yellow text-[#1A1A1A]"} w-full p-3 rounded-[5px]`} disabled={buttonDisabled} onClick={submitHandler}>Upload thematic area</button>
+                    <button className={`${buttonDisabled ? "bg-[#E6E6E6] text-[#595959]" : "bg-yellow text-[#1A1A1A]"} w-full p-3 rounded-[5px]`} disabled={buttonDisabled} onClick={submitHandler}>{status == "loading" ? (<SpinLoaderTwo />) : "Upload thematic area"}</button>
                 </div>
 
             </div>

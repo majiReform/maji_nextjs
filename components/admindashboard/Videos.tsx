@@ -1,5 +1,5 @@
 "use client"
-import { remove, selectValue } from "@/lib/features/thematic/thematicSlice";
+import { get, remove, selectValue } from "@/lib/features/videos/videosSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 // import { Menu } from "@mui/material";
 import Image from "next/image";
@@ -15,8 +15,9 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { useEffect, useState } from "react";
 import { RxExclamationTriangle } from "react-icons/rx";
+import { YouTubeEmbed } from '@next/third-parties/google'
 
-interface thematicarealistprop {
+interface videoListprop {
     navigateTo: string
 }
 
@@ -54,7 +55,7 @@ function DeleteModal({openState, setOpen, id}: openStateInterface) {
         setOpen(false)
     }
 
-    const removeFromThematic = () => {
+    const removeFromResearch = () => {
         dispatch(remove(id));
         setOpen(false);
     }
@@ -73,34 +74,35 @@ function DeleteModal({openState, setOpen, id}: openStateInterface) {
         >   
             <Box sx={style}>
                 <Typography id="modal-modal-title" className="flex items-center justify-center" variant="h6" component="h2">
-                <RxExclamationTriangle className="mr-4" /> Delete thematic area?
+                <RxExclamationTriangle className="mr-4" /> Delete Video?
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    Are you sure you want to delete this thematic area?
+                    Are you sure you want to delete this Video?
                 </Typography>
                 <div className="flex gap-4">
                     <button className="pointer-cursor w-full p-2 rounded-[10px] border" onClick={() => {handleClose()}}>Cancel</button>
-                    <button className="pointer-cursor w-full p-2 rounded-[10px] text-white bg-deletebutton" onClick={() => {removeFromThematic()}}>Delete</button>
+                    <button className="pointer-cursor w-full p-2 rounded-[10px] text-white bg-deletebutton" onClick={() => {removeFromResearch()}}>Delete</button>
                 </div>
             </Box>
         </Modal>
     );
 }
 
-function ThematicAreaList(props: thematicarealistprop) {
+function VideoList(props: videoListprop) {
 
-    const thematicarea = useAppSelector(selectValue);
-
+    
     const router = useRouter();
-
+    
     const [open, setOpen] = useState(false);
     
-//   const handleOpen = () => setOpen(true);
-
+    //   const handleOpen = () => setOpen(true);
+    
     const [id, setId] = useState("");
-  
-
+    
+    
     const edit = () => { }
+    
+    const videos = useAppSelector(selectValue);
 
     
 
@@ -110,16 +112,18 @@ function ThematicAreaList(props: thematicarealistprop) {
                 <button
                     onClick={() => router.push(props.navigateTo)}
                     className="p-4 bg-yellow"
-                >Add Thematic Area</button>
+                >Add Video</button>
             </div>
 
             <div className="grid grid-cols-4 gap-8 z-40 mb-20">
-                {thematicarea.map((record) => {
+                {videos.map((record) => {
                     return (
                         <div className="w-full p-4 bg-white relative">
-                            <div className="w-full h-[240px] relative z-10" style={{ backgroundImage: `url("${record.picture}")`, backgroundSize: "cover", backgroundRepeat: "no-repeat", borderRadius: "5px" }}>
+                            <div className="w-full h-[240px] relative z-10" style={{ backgroundImage: `url("${record.youtubeURL}")`, backgroundSize: "cover", backgroundRepeat: "no-repeat", borderRadius: "5px" }}>
                                 {/* <Image src={record.picture} fill={true} alt="Thematic picture list" className="z-10" /> */}
-                                <div className="top-[20px] left-[20px] absolute z-40 bg-yellow rounded-[40px] w-fit px-2">{record.category}</div>
+                                {/* <div className="top-[20px] left-[20px] absolute z-40 bg-yellow rounded-[40px] w-fit px-2">{record.category}</div> */}
+                                <YouTubeEmbed videoid={record.youtubeURL as string} params="controls=controls-1" style={{width: "full", height: "full"}} />
+                                {/* <video src={record.youtubeURL} style={{backgroundSize: "cover", backgroundRepeat: "no-repeat", width: "100%", height: "100%"}}></video> */}
                             </div>
                             <div className="pt-4 flex justify-between w-full">
                                 <div className="font-bold" style={{ textWrap: "wrap" }}>{record!!.title.length > 100 ? record!!.title.slice(0, 100) + "..." : record.title}</div>
@@ -147,5 +151,5 @@ function ThematicAreaList(props: thematicarealistprop) {
 
 
 export {
-    ThematicAreaList
+    VideoList
 }

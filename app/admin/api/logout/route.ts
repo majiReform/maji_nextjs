@@ -1,4 +1,5 @@
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
@@ -18,7 +19,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
         isSuccessful: true,
-        message: "Logged out"
+        message: "Logged out successfully!"
     }, {
         status: 200
     });

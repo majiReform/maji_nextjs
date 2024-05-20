@@ -19,6 +19,7 @@ import { add, selectStatus, selectValue } from '@/lib/features/thematic/thematic
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { UploadFile } from '@/components/admindashboard/UploadFile';
 import { AddAreaHeader } from '@/components/admindashboard/AddAreaHeader';
+import { SpinLoaderTwo } from '@/components/LoadingAnimation/spinLoader';
 
 export default function Page() {
 
@@ -65,9 +66,16 @@ export default function Page() {
             picture: pictureUrl,
             details: semanticText
         }));
-        toast("Done");
-
     }
+
+    useEffect(() => {
+
+        if(status == "success") {
+            toast.success("Thematic area added successfully");
+        }
+
+    }, [status]);
+
 
     const inputClass = "p-3 rounded-[5px] border border-[0.5px] bg-adminbg border-[#878787]";
 
@@ -114,7 +122,7 @@ export default function Page() {
                 </div>
 
                 <div>
-                    <button className={`${buttonDisabled ? "bg-[#E6E6E6] text-[#595959]" : "bg-yellow text-[#1A1A1A]"} w-full p-3 rounded-[5px]`} disabled={buttonDisabled} onClick={submitHandler}>Upload thematic area</button>
+                    <button className={`${buttonDisabled ? "bg-[#E6E6E6] text-[#595959]" : "bg-yellow text-[#1A1A1A]"} w-full p-3 rounded-[5px]`} disabled={buttonDisabled} onClick={submitHandler}>{status == "loading" ? (<SpinLoaderTwo />) : "Upload thematic area"}</button>
                 </div>
 
             </div>

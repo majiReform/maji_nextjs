@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { JWTPayload, SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 const secretKey = process.env.AUTH_KEY;
 
@@ -61,7 +62,7 @@ export async function updateSession(request: NextRequest) {
         return res;
 
     } catch (error: any) {
-        return NextResponse.redirect(new URL(`/admin/login?reason=${error.name == "JWTExpired" ? "sessionexpired" : "error"}`, request.url));
+        redirect(`/admin/login?reason=${error.name == "JWTExpired" ? "sessionexpired" : "error"}`);
     }
 
 

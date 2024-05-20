@@ -19,12 +19,13 @@ const labelStyle = {
     marginTop: "1rem"
 }
 
-import { Option, optionClasses } from '@mui/base/Option';
 import { useEffect, useState } from 'react';
 import { add, selectStatus, selectValue } from '@/lib/features/gallery/gallerySlice';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { UploadFile } from '@/components/admindashboard/UploadFile';
 import { AddAreaHeader } from '@/components/admindashboard/AddAreaHeader';
+import { SpinLoaderTwo } from '@/components/LoadingAnimation/spinLoader';
+import { toast } from 'react-toastify';
 
 export default function Page() {
 
@@ -36,9 +37,6 @@ export default function Page() {
 
     const [buttonDisabled, setButtonDisabled] = useState(true);
 
-    const [semanticText, setSemanticText] = useState("");
-    const [category, setCategory] = useState("");
-    const [title, setTitle] = useState("");
     const [pictureUrl, setPictureUrl] = useState("");
 
 
@@ -57,7 +55,13 @@ export default function Page() {
         }))
     }
 
-    const inputClass = "p-3 rounded-[5px] border border-[0.5px] bg-adminbg border-[#878787]";
+    if(status == "failed") {
+        toast.error("An error occurred");
+    }
+
+    if(status == "success") {
+        toast.success("An error occurred");
+    }
 
     return (
         <div>
@@ -78,7 +82,7 @@ export default function Page() {
                 />
 
                 <div>
-                    <button className={`${buttonDisabled ? "bg-[#E6E6E6] text-[#595959]" : "bg-yellow text-[#1A1A1A]"} w-full p-3 rounded-[5px]`} disabled={buttonDisabled} onClick={submitHandler}>Upload Image</button>
+                    <button className={`${buttonDisabled ? "bg-[#E6E6E6] text-[#595959]" : "bg-yellow text-[#1A1A1A]"} w-full p-3 rounded-[5px]`} disabled={buttonDisabled} onClick={submitHandler}>{status == "idle" || status == "failed" ? "Upload Image": (<SpinLoaderTwo />)}</button>
                 </div>
 
             </div>

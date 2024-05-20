@@ -1,25 +1,41 @@
 "use client"
+import { SpinLoaderTwo } from "@/components/LoadingAnimation/spinLoader";
 import { EmptyDocument } from "@/components/admindashboard/EmptyDocument";
+import { ResearchAndReportList } from "@/components/admindashboard/ResearchAndReport";
 import { ThematicAreaList } from "@/components/admindashboard/ThematicArea";
-import { selectStatus, selectValue } from "@/lib/features/thematic/thematicSlice";
+import { get, selectStatus, selectValue } from "@/lib/features/research/researchSlice";
 import { useAppSelector } from "@/lib/hooks";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
-export default function Layout() {
+export default function Page() {
 
-    const thematicarea = useAppSelector(selectValue);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(get({page: 1, limit: 10}));
+    }, [dispatch]);
+
+    const researchArea = useAppSelector(selectValue);
+    const status = useAppSelector(selectStatus);
    
     const navigateTo = "/admin/dashboard/reportandresearch/add";
 
-    if(thematicarea.length == 0) {
-        return <EmptyDocument
-        header="No Report and Research"
-        body="It looks like there are no report & research available at the moment. Get started by uploading new report & research. "
-        buttonTitle="Upload Report and Research"
-        navigateTo={navigateTo}
-         />
+
+    if(status == "idle") {
+        if(researchArea.length == 0) {
+            return <EmptyDocument
+            header="No Report and Research"
+            body="It looks like there are no report & research available at the moment. Get started by uploading new report & research. "
+            buttonTitle="Upload Report and Research"
+            navigateTo={navigateTo}
+             />
+        }
+    } else if (status == "loading" || status == "pre-load") {
+        return <SpinLoaderTwo />
     }
 
     return (
-        <ThematicAreaList navigateTo={navigateTo} />
+        <ResearchAndReportList navigateTo={navigateTo} />
     );
 }

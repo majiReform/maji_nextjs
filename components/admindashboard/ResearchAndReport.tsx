@@ -1,5 +1,5 @@
 "use client"
-import { remove, selectValue } from "@/lib/features/thematic/thematicSlice";
+import { remove, selectValue } from "@/lib/features/research/researchSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 // import { Menu } from "@mui/material";
 import Image from "next/image";
@@ -15,8 +15,9 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { useEffect, useState } from "react";
 import { RxExclamationTriangle } from "react-icons/rx";
+import { useDispatch } from "react-redux";
 
-interface thematicarealistprop {
+interface researchlistprop {
     navigateTo: string
 }
 
@@ -54,7 +55,7 @@ function DeleteModal({openState, setOpen, id}: openStateInterface) {
         setOpen(false)
     }
 
-    const removeFromThematic = () => {
+    const removeFromResearch = () => {
         dispatch(remove(id));
         setOpen(false);
     }
@@ -73,23 +74,23 @@ function DeleteModal({openState, setOpen, id}: openStateInterface) {
         >   
             <Box sx={style}>
                 <Typography id="modal-modal-title" className="flex items-center justify-center" variant="h6" component="h2">
-                <RxExclamationTriangle className="mr-4" /> Delete thematic area?
+                <RxExclamationTriangle className="mr-4" /> Delete research and report?
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    Are you sure you want to delete this thematic area?
+                    Are you sure you want to delete this research and report?
                 </Typography>
                 <div className="flex gap-4">
                     <button className="pointer-cursor w-full p-2 rounded-[10px] border" onClick={() => {handleClose()}}>Cancel</button>
-                    <button className="pointer-cursor w-full p-2 rounded-[10px] text-white bg-deletebutton" onClick={() => {removeFromThematic()}}>Delete</button>
+                    <button className="pointer-cursor w-full p-2 rounded-[10px] text-white bg-deletebutton" onClick={() => {removeFromResearch()}}>Delete</button>
                 </div>
             </Box>
         </Modal>
     );
 }
 
-function ThematicAreaList(props: thematicarealistprop) {
+function ResearchAndReportList(props: researchlistprop) {
 
-    const thematicarea = useAppSelector(selectValue);
+    const research = useAppSelector(selectValue);
 
     const router = useRouter();
 
@@ -110,14 +111,14 @@ function ThematicAreaList(props: thematicarealistprop) {
                 <button
                     onClick={() => router.push(props.navigateTo)}
                     className="p-4 bg-yellow"
-                >Add Thematic Area</button>
+                >Add Research And Report</button>
             </div>
 
             <div className="grid grid-cols-4 gap-8 z-40 mb-20">
-                {thematicarea.map((record) => {
+                {research.map((record) => {
                     return (
                         <div className="w-full p-4 bg-white relative">
-                            <div className="w-full h-[240px] relative z-10" style={{ backgroundImage: `url("${record.picture}")`, backgroundSize: "cover", backgroundRepeat: "no-repeat", borderRadius: "5px" }}>
+                            <div className="w-full h-[240px] relative z-10" style={{ backgroundImage: `url("${record.pictureURL}")`, backgroundSize: "cover", backgroundRepeat: "no-repeat", borderRadius: "5px" }}>
                                 {/* <Image src={record.picture} fill={true} alt="Thematic picture list" className="z-10" /> */}
                                 <div className="top-[20px] left-[20px] absolute z-40 bg-yellow rounded-[40px] w-fit px-2">{record.category}</div>
                             </div>
@@ -147,5 +148,5 @@ function ThematicAreaList(props: thematicarealistprop) {
 
 
 export {
-    ThematicAreaList
+    ResearchAndReportList
 }

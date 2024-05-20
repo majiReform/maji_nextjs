@@ -5,11 +5,14 @@ import TextField from '@mui/material/TextField';
 import { Button } from "@mui/material";
 import { useState } from "react";
 import { SpinLoaderTwo } from "../LoadingAnimation/spinLoader";
+import { loginFeature } from "@/lib/features/auth/login";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 function LeftAreaComponent() {
   return (
-    <div className="w-1/2 h-screen relative">
-      <Image src="/auth_pic.jpeg" alt="people_shaing_hands" fill={true} style={{backgroundSize: "cover!important"}} />
+    <div className="w-1/2 h-screen relative" style={{backgroundImage: `url('/auth_pic.jpeg')`, backgroundSize: "cover", backgroundPosition: "center"}}>
+      {/* <Image src="/auth_pic.jpeg" alt="people_shaing_hands" fill={true} style={{backgroundSize: "cover!important"}} /> */}
     </div>
   );
 }
@@ -18,14 +21,30 @@ function LeftAreaComponent() {
 
 function LoginComponent() {
 
+  const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [validationError, setValidationError] = useState("");
   const [loginButtonState, setLoginButtonState] = useState("idle");
 
 
-  const handleLogin = () => {
-    setLoginButtonState("loading");
+  const handleLogin = async () => {
+    try {
+      setLoginButtonState("loading");
+
+      await loginFeature(email, password);
+
+      router.push("/admin/dashboard/thematicarea");
+
+    } catch (error: any) {
+
+      toast.error(error.response.data.message);
+
+    } finally {
+      setLoginButtonState("idle");
+    }
+
   }
 
   return (
@@ -38,31 +57,33 @@ function LoginComponent() {
     </div>
 
         <div>
-          <TextField
+          <input
             id="outlined"
             type="email"
-            label="Email"
-            className="w-full bg-white"
+            placeholder="Email"
+            className="w-full bg-white py-3 px-4 rounded-[8px]"
             value={email}
             onChange={(e) => {setEmail(e.target.value)}}
           />
         </div>
 
         <div>
-          <TextField
+          <input
             id="outlined-password-input"
-            label="Password"
+            placeholder="Password"
             type="password"
-            className="w-full bg-white"
+            className="w-full bg-white py-3 px-4 rounded-[8px]"
+            value={password}
             onChange={(e) => {setPassword(e.target.value)}}
           />
         </div>
 
         <div>
-          <Button
-          variant="contained"
-          className="w-full bg-yellow text-black shadow-none py-2"
-          >{loginButtonState == "loading" ? <SpinLoaderTwo /> : "Login"}</Button>
+          <button
+          className={`w-full ${loginButtonState == "loading" ? "bg-adminbg" : !email || !password ? "bg-adminbg" : "bg-yellow"}  text-black shadow-none py-2 rounded-[8px] font-bold`}
+          onClick={handleLogin}
+          disabled={loginButtonState == "loading" ? true : !email || !password ? true : false}
+          >{loginButtonState == "loading" ? <SpinLoaderTwo /> : "Login"}</button>
         </div>
 
       </div>

@@ -1,3 +1,4 @@
+"use client"
 import { AdminHeaderComponent } from "@/components/admindashboard/Header";
 import { AdminSidebarComponent } from "@/components/admindashboard/Sidebar";
 import { Metadata } from "next";

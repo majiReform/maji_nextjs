@@ -11,7 +11,7 @@ async function uploadFile(file: any, fileType: string) {
     formData.append('public_id', process.env.NEXT_PUBLIC_PUBLIC_ID);
     formData.append('api_key', process.env.NEXT_PUBLIC_API_KEY);
 
-    const response = await axios.post(`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUD_NAME}/${fileType == "picture" ? "image" : "file"}/upload`, formData, {
+    const response = await axios.post(`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUD_NAME}/upload`, formData, {
         headers: {
             "Content-Type": "multipart/form-data"
         }

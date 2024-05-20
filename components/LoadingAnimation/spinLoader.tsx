@@ -11,7 +11,7 @@ function SpinLoader() {
 
 function SpinLoaderTwo() {
     return (
-        <ImSpinner className="animate-spin text-[40px]" />
+        <ImSpinner className="animate-spin text-[40px] mx-auto" />
     );
 }
 

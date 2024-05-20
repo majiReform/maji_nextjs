@@ -3,9 +3,13 @@ import { urlMaker } from "../urlMaker/urlMaker";
 
 
 async function loginFeature(email: string, password: string) {
-    const response = axios.post(urlMaker("/admin/api/login"), {
+    const response = await axios.post(urlMaker("/admin/api/login"), {
         email, password
     });
+    return {
+        response: response.data,
+        status: response.status
+    };
 }
 
 export {

@@ -1,6 +1,7 @@
 import { createAppSlice } from "@/lib/createAppSlice";
 import type { AppThunk } from "@/lib/store";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { addThematicArea, deleteThematicArea, singleThematicArea, thematicAreaList } from "./thematicAPI";
 
 export interface ThematicAreaInterface {
     _id?: string
@@ -14,35 +15,103 @@ export interface ThematicAreaInterface {
 
 export interface thematicSliceState {
     value: ThematicAreaInterface[],
-    state: "idle" | "loading" | "failed"
+    single: object,
+    state: "idle" | "pre-load" | "loading" | "success" | "failed",
+    errorMessage?: string,
+    page: number
 }
 
 const initialState: thematicSliceState = {
     value: [],
-    state: "idle"
+    single: {},
+    state: "pre-load",
+    errorMessage: "",
+    page: 1
 };
 
 export const thematicSlice = createAppSlice({
     name: "thematic",
     initialState,
     reducers: (create) => ({
-        add: create.reducer((state, action: PayloadAction<ThematicAreaInterface>) => {
-            state.value.push(action.payload);
-            console.log(state.value);
+        add: create.asyncThunk(
+            async (payload: ThematicAreaInterface) => {
+                return await addThematicArea(payload);
+            }, {
+            pending: (state) => {
+                state.state = "loading";
+            },
+            fulfilled: (state, action) => {
+                
+                if(state.value.length < 10) state.value.push(action.payload.response.addedDetails);
+                state.state = "success";
+            },
+            rejected: (state, action) => {
+                state.state = "failed";
+                state.errorMessage = action.error.message;
+            }
         }),
-        remove: create.reducer((state, action: PayloadAction<string>) => {
-            
-            console.log(action.payload);
-
-            state.value = state.value.filter(v => v._id != action.payload);
-        })
+        get: create.asyncThunk(
+            async (payload: { page: number, limit: number }) => {
+                return await thematicAreaList(payload.page, payload.limit);
+            }, {
+            pending: (state) => {
+                state.state = "loading";
+            },
+            fulfilled: (state, action) => {
+                state.page = action.payload.response.thematicAreas.currentPage;
+                state.value = action.payload.response.thematicAreas.results;
+                state.state = "idle";
+            },
+            rejected: (state, action) => {
+                state.state = "failed";
+                state.errorMessage = action.error.message;
+            }
+        }
+        ),
+        getSingle: create.asyncThunk(
+            async (payload: string) => {
+                return await singleThematicArea(payload);
+            }, {
+            pending: (state) => {
+                state.state = "loading";
+            },
+            fulfilled: (state, action) => {
+                state.single = action.payload.response;
+                state.state = "idle";
+            },
+            rejected: (state, action) => {
+                state.state = "failed";
+                state.errorMessage = action.error.message;
+            }
+        }
+        ),
+        remove: create.asyncThunk(
+            async (payload: string) => {
+                return await deleteThematicArea(payload);
+            }, {
+            pending: (state) => {
+                state.state = "loading";
+            },
+            fulfilled: (state) => {
+                state.single = {};
+                state.state = "idle";
+            },
+            rejected: (state, action) => {
+                state.state = "failed";
+                state.errorMessage = action.error.message;
+            }
+        }
+        ),
     }),
     selectors: {
         selectValue: (counter) => counter.value,
+        selectSingle: (counter) => counter.single,
         selectStatus: (counter) => counter.state,
+        selectPage: (counter) => counter.page,
+        errorValue: (counter) => counter.errorMessage
     }
 });
 
-export const { add, remove } = thematicSlice.actions;
+export const { add, remove, get, getSingle } = thematicSlice.actions;
 
-export const {selectValue, selectStatus} = thematicSlice.selectors;
+export const {selectValue, selectStatus, errorValue, selectPage, selectSingle} = thematicSlice.selectors;

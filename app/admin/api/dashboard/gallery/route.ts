@@ -6,11 +6,11 @@ export async function POST(request: NextRequest) {
     try {
         const { picture } = await request.json();
 
-        galleryCollection.create({picture});
+        const newPicture = await galleryCollection.create({picture});
 
         return NextResponse.json({
             isSuccessful: true,
-            picture
+            newPicture
         }, {
             status: 201
         });

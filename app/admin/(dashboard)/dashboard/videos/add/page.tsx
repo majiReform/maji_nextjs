@@ -23,9 +23,10 @@ import { Option, optionClasses } from '@mui/base/Option';
 import { useEffect, useState } from 'react';
 import { add, selectStatus, selectValue } from '@/lib/features/videos/videosSlice';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
-import { SpinLoader } from '@/components/LoadingAnimation/spinLoader';
+import { SpinLoader, SpinLoaderTwo } from '@/components/LoadingAnimation/spinLoader';
 import { UploadFile } from '@/components/admindashboard/UploadFile';
 import { AddAreaHeader } from '@/components/admindashboard/AddAreaHeader';
+import { toast } from 'react-toastify';
 
 export default function Page() {
 
@@ -68,9 +69,16 @@ export default function Page() {
         dispatch(add({
             title,
             details: description,
-            youtubeURL: youtube
+            youtubeURL: youtube.split("/")[youtube.split("/").length - 1]
         }))
     }
+
+    useEffect(() => {
+        if(status == "success") {
+            toast.success("Video added successfully");
+        }
+
+    }, [status]);
 
     const inputClass = "p-3 rounded-[5px] border border-[0.5px] bg-adminbg border-[#878787]";
 
@@ -98,11 +106,11 @@ export default function Page() {
 
                 <div className='flex flex-col'>
                     <label htmlFor="area-title">Youtube URL</label>
-                    <input type="text" className={youtube} onChange={(e) => { setYoutube(e.target.value) }} placeholder='Enter the yourube url' />
+                    <input type="text" className={inputClass} value={youtube} onChange={(e) => { setYoutube(e.target.value) }} placeholder='Enter the yourube url' />
                 </div>
 
                 <div>
-                    <button className={`${buttonDisabled ? "bg-[#E6E6E6] text-[#595959]" : "bg-yellow text-[#1A1A1A]"} w-full p-3 rounded-[5px]`} disabled={buttonDisabled || status == "loading"} onClick={submitHandler}>{status == "loading" ? <SpinLoader /> : "Upload"}</button>
+                    <button className={`${buttonDisabled ? "bg-[#E6E6E6] text-[#595959]" : "bg-yellow text-[#1A1A1A]"} w-full p-3 rounded-[5px]`} disabled={buttonDisabled || status == "loading"} onClick={submitHandler}>{status == "loading" ? <SpinLoaderTwo /> : "Upload"}</button>
                 </div>
 
             </div>

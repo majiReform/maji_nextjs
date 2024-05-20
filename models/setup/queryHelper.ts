@@ -30,11 +30,11 @@ class MongoDBQueryHelper<T> {
         }
     }
 
-    async findById(id: string) {
+    async findById(id: string | ObjectId) {
         try {
             const db = await this.connect();
             const collection = db.collection(this.collectionName);
-            return await collection.findOne({ _id: new ObjectId(id) }) as T;
+            return await collection.findOne({ _id: typeof(id) == "string" ? (new ObjectId(id)) : id }) as T;
         } catch (error: any) {
             throw new Error(`Error counting documents: ${error.message}`);
         }
@@ -126,7 +126,8 @@ class MongoDBQueryHelper<T> {
             totalPages,
             currentPage: page,
             totalDocuments: count,
-            currentPageDocument: results.length,
+            currentPageDocumentCount: results.length,
+            limit,
             results,
           };
         } catch (error: any) {

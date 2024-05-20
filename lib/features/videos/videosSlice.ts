@@ -1,45 +1,111 @@
 import { createAppSlice } from "@/lib/createAppSlice";
-import type { AppThunk } from "@/lib/store";
-import type { PayloadAction } from "@reduxjs/toolkit";
+import { addVideo, singleVideo, videosList } from "./videosAPI";
 
 export interface VideoInterface {
     _id?: string,
     title?: string,
     details?: string,
     youtubeURL?: string
+    createdAt?: Date
+    updatedAt?: Date
 }
 
 export interface videosSliceState {
     value: VideoInterface[],
-    state: "idle" | "loading" | "failed"
+    state: "idle" | "pre-load" | "loading" | "success" | "failed",
+    single: object,
+    errorMessage?: string,
+    page: number
 }
 
 const initialState: videosSliceState = {
     value: [],
-    state: "idle"
+    state: "pre-load",
+    single: {},
+    errorMessage: "",
+    page: 1
 };
 
 export const videosSlice = createAppSlice({
     name: "videos",
     initialState,
     reducers: (create) => ({
-        add: create.reducer((state, action: PayloadAction<VideoInterface>) => {
-            state.value.push(action.payload);
-            console.log(state.value);
+        add: create.asyncThunk(
+            async (payload: VideoInterface) => {
+                return await addVideo(payload);
+            }, {
+            pending: (state) => {
+                state.state = "loading";
+            },
+            fulfilled: (state, action) => {
+                if(state.value.length < 10) state.value.push(action.payload.response.addedDetails);
+                state.state = "success";
+            },
+            rejected: (state, action) => {
+                state.state = "failed";
+                state.errorMessage = action.error.message;
+            }
         }),
-        remove: create.reducer((state, action: PayloadAction<string>) => {
-            
-            console.log(action.payload);
-
-            state.value = state.value.filter(v => v._id != action.payload);
-        })
+        get: create.asyncThunk(
+            async (payload: { page: number, limit: number }) => {
+                return await videosList(payload.page, payload.limit);
+            }, {
+            pending: (state) => {
+                state.state = "loading";
+            },
+            fulfilled: (state, action) => {
+                state.value = action.payload.response.videos.results;
+                state.state = "idle";
+            },
+            rejected: (state, action) => {
+                state.state = "failed";
+                state.errorMessage = action.error.message;
+            }
+        }
+        ),
+        getSingle: create.asyncThunk(
+            async (payload: string) => {
+                return await singleVideo(payload);
+            }, {
+            pending: (state) => {
+                state.state = "loading";
+            },
+            fulfilled: (state, action) => {
+                state.single = action.payload.response;
+                state.state = "idle";
+            },
+            rejected: (state, action) => {
+                state.state = "failed";
+                state.errorMessage = action.error.message;
+            }
+        }
+        ),
+        remove: create.asyncThunk(
+            async (payload: string) => {
+                return await singleVideo(payload);
+            }, {
+            pending: (state) => {
+                state.state = "loading";
+            },
+            fulfilled: (state) => {
+                state.single = {};
+                state.state = "idle";
+            },
+            rejected: (state, action) => {
+                state.state = "failed";
+                state.errorMessage = action.error.message;
+            }
+        }
+        ),
     }),
     selectors: {
         selectValue: (counter) => counter.value,
         selectStatus: (counter) => counter.state,
+        selectSingle: (counter) => counter.single,
+        errorValue: (counter) => counter.errorMessage,
     }
 });
 
-export const { add, remove } = videosSlice.actions;
+export const { add, remove, get, getSingle } = videosSlice.actions;
 
-export const {selectValue, selectStatus} = videosSlice.selectors;
+export const {selectValue, selectStatus, selectSingle, errorValue} = videosSlice.selectors;

@@ -2,30 +2,33 @@ import { ThematicAreaInterface } from "@/lib/features/thematic/thematicSlice";
 import { thematicAreaCollection } from "@/models/ThematicArea";
 import { NextRequest, NextResponse } from "next/server";
 import { logIt } from "../../utils";
+import { researchAndReportAreaCollection } from "@/models/ResearchAndReport";
+import { ResearchAndReportInterface } from "@/lib/features/research/researchSlice";
 
 export async function POST(request: NextRequest) {
     try {
-        
+
         const {
             title,
             category,
-            picture,
+            pictureURL,
+            document,
             details
-        }: ThematicAreaInterface = await request.json();
+        }: ResearchAndReportInterface = await request.json();
 
-        const result = await thematicAreaCollection.create({
-            title, category, picture, details
+        const record = await researchAndReportAreaCollection.create({
+            title, category, pictureURL, document, details
         });
 
         return NextResponse.json({
             isSuccessful: true,
-            addedDetails: result
+            details: record
         }, {
             status: 201
         });
 
     } catch (error) {
-        logIt({value: error, level: "error"});
+        logIt({ value: error, level: "error" });
         return NextResponse.json({
             isSuccessful: false,
             error: "Internal server error"
@@ -37,22 +40,22 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
     try {
-        
+
         const searchParams = request.nextUrl.searchParams;
         const page = searchParams.get("page");
         const limit = searchParams.get("limit");
 
-        const thematicAreas = await thematicAreaCollection.paginate({}, parseInt(page as string), parseInt(limit as string));
+        const researchandreport = await researchAndReportAreaCollection.paginate({}, parseInt(page as string), parseInt(limit as string));
 
         return NextResponse.json({
             isSuccessful: true,
-            thematicAreas
+            details: researchandreport
         }, {
             status: 200
         });
 
     } catch (error) {
-        logIt({value: error, level: "error"});
+        logIt({ value: error, level: "error" });
         return NextResponse.json({
             isSuccessful: false,
             error: "Internal server error"

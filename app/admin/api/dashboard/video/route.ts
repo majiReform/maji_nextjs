@@ -13,17 +13,13 @@ export async function POST(request: NextRequest) {
             youtubeURL
         }: VideoInterface = await request.json();
 
-        await videosCollection.create({
+        const videoId = await videosCollection.create({
             title, details, youtubeURL
         });
 
         return NextResponse.json({
             isSuccessful: true,
-            addedDetails: {
-                title,
-                details,
-                youtubeURL
-            }
+            addedDetails: videoId
         }, {
             status: 201
         });

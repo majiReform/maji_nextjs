@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import { NextRequest, NextResponse } from "next/server";
 import { encrypt, logIt } from "../utils";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export async function POST(request: NextRequest) {
     const { email, password } = await request.json();
@@ -57,6 +58,7 @@ export async function POST(request: NextRequest) {
         }, {
             status: 200
         });
+
     } catch (error) {
         logIt({ value: error, level: "error" });
         return NextResponse.json({
