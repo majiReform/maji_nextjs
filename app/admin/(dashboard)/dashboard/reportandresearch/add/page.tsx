@@ -28,6 +28,7 @@ import { AddAreaHeader } from '@/components/admindashboard/AddAreaHeader';
 import { toast } from 'react-toastify';
 import { UploadFileTwo } from '@/components/admindashboard/UploadFileTwo';
 import { SpinLoaderTwo } from '@/components/LoadingAnimation/spinLoader';
+import { CldUploadButton } from 'next-cloudinary';
 
 export default function Page() {
 
@@ -43,7 +44,9 @@ export default function Page() {
     const [category, setCategory] = useState("");
     const [title, setTitle] = useState("");
     const [fileUrl, setFileUrl] = useState("");
+    const [originalFileNameTwo, setOriginalFileNameTwo] = useState("");
     const [pictureUrl, setPictureUrl] = useState("");
+    const [originalFileName, setOriginalFileName] = useState("");
 
     const hasReachedLimit = () => {
         console.log(details.length, "of", maxwords);
@@ -96,26 +99,83 @@ export default function Page() {
                     key='report-and-research-upload-header'
                 />
 
-                <div>
 
                 <UploadFile
                     title='Drop your image file here or open gallery'
                     body='Maximum upload files less than 30mb'
-                    buttonTitle='Browse picture'
-                    iconType="picture"
-                    setFileUrl={setPictureUrl}
-                    key={"picture_upoload"}
-                />
-                </div>
+                    buttonTitle='Browse file'
+                    iconType='picture'
+                    forId='research_upload_1'
+                    fileUrl={originalFileName}
+                    key={"research_file_upoload_1"}
+                >
+                    <CldUploadButton
 
-                <UploadFileTwo
+                        className="border rounded-[8px] py-3 px-8 w-fit mx-auto"
+                        options={{
+                            multiple: false,
+                            sources: ["local", "dropbox", "google_drive"],
+                            clientAllowedFormats: ["png", "jpg", "jpeg"]
+                        }}
+                        onSuccess={(result, widget) => {
+                            console.log(result)
+                            if (result.event == "success") {
+                                setPictureUrl(result!!.info.secure_url as string);  // { public_id, secure_url, etc }
+                                setOriginalFileName(result.info.original_filename);
+                            } else {
+                                toast.error("File upload failed, kindly retry.");
+                            }
+                            widget.close();
+                        }}
+
+                        uploadPreset={process.env.NEXT_PUBLIC_UPLOAD_PRESET}
+                    >
+                        Upload picture
+                    </CldUploadButton>
+                </UploadFile>
+
+                <UploadFile
+                    title='Drop your image file here or open gallery'
+                    body='Maximum upload files less than 30mb'
+                    buttonTitle='Browse file'
+                    iconType='file'
+                    forId='research_upload_2'
+                    fileUrl={originalFileNameTwo}
+                    key={"research_file_upoload_2"}
+                >
+                    <CldUploadButton
+                        className="border rounded-[8px] py-3 px-8 w-fit mx-auto"
+                        options={{
+                            multiple: false,
+                            sources: ["local", "dropbox", "google_drive"],
+                            clientAllowedFormats: ["docx", "doc", "txt", "pdf"]
+                        }}
+                        onSuccess={(result, widget) => {
+                            console.log(result)
+                            if (result.event == "success") {
+                                setFileUrl(result!!.info.secure_url as string);  // { public_id, secure_url, etc }
+                                setOriginalFileNameTwo(result.info.original_filename);
+                            } else {
+                                toast.error("File upload failed, kindly retry.");
+                            }
+                            widget.close();
+                        }}
+
+                        uploadPreset={process.env.NEXT_PUBLIC_UPLOAD_PRESET}
+                    >
+                        Upload file
+                    </CldUploadButton>
+                </UploadFile>
+
+                {/* <UploadFileTwo
                     title='Drop your document file here or browse files '
                     body='Maximum upload files less than 30mb'
                     buttonTitle='Browse file'
+                    forId='research_doc_1'
                     setFileUrlTwo={setFileUrl}
                     iconType="file"
-                    key={"file_upoload"}
-                />
+                    key={"research_file_upoload"}
+                /> */}
 
                 <div className='flex flex-col'>
                     <label htmlFor="select-category">Select category</label>

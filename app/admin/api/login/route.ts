@@ -59,6 +59,7 @@ export async function POST(request: NextRequest) {
             status: 200
         });
 
+
     } catch (error) {
         logIt({ value: error, level: "error" });
         return NextResponse.json({

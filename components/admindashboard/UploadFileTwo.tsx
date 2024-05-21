@@ -23,6 +23,7 @@ interface UploadFilePropsTwo {
     buttonTitle: string
     title: string
     body: string
+    forId: string
     iconType: "picture" | "file" | "others"
     setFileUrlTwo: (arg: string) => any
     fileTypes?: fileTypesTypeTwo[]
@@ -40,9 +41,9 @@ function UploadFileTwo(props: UploadFilePropsTwo) {
     const handleFileUpload = async (e: any) => {
         setUploadFileStateTwo("loading");
         const result = await uploadFileToCloudinary(e.target.files[0], props.iconType);
-        props.setFileUrlTwo(result.data.secure_url);
+        props.setFileUrlTwo(result.secure_url);
         setUploadFileTwo({
-            fileUrlTwo: result.data.secure_url,
+            fileUrlTwo: result.secure_url,
             fileTwo: e.target.files[0].name
         });
 
@@ -67,13 +68,13 @@ function UploadFileTwo(props: UploadFilePropsTwo) {
                     <div>
                         <input
                             type="file"
-                            id="upload-file-two"
+                            id={props.forId}
                             // accept=".jpg,.jpeg,.png"
                             accept={`${props.iconType == "picture" ? [".jpeg", ".png", ".jpg"].join(",") : ""}${props.iconType == "file" ? [".pdf", ".txt", ".doc", ".docx"].join(",") : ""}${props.iconType == "others" ? props.fileTypes?.join(",") : ""}`}
                             className='hidden'
                             onChange={handleFileUpload}
                         />
-                        <label style={labelStyleTwo} htmlFor="upload-file-two" className="upload-button-label">
+                        <label style={labelStyleTwo} htmlFor={props.forId} className="upload-button-label">
                             {props.buttonTitle}
                         </label>
                     </div>

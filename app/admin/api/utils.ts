@@ -62,7 +62,7 @@ export async function updateSession(request: NextRequest) {
         return res;
 
     } catch (error: any) {
-        redirect(`/admin/login?reason=${error.name == "JWTExpired" ? "sessionexpired" : "error"}`);
+        return NextResponse.redirect(new URL(`/admin/login?reason=${error.name == "JWTExpired" ? "sessionexpired" : "error"}`, request.url));
     }
 
 

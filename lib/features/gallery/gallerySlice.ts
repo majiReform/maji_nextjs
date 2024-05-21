@@ -12,16 +12,18 @@ export interface GalleryInterface {
 
 export interface gallerySliceState {
     value: GalleryInterface[],
-    state: "idle" | "loading" | "success" | "failed"
+    state: "idle" | "pre-load" | "loading" | "success" | "failed"
     single: object,
-    errorMessage?: string
+    errorMessage?: string,
+    page: number
 }
 
 const initialState: gallerySliceState = {
-    value: [],
-    state: "idle",
     single: {},
-    errorMessage: ""
+    value: [],
+    state: "pre-load",
+    errorMessage: "",
+    page: 1
 };
 
 export const gallerySlice = createAppSlice({
@@ -36,7 +38,9 @@ export const gallerySlice = createAppSlice({
                 state.state = "loading";
             },
             fulfilled: (state, action) => {
-                state.value.push(action.payload.response);
+                if(state.value.length < 10) {
+                    state.value.push(action.payload.response.newPicture);
+                }
                 state.state = "success";
             },
             rejected: (state, action) => {
@@ -52,7 +56,8 @@ export const gallerySlice = createAppSlice({
                 state.state = "loading";
             },
             fulfilled: (state, action) => {
-                state.value = action.payload.response;
+                state.value = action.payload.response.pictures.results;
+                state.page = action.payload.response.pictures.currentPage;
                 state.state = "idle";
             },
             rejected: (state, action) => {

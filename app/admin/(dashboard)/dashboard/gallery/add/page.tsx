@@ -26,18 +26,17 @@ import { UploadFile } from '@/components/admindashboard/UploadFile';
 import { AddAreaHeader } from '@/components/admindashboard/AddAreaHeader';
 import { SpinLoaderTwo } from '@/components/LoadingAnimation/spinLoader';
 import { toast } from 'react-toastify';
+import { CldUploadButton } from 'next-cloudinary';
 
 export default function Page() {
 
     const dispatch = useAppDispatch();
-    const thematicarea = useAppSelector(selectValue);
     const status = useAppSelector(selectStatus);
-
-    const maxwords = 250;
 
     const [buttonDisabled, setButtonDisabled] = useState(true);
 
     const [pictureUrl, setPictureUrl] = useState("");
+    const [originalPicture, setOriginalPicture] = useState("");
 
 
     useEffect(() => {
@@ -47,6 +46,8 @@ export default function Page() {
             setButtonDisabled(false);
         }
 
+        console.log(pictureUrl);
+
     }, [pictureUrl]);
 
     const submitHandler = () => {
@@ -55,13 +56,15 @@ export default function Page() {
         }))
     }
 
-    if(status == "failed") {
-        toast.error("An error occurred");
-    }
+    useEffect(() => {
+        if (status == "failed") {
+            toast.error("An error occurred");
+        }
 
-    if(status == "success") {
-        toast.success("An error occurred");
-    }
+        if (status == "success") {
+            toast.success("Picture upload successfully");
+        }
+    }, [status]);
 
     return (
         <div>
@@ -76,13 +79,38 @@ export default function Page() {
                     title='Drop your image file here or open gallery'
                     body='Maximum upload files less than 30mb'
                     buttonTitle='Browse file'
-                    iconType="picture"
-                    setFileUrl={setPictureUrl}
-                    key={"picture_upoload"}
-                />
+                    iconType='picture'
+                    forId='research_upload_1'
+                    fileUrl={originalPicture}
+                    key={"research_file_upoload_1"}
+                >
+                    <CldUploadButton
+
+                        className="border rounded-[8px] py-3 px-8 w-fit mx-auto"
+                        options={{
+                            multiple: false,
+                            sources: ["local", "dropbox", "google_drive"],
+                            clientAllowedFormats: ["png", "jpg", "jpeg"]
+                        }}
+                        onSuccess={(result, widget) => {
+                            console.log(result)
+                            if (result.event == "success") {
+                                setPictureUrl(result!!.info.secure_url as string);  // { public_id, secure_url, etc }
+                                setOriginalPicture(result.info.original_filename);
+                            } else {
+                                toast.error("File upload failed, kindly retry.");
+                            }
+                            widget.close();
+                        }}
+
+                        uploadPreset={process.env.NEXT_PUBLIC_UPLOAD_PRESET}
+                    >
+                        Upload picture
+                    </CldUploadButton>
+                </UploadFile>
 
                 <div>
-                    <button className={`${buttonDisabled ? "bg-[#E6E6E6] text-[#595959]" : "bg-yellow text-[#1A1A1A]"} w-full p-3 rounded-[5px]`} disabled={buttonDisabled} onClick={submitHandler}>{status == "idle" || status == "failed" ? "Upload Image": (<SpinLoaderTwo />)}</button>
+                    <button className={`${buttonDisabled ? "bg-[#E6E6E6] text-[#595959]" : "bg-yellow text-[#1A1A1A]"} w-full p-3 rounded-[5px]`} disabled={buttonDisabled} onClick={submitHandler}>{status == "loading" ? (<SpinLoaderTwo />) : "Upload Image"}</button>
                 </div>
 
             </div>

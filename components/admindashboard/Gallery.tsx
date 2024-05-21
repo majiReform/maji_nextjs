@@ -1,5 +1,5 @@
 "use client"
-import { get, remove, selectValue } from "@/lib/features/gallery/gallerySlice";
+import { remove, selectValue } from "@/lib/features/gallery/gallerySlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 // import { Menu } from "@mui/material";
 import Image from "next/image";
@@ -15,7 +15,6 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { useEffect, useState } from "react";
 import { RxExclamationTriangle } from "react-icons/rx";
-import { YouTubeEmbed } from '@next/third-parties/google'
 
 interface GalleryListprop {
     navigateTo: string
@@ -104,7 +103,7 @@ function GalleryList(props: GalleryListprop) {
     
     const videos = useAppSelector(selectValue);
 
-    
+    console.log(videos);
 
     return (
         <div>

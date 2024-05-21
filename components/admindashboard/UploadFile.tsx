@@ -1,5 +1,5 @@
 import { uploadFileToCloudinary } from "@/lib/features/cloudinary/cloudinaryUtil";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { AiOutlinePicture } from "react-icons/ai";
 import { CiFileOn } from "react-icons/ci";
 import { IoMdCloudUpload } from "react-icons/io";
@@ -23,32 +23,16 @@ interface UploadFileProps {
     buttonTitle: string
     title: string
     body: string
+    forId: string
     iconType: "picture" | "file" | "others"
-    setFileUrl: (arg: string) => any
+    fileUrl: string
     fileTypes?: fileTypesType[]
+    readonly children: ReactNode
 }
 
 function UploadFile(props: UploadFileProps) {
 
-    const [uploadFile, setUploadFile] = useState({
-        fileUrl: null,
-        file: null
-    });
-
-    const [uploadFileState, setUploadFileState] = useState("idle"); // loading, idle
-
-    const handleFileUpload = async (e: any) => {
-        setUploadFileState("loading");
-        const result = await uploadFileToCloudinary(e.target.files[0], props.iconType);
-        props.setFileUrl(result.data.secure_url);
-        setUploadFile({
-            fileUrl: result.data.secure_url,
-            file: e.target.files[0].name
-        });
-
-        setUploadFileState("idle");
-
-    }
+    // const [uploadFile, setUploadFile] = useState("");
 
     const iconStyle = "mx-auto w-[60px] h-[60px]";
 
@@ -64,31 +48,19 @@ function UploadFile(props: UploadFileProps) {
 
                     <div className='font-bold'>{props.title}</div>
                     <div>{props.body}</div>
-                    <div>
-                        <input
-                            type="file"
-                            id="upload-file"
-                            // accept=".jpg,.jpeg,.png"
-                            accept={`${props.iconType == "picture" ? [".jpeg", ".png", ".jpg"].join(",") : ""}${props.iconType == "file" ? [".pdf", ".txt", ".doc", ".docx"].join(",") : ""}${props.iconType == "others" ? props.fileTypes?.join(",") : ""}`}
-                            className='hidden'
-                            onChange={handleFileUpload}
-                        />
-                        <label style={labelStyle} htmlFor="upload-file" className="upload-button-label">
-                            {props.buttonTitle}
-                        </label>
-                    </div>
+                    {props.children}
                 </div>
 
             </div>
 
-            {uploadFileState == "idle" ? (
-            <div className={`${uploadFile.fileUrl == null && uploadFile.file == null ? "hidden" : "flex justify-between py-4 mt-2"}`}>
-                <div className="w-[90%]">{uploadFile.file}</div>
+            {props.fileUrl ? (
+            <div className={`${!props.fileUrl ? "hidden" : "flex justify-between py-4 mt-2"}`}>
+                <div className="w-[90%]">{props.fileUrl.split("/")[props.fileUrl.split("/").length - 1]}</div>
                 <MdClose className="w-[10%]" />
             </div>
         ) : ""}
 
-        {uploadFileState == "loading" ? (<div className="flex justify-center text-center py-2"><SpinLoaderTwo /></div>) : ""}
+        {/* {uploadFileState == "loading" ? (<div className="flex justify-center text-center py-2"><SpinLoaderTwo /></div>) : ""} */}
 
             
 

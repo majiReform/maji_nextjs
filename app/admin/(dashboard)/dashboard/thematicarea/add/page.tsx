@@ -10,7 +10,7 @@ import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import { IoArrowBack } from "react-icons/io5";
 import { toast } from 'react-toastify';
-
+import { CldUploadButton } from 'next-cloudinary';
 
 
 import { Option, optionClasses } from '@mui/base/Option';
@@ -34,7 +34,8 @@ export default function Page() {
     const [semanticText, setSemanticText] = useState("");
     const [category, setCategory] = useState("");
     const [title, setTitle] = useState("");
-    const [pictureUrl, setpictureUrl] = useState("");   
+    const [pictureUrl, setpictureUrl] = useState("");
+    const [originalFileName, setOriginalFileName] = useState("");
 
     const hasReachedLimit = () => {
         console.log(semanticText.length, "of", maxwords);
@@ -70,7 +71,7 @@ export default function Page() {
 
     useEffect(() => {
 
-        if(status == "success") {
+        if (status == "success") {
             toast.success("Thematic area added successfully");
         }
 
@@ -93,9 +94,33 @@ export default function Page() {
                     body='Maximum upload files less than 30mb'
                     buttonTitle='Browse file'
                     iconType='picture'
-                    setFileUrl={setpictureUrl}
-                    key={"file_upoload"}
-                />
+                    forId='thematic_upload_1'
+                    fileUrl={originalFileName}
+                    key={"thematic_file_upoload"}
+                >
+                    <CldUploadButton
+
+                        className="border rounded-[8px] py-3 px-8 w-fit mx-auto"
+                        options={{
+                            multiple: false,
+                            sources: ["local", "dropbox"]
+                        }}
+                        onSuccess={(result, widget) => {
+                            console.log(result)
+                            if (result.event == "success") {
+                                setpictureUrl(result!!.info.secure_url as string);  // { public_id, secure_url, etc }
+                                setOriginalFileName(result.info.original_filename);
+                            } else {
+                                toast.error("File upload failed, kindly retry.");
+                            }
+                            widget.close();
+                        }}
+
+                        uploadPreset={process.env.NEXT_PUBLIC_UPLOAD_PRESET}
+                    >
+                        Upload picture
+                    </CldUploadButton>
+                </UploadFile>
 
                 <div className='flex flex-col'>
                     <label htmlFor="select-category">Select category</label>
@@ -114,7 +139,7 @@ export default function Page() {
                 </div>
 
                 <div className='flex flex-col'>
-                    <label htmlFor="area-title">Thematic Area Title</label>
+                    <label htmlFor="area-title">Thematic Area Body</label>
                     <textarea className={inputClass} name="" id="" rows={12} placeholder='Type text here' value={semanticText} onChange={(e) => { setSemanticText(e.target.value) }}></textarea>
                     <div className='text-right'>
                         <small>{semanticText.length}/{maxwords}</small>
