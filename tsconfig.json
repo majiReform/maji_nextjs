@@ -1,12 +1,12 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "app/",
     "paths": {
-      "@/components/*": ["app/components/*"],
-      "@/models/*": ["app/models/*"],
-      "@/lib/*": ["app/lib/*"],
-      "@/styles/*": ["app/styles/*"],
+      "@/components/*": ["components/*"],
+      "@/models/*": ["models/*"],
+      "@/lib/*": ["lib/*"],
+      "@/styles/*": ["styles/*"],
     },
     "target": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],

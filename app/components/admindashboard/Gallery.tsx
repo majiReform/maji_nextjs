@@ -90,7 +90,7 @@ function GalleryList(props: GalleryListprop) {
     
     const edit = () => { }
     
-    const videos = useAppSelector(selectValue);
+    const galleryValues = useAppSelector(selectValue);
 
     return (
         <div>
@@ -102,10 +102,10 @@ function GalleryList(props: GalleryListprop) {
             </div>
 
             <div className="grid grid-cols-4 gap-8 z-40 mb-20">
-                {videos.map((record) => {
+                {galleryValues.map((record) => {
                     return (
                         <div className="w-full p-4 bg-white relative">
-                            <div className="w-full h-[240px] relative z-10" style={{ backgroundImage: `url("${record?.picture}")`, backgroundSize: "cover", backgroundRepeat: "no-repeat", borderRadius: "5px" }}>
+                            <div className="w-full h-[240px] relative z-10" style={{ backgroundImage: `url("${record?.picture}")`, backgroundSize: "cover", backgroundRepeat: "no-repeat", borderRadius: "5px", backgroundPosition: "center" }}>
                                 {/* <Image src={record.picture} fill={true} alt="Thematic picture list" className="z-10" /> */}
                                 {/* <div className="top-[20px] left-[20px] absolute z-40 bg-yellow rounded-[40px] w-fit px-2">{record.category}</div> */}
                             </div>
