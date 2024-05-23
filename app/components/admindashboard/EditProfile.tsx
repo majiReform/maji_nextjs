@@ -42,7 +42,6 @@ function EditProfile() {
         }
     }, [status]);
 
-
     useEffect(() => {
         setProfilePictureInput(profile.profilePicture!!);
         setFullNameInput(profile.fullName!!);
