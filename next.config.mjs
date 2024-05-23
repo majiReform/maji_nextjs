@@ -16,7 +16,7 @@ const nextConfig = {
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     // Add your custom Webpack configuration here
     config.resolve.alias = {
-      '@': path.resolve(__dirname, 'src'),
+      '@': path.resolve(__dirname, './'),
     };
 
     return config;
