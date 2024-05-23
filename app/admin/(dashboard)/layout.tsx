@@ -1,6 +1,6 @@
 "use client"
-import { AdminHeaderComponent } from "components/admindashboard/Header";
-import { AdminSidebarComponent } from "components/admindashboard/Sidebar";
+import { AdminHeaderComponent } from "@/components/admindashboard/Header";
+import { AdminSidebarComponent } from "@/components/admindashboard/Sidebar";
 import { Metadata } from "next";
 import { ReactNode } from "react";
 import { ToastContainer } from 'react-toastify';

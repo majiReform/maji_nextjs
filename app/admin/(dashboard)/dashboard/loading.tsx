@@ -1,4 +1,4 @@
-import { SpinLoader } from "components/LoadingAnimation/spinLoader";
+import { SpinLoader } from "@/components/LoadingAnimation/spinLoader";
 
 export default function Loading() {
     return (

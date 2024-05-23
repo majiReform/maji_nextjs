@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { logIt } from "../../../utils";
 
-import { thematicAreaCollection } from "models/ThematicArea";
+import { thematicAreaCollection } from "@/models/ThematicArea";
 
 interface ParamsInterface {
     params: {

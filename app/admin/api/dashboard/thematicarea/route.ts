@@ -1,5 +1,5 @@
-import { ThematicAreaInterface } from "lib/features/thematic/thematicSlice";
-import { thematicAreaCollection } from "models/ThematicArea";
+import { ThematicAreaInterface } from "@/lib/features/thematic/thematicSlice";
+import { thematicAreaCollection } from "@/models/ThematicArea";
 import { NextRequest, NextResponse } from "next/server";
 import { logIt } from "../../utils";
 

@@ -1,5 +1,5 @@
 import { MongoDBQueryHelper } from "./setup/queryHelper"
-import { ResearchAndReportInterface } from "lib/features/research/researchSlice";
+import { ResearchAndReportInterface } from "@/lib/features/research/researchSlice";
 import { Document } from "mongodb";
 
 interface ResearchAndReportCollectionInterface extends ResearchAndReportInterface, Document {}

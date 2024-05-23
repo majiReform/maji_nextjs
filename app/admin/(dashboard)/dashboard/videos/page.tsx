@@ -1,10 +1,10 @@
 "use client"
-import { SpinLoaderTwo } from "components/LoadingAnimation/spinLoader";
-import { EmptyDocument } from "components/admindashboard/EmptyDocument";
-import { ThematicAreaList } from "components/admindashboard/ThematicArea";
-import { VideoList } from "components/admindashboard/Videos";
-import { get, selectValue, selectStatus } from "lib/features/videos/videosSlice";
-import { useAppDispatch, useAppSelector } from "lib/hooks";
+import { SpinLoaderTwo } from "@/components/LoadingAnimation/spinLoader";
+import { EmptyDocument } from "@/components/admindashboard/EmptyDocument";
+import { ThematicAreaList } from "@/components/admindashboard/ThematicArea";
+import { VideoList } from "@/components/admindashboard/Videos";
+import { get, selectValue, selectStatus } from "@/lib/features/videos/videosSlice";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useEffect } from "react";
 
 

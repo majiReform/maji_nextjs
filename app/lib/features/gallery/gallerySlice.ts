@@ -1,44 +1,46 @@
-import { createAppSlice } from "lib/createAppSlice";
-import { addVideo, deleteVideo, singleVideo, videosList } from "./videosAPI";
+import { createAppSlice } from "@/lib/createAppSlice";
+import type { AppThunk } from "@/lib/store";
+import type { PayloadAction } from "@reduxjs/toolkit";
+import { addGallery, deleteGallery, galleryList, singleGallery } from "./galleryAPI";
 
-export interface VideoInterface {
+export interface GalleryInterface {
     _id?: string,
-    title?: string,
-    details?: string,
-    youtubeURL?: string
+    picture?: string,
     createdAt?: Date
     updatedAt?: Date
 }
 
-export interface videosSliceState {
-    value: VideoInterface[],
-    state: "idle" | "pre-load" | "loading" | "success" | "failed",
+export interface gallerySliceState {
+    value: GalleryInterface[],
+    state: "idle" | "pre-load" | "loading" | "success" | "failed"
     single: object,
     errorMessage?: string,
     page: number
 }
 
-const initialState: videosSliceState = {
+const initialState: gallerySliceState = {
+    single: {},
     value: [],
     state: "pre-load",
-    single: {},
     errorMessage: "",
     page: 1
 };
 
-export const videosSlice = createAppSlice({
-    name: "videos",
+export const gallerySlice = createAppSlice({
+    name: "gallery",
     initialState,
     reducers: (create) => ({
         add: create.asyncThunk(
-            async (payload: VideoInterface) => {
-                return await addVideo(payload);
+            async (payload: GalleryInterface) => {
+                return await addGallery(payload);
             }, {
             pending: (state) => {
                 state.state = "loading";
             },
             fulfilled: (state, action) => {
-                if(state.value.length < 10) state.value.push(action.payload.response.addedDetails);
+                if(state.value.length < 10) {
+                    state.value.push(action.payload.response.newPicture);
+                }
                 state.state = "success";
             },
             rejected: (state, action) => {
@@ -48,13 +50,14 @@ export const videosSlice = createAppSlice({
         }),
         get: create.asyncThunk(
             async (payload: { page: number, limit: number }) => {
-                return await videosList(payload.page, payload.limit);
+                return await galleryList(payload.page, payload.limit);
             }, {
             pending: (state) => {
                 state.state = "loading";
             },
             fulfilled: (state, action) => {
-                state.value = action.payload.response.videos.results;
+                state.value = action.payload.response.pictures.results;
+                state.page = action.payload.response.pictures.currentPage;
                 state.state = "idle";
             },
             rejected: (state, action) => {
@@ -65,7 +68,7 @@ export const videosSlice = createAppSlice({
         ),
         getSingle: create.asyncThunk(
             async (payload: string) => {
-                return await singleVideo(payload);
+                return await singleGallery(payload);
             }, {
             pending: (state) => {
                 state.state = "loading";
@@ -82,12 +85,13 @@ export const videosSlice = createAppSlice({
         ),
         remove: create.asyncThunk(
             async (payload: string) => {
-                return await deleteVideo(payload);
+                return await deleteGallery(payload);
             }, {
             pending: (state) => {
                 state.state = "loading";
             },
             fulfilled: (state, action) => {
+                console.log(action.payload.response);
                 state.single = {};
                 state.value = state.value.filter(s => s._id != action.payload.response.deletedId);
                 state.state = "idle";
@@ -102,11 +106,11 @@ export const videosSlice = createAppSlice({
     selectors: {
         selectValue: (counter) => counter.value,
         selectStatus: (counter) => counter.state,
-        selectSingle: (counter) => counter.single,
-        errorValue: (counter) => counter.errorMessage,
+        singleValue: (counter) => counter.single,
+        errorValue: (counter) => counter.errorMessage
     }
 });
 
-export const { add, remove, get, getSingle } = videosSlice.actions;
+export const { add, remove, get, getSingle } = gallerySlice.actions;
 
-export const {selectValue, selectStatus, selectSingle, errorValue} = videosSlice.selectors;
+export const {selectValue, selectStatus, errorValue, singleValue} = gallerySlice.selectors;

@@ -20,11 +20,11 @@ const labelStyle = {
 }
 
 import { useEffect, useState } from 'react';
-import { add, selectStatus, selectValue } from 'lib/features/gallery/gallerySlice';
-import { useAppDispatch, useAppSelector } from 'lib/hooks';
-import { UploadFile } from 'components/admindashboard/UploadFile';
-import { AddAreaHeader } from 'components/admindashboard/AddAreaHeader';
-import { SpinLoaderTwo } from 'components/LoadingAnimation/spinLoader';
+import { add, selectStatus, selectValue } from '@/lib/features/gallery/gallerySlice';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks';
+import { UploadFile } from '@/components/admindashboard/UploadFile';
+import { AddAreaHeader } from '@/components/admindashboard/AddAreaHeader';
+import { SpinLoaderTwo } from '@/components/LoadingAnimation/spinLoader';
 import { toast } from 'react-toastify';
 import { CldUploadButton, CloudinaryUploadWidgetInfo, CloudinaryUploadWidgetResults } from 'next-cloudinary';
 

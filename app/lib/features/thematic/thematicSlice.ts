@@ -1,50 +1,48 @@
-import { createAppSlice } from "lib/createAppSlice";
-import type { AppThunk } from "lib/store";
+import { createAppSlice } from "@/lib/createAppSlice";
+import type { AppThunk } from "@/lib/store";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { addResearch, deleteResearch, researchList, singleResearch } from "./researchAPI";
+import { addThematicArea, deleteThematicArea, singleThematicArea, thematicAreaList } from "./thematicAPI";
 
-export interface ResearchAndReportInterface {
+export interface ThematicAreaInterface {
     _id?: string
-    title?: string
     category?: string
-    pictureURL?: string
-    document?: string
+    title?: string
+    picture?: string
     details?: string
     createdAt?: Date
     updatedAt?: Date
 }
 
-export interface researchSliceState {
-    value: ResearchAndReportInterface[],
+export interface thematicSliceState {
+    value: ThematicAreaInterface[],
     single: object,
     state: "idle" | "pre-load" | "loading" | "success" | "failed",
     errorMessage?: string,
     page: number
 }
 
-export interface PageAndNumber { page: number, limit: number }
-
-const initialState: researchSliceState = {
+const initialState: thematicSliceState = {
     value: [],
-    state: "pre-load",
     single: {},
+    state: "pre-load",
     errorMessage: "",
     page: 1
 };
 
-export const researchSlice = createAppSlice({
-    name: "research",
+export const thematicSlice = createAppSlice({
+    name: "thematic",
     initialState,
     reducers: (create) => ({
         add: create.asyncThunk(
-            async (payload: ResearchAndReportInterface) => {
-                return await addResearch(payload);
+            async (payload: ThematicAreaInterface) => {
+                return await addThematicArea(payload);
             }, {
             pending: (state) => {
                 state.state = "loading";
             },
             fulfilled: (state, action) => {
-                if(state.value.length < 10) state.value.push(action.payload.response.details);
+                
+                if(state.value.length < 10) state.value.push(action.payload.response.addedDetails);
                 state.state = "success";
             },
             rejected: (state, action) => {
@@ -53,15 +51,15 @@ export const researchSlice = createAppSlice({
             }
         }),
         get: create.asyncThunk(
-            async (payload: PageAndNumber) => {
-                return await researchList(payload.page, payload.limit);
+            async (payload: { page: number, limit: number }) => {
+                return await thematicAreaList(payload.page, payload.limit);
             }, {
             pending: (state) => {
                 state.state = "loading";
             },
             fulfilled: (state, action) => {
-                console.log(action.payload.response.details.results);
-                state.value = action.payload.response.details.results;
+                state.page = action.payload.response.thematicAreas.currentPage;
+                state.value = action.payload.response.thematicAreas.results;
                 state.state = "idle";
             },
             rejected: (state, action) => {
@@ -72,7 +70,7 @@ export const researchSlice = createAppSlice({
         ),
         getSingle: create.asyncThunk(
             async (payload: string) => {
-                return await singleResearch(payload);
+                return await singleThematicArea(payload);
             }, {
             pending: (state) => {
                 state.state = "loading";
@@ -89,7 +87,7 @@ export const researchSlice = createAppSlice({
         ),
         remove: create.asyncThunk(
             async (payload: string) => {
-                return await deleteResearch(payload);
+                return await deleteThematicArea(payload);
             }, {
             pending: (state) => {
                 state.state = "loading";
@@ -97,7 +95,7 @@ export const researchSlice = createAppSlice({
             fulfilled: (state, action) => {
                 state.single = {};
                 state.value = state.value.filter(s => s._id != action.payload.response.deletedId);
-                state.state = "success";
+                state.state = "idle";
             },
             rejected: (state, action) => {
                 state.state = "failed";
@@ -110,10 +108,11 @@ export const researchSlice = createAppSlice({
         selectValue: (counter) => counter.value,
         selectSingle: (counter) => counter.single,
         selectStatus: (counter) => counter.state,
+        selectPage: (counter) => counter.page,
         errorValue: (counter) => counter.errorMessage
     }
 });
 
-export const { add, remove, get, getSingle } = researchSlice.actions;
+export const { add, remove, get, getSingle } = thematicSlice.actions;
 
-export const { selectValue, selectStatus, errorValue, selectSingle } = researchSlice.selectors;
+export const {selectValue, selectStatus, errorValue, selectPage, selectSingle} = thematicSlice.selectors;

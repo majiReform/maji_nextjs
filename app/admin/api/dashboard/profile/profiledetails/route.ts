@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSesstion, logIt } from "../../../utils";
-import { userCollection } from "models/Users";
-import { UserInterface } from "lib/features/profile/profileSlice";
+import { userCollection } from "@/models/Users";
+import { UserInterface } from "@/lib/features/profile/profileSlice";
 
 
 export async function GET(_request: NextRequest) {
