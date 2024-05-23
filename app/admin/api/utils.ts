@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { JWTPayload, SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
 const secretKey = process.env.AUTH_KEY;
 

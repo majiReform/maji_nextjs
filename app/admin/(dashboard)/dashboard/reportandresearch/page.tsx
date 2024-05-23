@@ -1,10 +1,10 @@
 "use client"
-import { SpinLoaderTwo } from "@/components/LoadingAnimation/spinLoader";
-import { EmptyDocument } from "@/components/admindashboard/EmptyDocument";
-import { ResearchAndReportList } from "@/components/admindashboard/ResearchAndReport";
-import { ThematicAreaList } from "@/components/admindashboard/ThematicArea";
-import { get, selectStatus, selectValue } from "@/lib/features/research/researchSlice";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { SpinLoaderTwo } from "components/LoadingAnimation/spinLoader";
+import { EmptyDocument } from "components/admindashboard/EmptyDocument";
+import { ResearchAndReportList } from "components/admindashboard/ResearchAndReport";
+import { ThematicAreaList } from "components/admindashboard/ThematicArea";
+import { get, selectStatus, selectValue } from "lib/features/research/researchSlice";
+import { useAppDispatch, useAppSelector } from "lib/hooks";
 import { useEffect } from "react";
 
 export default function Page() {

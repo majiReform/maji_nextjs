@@ -1,8 +1,7 @@
-import { thematicAreaCollection } from "@/models/ThematicArea";
 import { NextRequest, NextResponse } from "next/server";
 import { logIt } from "../../utils";
-import { VideoInterface } from "@/lib/features/videos/videosSlice";
-import { videosCollection } from "@/models/Videos";
+import { VideoInterface } from "lib/features/videos/videosSlice";
+import { videosCollection } from "models/Videos";
 
 export async function POST(request: NextRequest) {
     try {

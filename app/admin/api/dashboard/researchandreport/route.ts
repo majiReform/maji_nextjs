@@ -1,9 +1,7 @@
-import { ThematicAreaInterface } from "@/lib/features/thematic/thematicSlice";
-import { thematicAreaCollection } from "@/models/ThematicArea";
 import { NextRequest, NextResponse } from "next/server";
 import { logIt } from "../../utils";
-import { researchAndReportAreaCollection } from "@/models/ResearchAndReport";
-import { ResearchAndReportInterface } from "@/lib/features/research/researchSlice";
+import { researchAndReportAreaCollection } from "models/ResearchAndReport";
+import { ResearchAndReportInterface } from "lib/features/research/researchSlice";
 
 export async function POST(request: NextRequest) {
     try {

@@ -4,10 +4,10 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { useState } from 'react';
-import { EditProfile } from '@/components/admindashboard/EditProfile';
-import { ChangePassword } from '@/components/admindashboard/ChangePassword';
-import { useAppDispatch } from '@/lib/hooks';
-import { selectValue } from '@/lib/features/profile/profileSlice';
+import { EditProfile } from 'components/admindashboard/EditProfile';
+import { ChangePassword } from 'components/admindashboard/ChangePassword';
+import { useAppDispatch } from 'lib/hooks';
+import { selectValue } from 'lib/features/profile/profileSlice';
 
 
 interface TabPanelProps {

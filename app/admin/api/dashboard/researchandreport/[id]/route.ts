@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { logIt } from "../../../utils";
-import { videosCollection } from "@/models/Videos";
 import { researchAndReportAreaCollection } from "@/models/ResearchAndReport";
 
 interface ParamsInterface {

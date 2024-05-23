@@ -1,4 +1,4 @@
-import { createAppSlice } from "@/lib/createAppSlice";
+import { createAppSlice } from "lib/createAppSlice";
 import { addVideo, deleteVideo, singleVideo, videosList } from "./videosAPI";
 
 export interface VideoInterface {

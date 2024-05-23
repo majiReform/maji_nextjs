@@ -1,4 +1,4 @@
-import { LeftAreaComponent } from "@/components/auth/Auth";
+import { LeftAreaComponent } from "components/auth/Auth";
 import { ReactNode } from "react";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';

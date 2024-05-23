@@ -1,13 +1,4 @@
 'use client'
-import {
-    Select,
-    selectClasses,
-    SelectListboxSlotProps,
-    SelectProps,
-    SelectRootSlotProps,
-} from '@mui/base/Select';
-import { styled } from '@mui/material/styles';
-import Button from '@mui/material/Button';
 
 const labelStyle = {
     backgroundColor: "indigo",
@@ -21,13 +12,13 @@ const labelStyle = {
 
 import { Option, optionClasses } from '@mui/base/Option';
 import { useEffect, useState } from 'react';
-import { add, selectStatus, selectValue } from '@/lib/features/research/researchSlice';
-import { useAppDispatch, useAppSelector } from '@/lib/hooks';
-import { UploadFile } from '@/components/admindashboard/UploadFile';
-import { AddAreaHeader } from '@/components/admindashboard/AddAreaHeader';
+import { add, selectStatus, selectValue } from 'lib/features/research/researchSlice';
+import { useAppDispatch, useAppSelector } from 'lib/hooks';
+import { UploadFile } from 'components/admindashboard/UploadFile';
+import { AddAreaHeader } from 'components/admindashboard/AddAreaHeader';
 import { toast } from 'react-toastify';
-import { UploadFileTwo } from '@/components/admindashboard/UploadFileTwo';
-import { SpinLoaderTwo } from '@/components/LoadingAnimation/spinLoader';
+import { UploadFileTwo } from 'components/admindashboard/UploadFileTwo';
+import { SpinLoaderTwo } from 'components/LoadingAnimation/spinLoader';
 import { CldUploadButton } from 'next-cloudinary';
 
 export default function Page() {

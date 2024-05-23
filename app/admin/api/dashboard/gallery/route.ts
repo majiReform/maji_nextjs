@@ -1,4 +1,4 @@
-import { galleryCollection } from "@/models/Gallery";
+import { galleryCollection } from "models/Gallery";
 import { NextRequest, NextResponse } from "next/server";
 import { logIt } from "../../utils";
 

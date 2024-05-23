@@ -1,31 +1,10 @@
 'use client'
-import {
-    Select,
-    selectClasses,
-    SelectListboxSlotProps,
-    SelectProps,
-    SelectRootSlotProps,
-} from '@mui/base/Select';
-import { styled } from '@mui/material/styles';
-import Button from '@mui/material/Button';
-
- const labelStyle = {
-    backgroundColor: "indigo",
-    color: "white",
-    padding: "0.5rem",
-    fontFamily: "sans-serif",
-    borderRadius: "0.3rem",
-    cursor: "pointer",
-    marginTop: "1rem"
-  }
-
-import { Option, optionClasses } from '@mui/base/Option';
 import { useEffect, useState } from 'react';
-import { add, selectStatus, selectValue } from '@/lib/features/videos/videosSlice';
-import { useAppDispatch, useAppSelector } from '@/lib/hooks';
-import { SpinLoader, SpinLoaderTwo } from '@/components/LoadingAnimation/spinLoader';
-import { UploadFile } from '@/components/admindashboard/UploadFile';
-import { AddAreaHeader } from '@/components/admindashboard/AddAreaHeader';
+import { add, selectStatus, selectValue } from 'lib/features/videos/videosSlice';
+import { useAppDispatch, useAppSelector } from 'lib/hooks';
+import { SpinLoader, SpinLoaderTwo } from 'components/LoadingAnimation/spinLoader';
+import { UploadFile } from 'components/admindashboard/UploadFile';
+import { AddAreaHeader } from 'components/admindashboard/AddAreaHeader';
 import { toast } from 'react-toastify';
 
 export default function Page() {

@@ -1,5 +1,5 @@
 
-import { UserInterface } from "@/lib/features/profile/profileSlice";
+import { UserInterface } from "lib/features/profile/profileSlice";
 import { MongoDBQueryHelper } from "./setup/queryHelper"
 import { Document } from "mongodb";
 

@@ -1,12 +1,12 @@
 "use client"
-import { EmptyDocument } from "@/components/admindashboard/EmptyDocument";
-import { ThematicAreaList } from "@/components/admindashboard/ThematicArea";
-import { selectStatus, selectValue } from "@/lib/features/thematic/thematicSlice";
-import { useAppSelector } from "@/lib/hooks";
-import { get } from "@/lib/features/thematic/thematicSlice";
-import { useAppDispatch } from "@/lib/hooks";
+import { EmptyDocument } from "components/admindashboard/EmptyDocument";
+import { ThematicAreaList } from "components/admindashboard/ThematicArea";
+import { selectStatus, selectValue } from "lib/features/thematic/thematicSlice";
+import { useAppSelector } from "lib/hooks";
+import { get } from "lib/features/thematic/thematicSlice";
+import { useAppDispatch } from "lib/hooks";
 import { useEffect } from "react";
-import { SpinLoaderTwo } from "@/components/LoadingAnimation/spinLoader";
+import { SpinLoaderTwo } from "components/LoadingAnimation/spinLoader";
 
 
 export default function ThematicArea() {

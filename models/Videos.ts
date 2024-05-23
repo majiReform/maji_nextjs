@@ -1,5 +1,5 @@
 import { MongoDBQueryHelper } from "./setup/queryHelper"
-import { VideoInterface } from "@/lib/features/videos/videosSlice";
+import { VideoInterface } from "lib/features/videos/videosSlice";
 import { Document } from "mongodb";
 
 

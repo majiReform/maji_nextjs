@@ -1,25 +1,15 @@
 'use client'
-import {
-    Select,
-    selectClasses,
-    SelectListboxSlotProps,
-    SelectProps,
-    SelectRootSlotProps,
-} from '@mui/base/Select';
-import { styled } from '@mui/material/styles';
-import Button from '@mui/material/Button';
-import { IoArrowBack } from "react-icons/io5";
 import { toast } from 'react-toastify';
 import { CldUploadButton } from 'next-cloudinary';
 
 
 import { Option, optionClasses } from '@mui/base/Option';
 import { useEffect, useState } from 'react';
-import { add, selectStatus, selectValue } from '@/lib/features/thematic/thematicSlice';
-import { useAppDispatch, useAppSelector } from '@/lib/hooks';
-import { UploadFile } from '@/components/admindashboard/UploadFile';
-import { AddAreaHeader } from '@/components/admindashboard/AddAreaHeader';
-import { SpinLoaderTwo } from '@/components/LoadingAnimation/spinLoader';
+import { add, selectStatus, selectValue } from 'lib/features/thematic/thematicSlice';
+import { useAppDispatch, useAppSelector } from 'lib/hooks';
+import { UploadFile } from 'components/admindashboard/UploadFile';
+import { AddAreaHeader } from 'components/admindashboard/AddAreaHeader';
+import { SpinLoaderTwo } from 'components/LoadingAnimation/spinLoader';
 import { AnyARecord } from 'dns';
 
 export default function Page() {
