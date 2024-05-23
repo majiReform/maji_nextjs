@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSesstion, logIt } from "../../../utils";
-import { userCollection } from "@/models/Users";
+import { userCollection } from "../../../../../../models/Users";
 import { UserInterface } from "@/lib/features/profile/profileSlice";
 
 

@@ -3,8 +3,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import { useState } from 'react';
-import { EditProfile } from '@/components/admindashboard/EditProfile';
-import { ChangePassword } from '@/components/admindashboard/ChangePassword';
+import { EditProfile } from '../../../../../components/admindashboard/EditProfile';
+import { ChangePassword } from '../../../../../components/admindashboard/ChangePassword';
 
 
 interface TabPanelProps {

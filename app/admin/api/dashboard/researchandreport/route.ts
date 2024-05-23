@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { logIt } from "../../utils";
-import { researchAndReportAreaCollection } from "@/models/ResearchAndReport";
+import { researchAndReportAreaCollection } from "../../../../../models/ResearchAndReport";
 import { ResearchAndReportInterface } from "@/lib/features/research/researchSlice";
 
 export async function POST(request: NextRequest) {

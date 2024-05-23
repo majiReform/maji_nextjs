@@ -4,9 +4,9 @@ import { CldUploadButton } from 'next-cloudinary';
 import { useEffect, useState } from 'react';
 import { add, selectStatus, selectValue } from '@/lib/features/thematic/thematicSlice';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
-import { UploadFile } from '@/components/admindashboard/UploadFile';
-import { AddAreaHeader } from '@/components/admindashboard/AddAreaHeader';
-import { SpinLoaderTwo } from '@/components/LoadingAnimation/spinLoader';
+import { UploadFile } from '../../../../../../components/admindashboard/UploadFile';
+import { AddAreaHeader } from '../../../../../../components/admindashboard/AddAreaHeader';
+import { SpinLoaderTwo } from '../../../../../../components/LoadingAnimation/spinLoader';
 import { AnyARecord } from 'dns';
 
 export default function Page() {

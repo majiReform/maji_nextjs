@@ -2,8 +2,8 @@
 import { useEffect, useState } from 'react';
 import { add, selectStatus, selectValue } from '@/lib/features/videos/videosSlice';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
-import { SpinLoaderTwo } from '@/components/LoadingAnimation/spinLoader';
-import { AddAreaHeader } from '@/components/admindashboard/AddAreaHeader';
+import { SpinLoaderTwo } from '../../../../../../components/LoadingAnimation/spinLoader';
+import { AddAreaHeader } from '../../../../../../components/admindashboard/AddAreaHeader';
 import { toast } from 'react-toastify';
 
 export default function Page() {

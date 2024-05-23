@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "baseUrl": "app/",
+    "baseUrl": ".",
     "paths": {
       "@/components/*": ["components/*"],
       "@/models/*": ["models/*"],

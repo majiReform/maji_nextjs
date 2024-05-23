@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { logIt } from "../../../utils";
-import { videosCollection } from "@/models/Videos";
-import { galleryCollection } from "@/models/Gallery";
+import { videosCollection } from "../../../../../../models/Videos";
+import { galleryCollection } from "../../../../../../models/Gallery";
 
 interface ParamsInterface {
     params: {

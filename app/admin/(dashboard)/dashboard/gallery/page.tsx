@@ -1,7 +1,7 @@
 "use client"
-import { SpinLoaderTwo } from "@/components/LoadingAnimation/spinLoader";
-import { EmptyDocument } from "@/components/admindashboard/EmptyDocument";
-import { GalleryList } from "@/components/admindashboard/Gallery";
+import { SpinLoaderTwo } from "../../../../../components/LoadingAnimation/spinLoader";
+import { EmptyDocument } from "../../../../../components/admindashboard/EmptyDocument";
+import { GalleryList } from "../../../../../components/admindashboard/Gallery";
 import { get, selectStatus, selectValue } from "@/lib/features/gallery/gallerySlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useEffect } from "react";
