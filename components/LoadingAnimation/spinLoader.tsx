@@ -1,10 +1,11 @@
+import zIndex from "@mui/material/styles/zIndex";
 import { ImSpinner3 } from "react-icons/im";
 import { ImSpinner } from "react-icons/im";
 
 
 function SpinLoader() {
     return (
-        <ImSpinner3 className="animate-spin text-[40px]" />
+        <ImSpinner3 className="animate-spin text-[40px]" style={{zIndex: "100"}} />
     );
 }
 

@@ -92,8 +92,9 @@ export const thematicSlice = createAppSlice({
             pending: (state) => {
                 state.state = "loading";
             },
-            fulfilled: (state) => {
+            fulfilled: (state, action) => {
                 state.single = {};
+                state.value = state.value.filter(s => s._id != action.payload.response.deletedId);
                 state.state = "idle";
             },
             rejected: (state, action) => {

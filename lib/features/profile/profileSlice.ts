@@ -16,13 +16,15 @@ export interface UserInterface {
 
 export interface profileSliceState {
     value: UserInterface,
-    state: "idle" | "loading" | "failed",
-    errorMessage?: string
+    state: "idle" | "pre-load" | "success" | "loading" | "failed",
+    errorMessage?: string,
+    successMessage: string
 }
 
 const initialState: profileSliceState = {
     value: {},
-    state: "idle",
+    state: "pre-load",
+    successMessage: "",
     errorMessage: ""
 };
 
@@ -35,10 +37,10 @@ export const profileSlice = createAppSlice({
                 return await getProfile();
             }, {
             pending: (state) => {
-                state.state = "loading";
+                state.state = "pre-load";
             },
             fulfilled: (state, action) => {
-                state.value = action.payload.response;
+                state.value = action.payload.response.details;
                 state.state = "idle";
             },
             rejected: (state, action) => {
@@ -54,8 +56,9 @@ export const profileSlice = createAppSlice({
                 state.state = "loading";
             },
             fulfilled: (state, action) => {
-                state.value = action.payload.response;
-                state.state = "idle";
+                state.value = action.payload.response.details;
+                state.successMessage = "Profile update successful";
+                state.state = "success";
             },
             rejected: (state, action) => {
                 state.state = "failed";
@@ -71,9 +74,10 @@ export const profileSlice = createAppSlice({
                 state.state = "loading";
             },
             fulfilled: (state, action) => {
-                console.log("Profile", action.payload.response, action.payload.status);
-                state.value.profilePicture = action.payload.response;
-                state.state = "idle";
+                console.log("Profile", action.payload.response.newProfilePicture, action.payload.status);
+                state.value.profilePicture = action.payload.response.newProfilePicture;
+                state.successMessage = "Profile picture update successful";
+                state.state = "success";
             },
             rejected: (state, action) => {
                 state.state = "failed";
@@ -88,12 +92,17 @@ export const profileSlice = createAppSlice({
             pending: (state) => {
                 state.state = "loading";
             },
-            fulfilled: (state) => {
-                state.state = "idle";
+            fulfilled: (state, action) => {
+                console.log(action.payload.response);
+                state.state = "success";
+                state.successMessage = "Password update successful";
             },
             rejected: (state, action) => {
+                console.log("Error details:", action.error);
                 state.state = "failed";
-                state.errorMessage = action.error.message;
+                if(action.error.code == "ERR_BAD_REQUEST") {
+                    state.errorMessage = "Invalid current password";
+                }
             }
         }
         ),
@@ -101,10 +110,11 @@ export const profileSlice = createAppSlice({
     selectors: {
         selectValue: (counter) => counter.value,
         errorValue: (counter) => counter.errorMessage,
+        successValue: (counter) => counter.successMessage,
         selectStatus: (counter) => counter.state,
     }
 });
 
 export const { get, update, updatePicture, updateProfilePassword } = profileSlice.actions;
 
-export const { selectValue, selectStatus, errorValue } = profileSlice.selectors;
+export const { selectValue, selectStatus, errorValue, successValue } = profileSlice.selectors;

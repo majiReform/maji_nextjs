@@ -45,9 +45,9 @@ export async function updateSession(request: NextRequest) {
     
         const decryptedPayload = await decypt(session!!.value);
     
-        console.log("Decrypted payload:", decryptedPayload);
+        // console.log("Decrypted payload:", decryptedPayload);
     
-        console.log("Has expired");
+        // console.log("Has expired");
     
     
         const res = NextResponse.next();

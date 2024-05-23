@@ -117,11 +117,11 @@ export default function Page() {
                             sources: ["local", "dropbox", "google_drive"],
                             clientAllowedFormats: ["png", "jpg", "jpeg"]
                         }}
-                        onSuccess={(result, widget) => {
+                        onSuccess={(result: any, widget) => {
                             console.log(result)
                             if (result.event == "success") {
-                                setPictureUrl(result!!.info.secure_url as string);  // { public_id, secure_url, etc }
-                                setOriginalFileName(result.info.original_filename);
+                                setPictureUrl(result?.info.secure_url);  // { public_id, secure_url, etc }
+                                setOriginalFileName(result?.info.original_filename);
                             } else {
                                 toast.error("File upload failed, kindly retry.");
                             }
@@ -150,10 +150,10 @@ export default function Page() {
                             sources: ["local", "dropbox", "google_drive"],
                             clientAllowedFormats: ["docx", "doc", "txt", "pdf"]
                         }}
-                        onSuccess={(result, widget) => {
+                        onSuccess={(result: any, widget) => {
                             console.log(result)
                             if (result.event == "success") {
-                                setFileUrl(result!!.info.secure_url as string);  // { public_id, secure_url, etc }
+                                setFileUrl(result!!.info.secure_url);  // { public_id, secure_url, etc }
                                 setOriginalFileNameTwo(result.info.original_filename);
                             } else {
                                 toast.error("File upload failed, kindly retry.");

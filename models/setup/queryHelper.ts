@@ -1,4 +1,4 @@
-import { Db, ObjectId } from "mongodb";
+import { Db, Filter, FilterOperators, ObjectId } from "mongodb";
 import { connectDB } from "./connect";
 
 
@@ -20,12 +20,12 @@ class MongoDBQueryHelper<T> {
         return this.db;
     }
 
-    async findOne(query: T) {
+    async findOne(query: object) {
         try {
             const db = await this.connect();
             const collection = db.collection(this.collectionName);
-            return await collection.findOne(query) as T;
-        } catch (error) {
+            return await collection.findOne(query);
+        } catch (error: any) {
             throw new Error(`Error counting documents: ${error.message}`);
         }
     }
@@ -40,7 +40,17 @@ class MongoDBQueryHelper<T> {
         }
     }
 
-    async find(query: T, options: { limit?: number; skip?: number } = {}) {
+    async findByIdAndDelete(id: string | ObjectId) {
+        try {
+            const db = await this.connect();
+            const collection = db.collection(this.collectionName);
+            return await collection.deleteOne({ _id: typeof(id) == "string" ? (new ObjectId(id)) : id }) as T;
+        } catch (error: any) {
+            throw new Error(`Error counting documents: ${error.message}`);
+        }
+    }
+
+    async find(query: object, options: { limit?: number; skip?: number } = {}) {
         try {
             const db = await this.connect();
             const collection = db.collection(this.collectionName);
@@ -51,7 +61,7 @@ class MongoDBQueryHelper<T> {
         }
     }
 
-    async create(data: T) {
+    async create(data: any) {
         try {
             const db = await this.connect();
             const collection = db.collection(this.collectionName);
@@ -64,7 +74,7 @@ class MongoDBQueryHelper<T> {
         }
     }
 
-    async findByIdAndUpdate(id: string | ObjectId, data: T): Promise<any> {
+    async findByIdAndUpdate(id: string | ObjectId, data: any): Promise<any> {
         try {
             const db = await this.connect();
             const collection = db.collection(this.collectionName);
@@ -77,7 +87,7 @@ class MongoDBQueryHelper<T> {
         }
     }
 
-    async update(query: T, data: T): Promise<any> {
+    async update(query: object, data: any): Promise<any> {
         try {
             const db = await this.connect();
             const collection = db.collection(this.collectionName);
@@ -88,7 +98,7 @@ class MongoDBQueryHelper<T> {
         }
     }
 
-    async delete(query: T) {
+    async deleteOneDocument(query: object) {
         try {
             const db = await this.connect();
             const collection = db.collection(this.collectionName);
@@ -98,7 +108,7 @@ class MongoDBQueryHelper<T> {
         }
     }
 
-    async count(query: T) {
+    async count(query: object) {
         try {
             const db = await this.connect();
         const collection = db.collection(this.collectionName);
@@ -108,7 +118,7 @@ class MongoDBQueryHelper<T> {
         }
       }
 
-      async paginate(query: T, page:number = 1, limit: number = 10) {
+      async paginate(query: object, page:number = 1, limit: number = 10) {
         try {
           const count = await this.count(query);
           const totalPages = Math.ceil(count / limit);

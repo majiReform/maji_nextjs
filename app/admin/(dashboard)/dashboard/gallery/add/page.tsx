@@ -26,7 +26,7 @@ import { UploadFile } from '@/components/admindashboard/UploadFile';
 import { AddAreaHeader } from '@/components/admindashboard/AddAreaHeader';
 import { SpinLoaderTwo } from '@/components/LoadingAnimation/spinLoader';
 import { toast } from 'react-toastify';
-import { CldUploadButton } from 'next-cloudinary';
+import { CldUploadButton, CloudinaryUploadWidgetInfo, CloudinaryUploadWidgetResults } from 'next-cloudinary';
 
 export default function Page() {
 
@@ -92,12 +92,14 @@ export default function Page() {
                             sources: ["local", "dropbox", "google_drive"],
                             clientAllowedFormats: ["png", "jpg", "jpeg"]
                         }}
-                        onSuccess={(result, widget) => {
+                        onSuccess={(result: any, widget) => {
                             console.log(result)
                             if (result.event == "success") {
-                                setPictureUrl(result!!.info.secure_url as string);  // { public_id, secure_url, etc }
-                                setOriginalPicture(result.info.original_filename);
+                                setPictureUrl(result?.info.secure_url);  // { public_id, secure_url, etc }
+                                setOriginalPicture(result?.info.original_filename);
                             } else {
+                                setPictureUrl("");  // { public_id, secure_url, etc }
+                                setOriginalPicture("");
                                 toast.error("File upload failed, kindly retry.");
                             }
                             widget.close();

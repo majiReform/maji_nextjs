@@ -4,13 +4,12 @@ import { EmptyDocument } from "@/components/admindashboard/EmptyDocument";
 import { ResearchAndReportList } from "@/components/admindashboard/ResearchAndReport";
 import { ThematicAreaList } from "@/components/admindashboard/ThematicArea";
 import { get, selectStatus, selectValue } from "@/lib/features/research/researchSlice";
-import { useAppSelector } from "@/lib/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 
 export default function Page() {
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         dispatch(get({page: 1, limit: 10}));

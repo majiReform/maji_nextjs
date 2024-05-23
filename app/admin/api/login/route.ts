@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
         const session = await encrypt({
             user: {
                 fullName: admin.fullName,
-                userId: admin!!._id as string,
+                userId: (admin!!._id).toString(),
                 email: admin.email,
                 role: "admin"
             }

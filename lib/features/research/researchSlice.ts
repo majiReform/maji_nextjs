@@ -22,6 +22,8 @@ export interface researchSliceState {
     page: number
 }
 
+export interface PageAndNumber { page: number, limit: number }
+
 const initialState: researchSliceState = {
     value: [],
     state: "pre-load",
@@ -51,7 +53,7 @@ export const researchSlice = createAppSlice({
             }
         }),
         get: create.asyncThunk(
-            async (payload: { page: number, limit: number }) => {
+            async (payload: PageAndNumber) => {
                 return await researchList(payload.page, payload.limit);
             }, {
             pending: (state) => {
@@ -92,8 +94,9 @@ export const researchSlice = createAppSlice({
             pending: (state) => {
                 state.state = "loading";
             },
-            fulfilled: (state) => {
+            fulfilled: (state, action) => {
                 state.single = {};
+                state.value = state.value.filter(s => s._id != action.payload.response.deletedId);
                 state.state = "success";
             },
             rejected: (state, action) => {

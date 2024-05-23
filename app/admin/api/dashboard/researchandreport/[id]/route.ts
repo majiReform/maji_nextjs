@@ -35,3 +35,34 @@ export async function GET(_request: NextRequest, {params}: ParamsInterface) {
         });
     }
 }
+
+
+
+
+export async function DELETE(_request: NextRequest, {params}: ParamsInterface) {
+    
+    try {
+        const id = params.id;
+
+        const deletedReport = await researchAndReportAreaCollection.findByIdAndDelete(id);
+
+        return NextResponse.json({
+            isSuccessful: true,
+            deletedReport,
+            deletedId: id
+        }, {
+            status: 200
+        });
+        
+    } catch (error) {
+        logIt({value: error, level: "error"});
+        return NextResponse.json({
+            isSuccessful: false,
+            error: "Internal server error"
+        }, {
+            status: 500
+        });
+    }
+
+}
+

@@ -20,6 +20,7 @@ import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { UploadFile } from '@/components/admindashboard/UploadFile';
 import { AddAreaHeader } from '@/components/admindashboard/AddAreaHeader';
 import { SpinLoaderTwo } from '@/components/LoadingAnimation/spinLoader';
+import { AnyARecord } from 'dns';
 
 export default function Page() {
 
@@ -105,10 +106,10 @@ export default function Page() {
                             multiple: false,
                             sources: ["local", "dropbox"]
                         }}
-                        onSuccess={(result, widget) => {
+                        onSuccess={(result: any, widget) => {
                             console.log(result)
                             if (result.event == "success") {
-                                setpictureUrl(result!!.info.secure_url as string);  // { public_id, secure_url, etc }
+                                setpictureUrl(result!!.info.secure_url);  // { public_id, secure_url, etc }
                                 setOriginalFileName(result.info.original_filename);
                             } else {
                                 toast.error("File upload failed, kindly retry.");

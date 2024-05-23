@@ -11,7 +11,6 @@ export async function GET(_request: NextRequest) {
 
         const admin = await userCollection.findById(session.user.userId);
 
-
         if(admin) delete admin.password;
 
         return NextResponse.json({
@@ -55,10 +54,14 @@ export async function PUT(request: NextRequest) {
             fullName, email, phoneNumber
         });
 
+        const newRecord = await userCollection.findById(session?.user!!.userId);
+
+        delete newRecord.password;
+
         return NextResponse.json({
             isSuccessful: true,
             message: "Profile updated Successfully",
-            details: record
+            details: newRecord
         }, {
             status: 200
         });

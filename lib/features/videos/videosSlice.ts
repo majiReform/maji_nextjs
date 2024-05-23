@@ -1,5 +1,5 @@
 import { createAppSlice } from "@/lib/createAppSlice";
-import { addVideo, singleVideo, videosList } from "./videosAPI";
+import { addVideo, deleteVideo, singleVideo, videosList } from "./videosAPI";
 
 export interface VideoInterface {
     _id?: string,
@@ -82,13 +82,14 @@ export const videosSlice = createAppSlice({
         ),
         remove: create.asyncThunk(
             async (payload: string) => {
-                return await singleVideo(payload);
+                return await deleteVideo(payload);
             }, {
             pending: (state) => {
                 state.state = "loading";
             },
-            fulfilled: (state) => {
+            fulfilled: (state, action) => {
                 state.single = {};
+                state.value = state.value.filter(s => s._id != action.payload.response.deletedId);
                 state.state = "idle";
             },
             rejected: (state, action) => {

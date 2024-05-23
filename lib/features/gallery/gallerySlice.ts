@@ -90,8 +90,10 @@ export const gallerySlice = createAppSlice({
             pending: (state) => {
                 state.state = "loading";
             },
-            fulfilled: (state) => {
+            fulfilled: (state, action) => {
+                console.log(action.payload.response);
                 state.single = {};
+                state.value = state.value.filter(s => s._id != action.payload.response.deletedId);
                 state.state = "idle";
             },
             rejected: (state, action) => {

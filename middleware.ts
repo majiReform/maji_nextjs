@@ -4,7 +4,7 @@ import { updateSession } from "./app/admin/api/utils";
 export async function middleware(request: NextRequest) {
     let cookie = request.cookies.get("session");
 
-    console.log("Za cookie", cookie, "ends here");
+    // console.log("Za cookie", cookie, "ends here");
     
     if(!cookie) {
         return NextResponse.redirect(new URL("/admin/login", request.url));

@@ -14,9 +14,14 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { RxExclamationTriangle } from "react-icons/rx";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { logoutFeature } from "@/lib/features/auth/logoutFeat";
 import { toast } from 'react-toastify';
+import { get, selectStatus } from '@/lib/features/profile/profileSlice';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks';
+import { selectValue } from '@/lib/features/profile/profileSlice';
+import { SpinLoader, SpinLoaderTwo } from '../LoadingAnimation/spinLoader';
+import { NoPicture } from './ProfilePictureStates';
 
 function selectAreaHeader() {
 
@@ -115,8 +120,21 @@ function LogoutModal({openState, setOpen}: openStateInterface) {
 function AdminHeaderComponent() {
 
     const [openState, setOpenState] = useState(false);
+    
+    const dispatch = useAppDispatch();
 
-    const router = useRouter()
+    useEffect(() => {
+        dispatch(get());
+    }, [dispatch]);
+
+    const profile = useAppSelector(selectValue);
+    const status = useAppSelector(selectStatus);
+
+    // if(status == "loading") {
+    //     return <SpinLoaderTwo />
+    // }
+
+    const router = useRouter();
 
     const settings = () => {
         router.push("/admin/dashboard/settings");
@@ -130,13 +148,14 @@ function AdminHeaderComponent() {
         <div className="flex justify-between items-center px-8 w-full h-[80px]">
             <LogoutModal  openState={openState} setOpen={setOpenState} />
             <div className="font-bold text-xl">{selectAreaHeader()}</div>
-            <Dropdown>
+            {status == "loading" || status == "pre-load" ? (<SpinLoader />) : (<Dropdown>
                 <MenuButton className='flex gap-2'>
                     <div className='h-[45px] w-[45px] rounded-full relative overflow-hidden'>
-                        <Image src="/auth_pic.jpeg" fill={true} alt='Profile picture' />
+                    {profile.profilePicture ? (<Image src={profile.profilePicture!!} fill={true} alt='Profile picture' />) : (<NoPicture />)}
+                        
                     </div>
                     <div className='text-left'>
-                        <div className='font-bold'>Victor Peter</div>
+                        <div className='font-bold'>{profile.fullName}</div>
                         <div>Admin</div>
                     </div>
                     <RxCaretDown className='h-[30px] w-[40px]' />
@@ -145,7 +164,8 @@ function AdminHeaderComponent() {
                     <MenuItem className="cursor-pointer" onClick={settings}>Settings</MenuItem>
                     <MenuItem className="cursor-pointer" onClick={logoutButton}>Log out</MenuItem>
                 </Menu>
-            </Dropdown>
+            </Dropdown>)}
+            
         </div>
     );
 }
