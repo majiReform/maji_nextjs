@@ -1,4 +1,5 @@
 "use client"
+import { Metadata } from "next";
 import { SpinLoaderTwo } from "../../../../../components/LoadingAnimation/spinLoader";
 import { EmptyDocument } from "../../../../../components/admindashboard/EmptyDocument";
 import { GalleryList } from "../../../../../components/admindashboard/Gallery";
@@ -37,3 +38,8 @@ export default function Layout() {
         <GalleryList navigateTo={navigateTo} />
     );
 }
+
+
+export const metadata: Metadata = {
+    title: "Maji Admin - Home"
+  };
