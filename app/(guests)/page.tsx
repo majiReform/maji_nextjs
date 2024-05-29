@@ -1,6 +1,6 @@
 "use client"
 import type { Metadata } from "next";
-import { Counter } from "../components/counter/Counter";
+import { Counter } from "../../components/counter/Counter";
 import { GuestHeader } from "@/components/guests/Header";
 import { HeroSection } from "@/components/guests/HomeSection/HeroSection";
 import { AboutUsSection } from "@/components/guests/HomeSection/AboutUs";
@@ -13,7 +13,7 @@ import { GuestMedia } from "@/components/guests/HomeSection/Media";
 
 export default function IndexPage() {
   return (
-    <div className="overflow-y-auto h-screen flex flex-col">
+    <div className="overflow-y-auto overflow-x-hidden h-screen flex flex-col">
       <GuestHeader />
       <HeroSection />
       <AboutUsSection />

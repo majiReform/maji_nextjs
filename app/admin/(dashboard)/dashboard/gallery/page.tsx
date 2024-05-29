@@ -38,8 +38,3 @@ export default function Layout() {
         <GalleryList navigateTo={navigateTo} />
     );
 }
-
-
-export const metadata: Metadata = {
-    title: "Maji Admin - Home"
-  };

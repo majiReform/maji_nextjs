@@ -1,4 +1,5 @@
 import Image from "next/image";
+import AliceCarousel from "react-alice-carousel";
 
 
 interface PartnersListInterface {
@@ -34,20 +35,42 @@ const partnersList: PartnersListInterface[] = [
 ];
 
 function PartnersAndDonorsSection () {
+
+    const responsive = {
+        0: { items: 1 },
+        568: { items: 2 },
+        1024: { items: 3 },
+        1025: { items: 4 },
+        1026: { items: 5 },
+    };
+
     return (
         <div className="bg-black px-20 py-8">
             <div className="text-center">Our Partners and Donors</div>
             <div className="flex justify-between">
-            {partnersList.map((partner, index) => {
+            <AliceCarousel
+                autoHeight
+                autoPlay
+                responsive={responsive}
+                // autoPlayControls
+                disableDotsControls
+                disableButtonsControls
+                mouseTracking
+                infinite
+                autoPlayInterval={2000}
+            >
+                {partnersList.map((partner, index) => {
                 return (
-                    <div key={index}>
-                        <div className="relative h-[120px]">
+                    <div key={index} className="px-8">
+                        <div className={`relative ${partner.pictureURL == "/United_States_Consulate_General_Lagos_1.png" ? "w-[120px]" : ""} h-[120px] mx-auto`}>
                         <Image src={partner.pictureURL} fill={true} alt="Partner list" style={{backgroundSize: "contain", width: "100%"}} />
                         </div>
-                        <div className="text-white text-[16px] mt-4">{partner.title}</div>
+                        <div className="text-white text-center text-[14px] mt-4">{partner.title}</div>
                     </div>
                 );
             })}
+            </AliceCarousel>
+            
             </div>
         </div>
     );

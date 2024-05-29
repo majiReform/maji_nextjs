@@ -26,20 +26,20 @@ function GuestMedia() {
     ];
 
     return (
-        <div className="py-10 px-20">
+        <div className="py-10 px-8 md:py-10 md:px-20">
             <div className="text-center mb-10 flex justify-between items-center">
                 <div>
-                    <div className="w-[200px] h-[10px] bg-yellow rounded-[10px] mb-2"></div>
-                    <div className="text-[32px] font-bold font-bold">Media</div>
+                    <div className="w-[80px] md:w-[200px] h-[10px] bg-yellow rounded-[10px] mb-2"></div>
+                    <div className="text-[20px] md:text-[32px] font-bold font-bold">Media</div>
                 </div>
                 <button className="flex gap-2 items-center">See More <BsCaretRight /></button>
             </div>
-            <div className="flex gap-4 w-full h-[650px]">
-                <div className="w-1/2">
+            <div className="flex flex-col md:flex-row gap-4 w-full h-[450px] md:h-[650px]">
+                <div className="w-full h-full md:w-1/2">
                     <div className="w-full h-full relative z-10" style={{ backgroundImage: `url("${thematicarea[0].picture}")`, backgroundSize: "cover", backgroundRepeat: "no-repeat", borderRadius: "5px", backgroundPosition: "center" }}>
                     </div>
                 </div>
-                <div className="grid grid-cols-2 gap-4 h-full w-1/2">
+                <div className="grid grid-cols-2 gap-4 h-full w-full md:w-1/2">
                     {thematicarea.map((record) => {
                         return (
                             <div className="w-full bg-white relative border border-[#E6E6E6] rounded-[10px] overflow-hidden">
