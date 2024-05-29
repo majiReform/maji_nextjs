@@ -73,7 +73,7 @@ export default function Page() {
 
     return (
         <div>
-            <div className='flex flex-col w-[800px] mx-auto py-20 gap-6'>
+            <div className='flex flex-col w-full md:w-[800px] mx-auto py-20 gap-6'>
 
                 <AddAreaHeader
                     title='Upload Report and Research'

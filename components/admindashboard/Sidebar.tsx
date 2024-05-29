@@ -1,6 +1,9 @@
 'use client'
+import { closeSidebar, isOpenValue } from "@/lib/features/sidebar/sidebarSlice";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
+import { MdClose } from "react-icons/md";
 
 interface buttonPropertyInterface {
     name: string,
@@ -10,6 +13,8 @@ interface buttonPropertyInterface {
 function SidebarButton() {
 
     const router = useRouter();
+
+    const dispatch = useAppDispatch();
 
     const pathName = usePathname();
 
@@ -36,7 +41,7 @@ function SidebarButton() {
         <div className="flex flex-col gap-2 p-2">
             {buttonProperties.map((buttonProperty: buttonPropertyInterface) => {
                 return (
-                    <button className={`pl-10 py-6 text-left rounded-[8px] ${pathName.includes(buttonProperty.path) ? "bg-black text-white" : ""}`} onClick={() => {router.push(buttonProperty.path)}}>{buttonProperty.name}</button>
+                    <button className={`pl-10 py-6 text-left rounded-[8px] ${pathName.includes(buttonProperty.path) ? "bg-black text-white" : ""}`} onClick={() => {router.push(buttonProperty.path); dispatch(closeSidebar())}}>{buttonProperty.name}</button>
                 );
             })}
         </div>
@@ -44,10 +49,18 @@ function SidebarButton() {
 }
 
 function AdminSidebarComponent () {
+
+    const dispatch = useAppDispatch();
+
+    const isSidebarOpen = useAppSelector(isOpenValue);
+
     return (
-        <div className="flex flex-col w-[15%] gap-20 py-4">
+        <div className={`md:flex md:flex-col w-full absolute ${isSidebarOpen ? "flex flex-col" : "hidden"} md:relative md:w-[15%] gap-20 py-4 bg-white h-screen`} style={{zIndex: "200"}}>
+            <div className="flex items-center">
             <div className="relative h-[40px] w-[100px] mx-auto">
                 <Image src="/maij_logo.png" fill={true} alt="Maij logo" />
+            </div>
+            <MdClose className="mr-4 md:hidden" onClick={() => {dispatch(closeSidebar())}} />
             </div>
             <SidebarButton />
         </div>

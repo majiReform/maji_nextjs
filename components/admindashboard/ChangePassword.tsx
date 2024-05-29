@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { SpinLoader, SpinLoaderTwo } from "../LoadingAnimation/spinLoader";
+import { NoPicture } from "./ProfilePictureStates";
 
 function ChangePassword() {
 
@@ -43,10 +44,10 @@ function ChangePassword() {
 
     return (
         <div>
-            <div className="flex flex-col w-[800px] gap-10 mx-auto py-20">
+            <div className="flex flex-col w-full md:w-[800px] gap-10 mx-auto py-20">
 
                 <div className="relative w-[200px] h-[200px] rounded-full overflow-hidden mx-auto">
-                    <Image src={profile.profilePicture ? profile.profilePicture : "/auth_pic.jpeg"} fill={true} alt="Profile picture" style={{ zIndex: "20" }} />
+                {profile.profilePicture ? (<Image src={profile.profilePicture} fill={true} alt="Profile picture" style={{zIndex: "20"}} />) : (<NoPicture />)}
                 </div>
 
                 <div>

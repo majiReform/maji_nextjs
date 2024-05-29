@@ -114,7 +114,7 @@ function ResearchAndReportList(props: researchlistprop) {
                 >Add Research And Report</button>
             </div>
 
-            <div className="grid grid-cols-4 gap-8 z-40 mb-20">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 z-40 mb-20">
                 {research.map((record) => {
                     return (
                         <div className="w-full p-4 bg-white relative">

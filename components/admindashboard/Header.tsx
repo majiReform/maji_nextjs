@@ -22,6 +22,8 @@ import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { selectValue } from '@/lib/features/profile/profileSlice';
 import { SpinLoader, SpinLoaderTwo } from '../LoadingAnimation/spinLoader';
 import { NoPicture } from './ProfilePictureStates';
+import { ImMenu } from 'react-icons/im';
+import { closeSidebar, openSidebar } from '@/lib/features/sidebar/sidebarSlice';
 
 function selectAreaHeader() {
 
@@ -147,9 +149,9 @@ function AdminHeaderComponent() {
     return (
         <div className="flex justify-between items-center px-8 w-full h-[80px]">
             <LogoutModal  openState={openState} setOpen={setOpenState} />
-            <div className="font-bold text-xl">{selectAreaHeader()}</div>
+            <div className="font-bold md:text-xl">{selectAreaHeader()}</div>
             {status == "loading" || status == "pre-load" ? (<SpinLoader />) : (<Dropdown>
-                <MenuButton className='flex gap-2'>
+                <MenuButton className='flex items-center gap-1 md:gap-2 text-[14px]'>
                     <div className='h-[45px] w-[45px] rounded-full relative overflow-hidden'>
                     {profile.profilePicture ? (<Image src={profile.profilePicture!!} fill={true} alt='Profile picture' />) : (<NoPicture />)}
                         
@@ -160,12 +162,12 @@ function AdminHeaderComponent() {
                     </div>
                     <RxCaretDown className='h-[30px] w-[40px]' />
                 </MenuButton>
-                <Menu className='bg-white flex flex-col gap-8 p-4'>
+                <Menu className='bg-white flex flex-col gap-8 p-4' style={{zIndex: "200"}}>
                     <MenuItem className="cursor-pointer" onClick={settings}>Settings</MenuItem>
                     <MenuItem className="cursor-pointer" onClick={logoutButton}>Log out</MenuItem>
                 </Menu>
             </Dropdown>)}
-            
+            <ImMenu className='block md:hidden' onClick={() => {dispatch(openSidebar())}} />
         </div>
     );
 }
