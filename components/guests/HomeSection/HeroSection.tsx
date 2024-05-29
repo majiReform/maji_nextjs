@@ -23,7 +23,7 @@ function HeroSection() {
 
 
     return (
-        <div style={{zIndex: "900"}}>
+        <div style={{zIndex: "200"}}>
             <AliceCarousel
                 autoHeight
                 autoPlay

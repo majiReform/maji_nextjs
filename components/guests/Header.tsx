@@ -114,7 +114,7 @@ function GuestHeader() {
     // };
 
     return (
-        <div>
+        <div style={{zIndex: "1800"}}>
             {/* Desktop header */}
             <div className="hidden md:flex justify-between items-center px-20 py-4">
                 <div className="relative w-[90px] h-[40px]">
@@ -131,7 +131,7 @@ function GuestHeader() {
                                         </div>
                                         <RxCaretDown className='h-[20px] w-[20px]' />
                                     </MenuButton>
-                                    <Menu className='bg-white flex flex-col p-4'>
+                                    <Menu className='bg-white flex flex-col p-4' style={{zIndex: "1800"}}>
                                         {value.children.map((child, indextwo) => {
                                             return (
                                                 <MenuItem className="cursor-pointer" key={indextwo} onClick={() => { router.push(child.link) }}>{child.text}</MenuItem>
