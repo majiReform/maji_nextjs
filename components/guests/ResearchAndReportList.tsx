@@ -57,7 +57,7 @@ function GuestResearchAdReportList() {
     ];
 
     return (
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-10 mx-20'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-8 md:py-10 mx-8 md:mx-20'>
             {thematicarea.map((record) => {
                 return (
                     <div className="w-full bg-white relative rounded-[10px] overflow-hidden">

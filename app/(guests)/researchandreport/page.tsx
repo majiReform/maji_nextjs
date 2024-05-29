@@ -8,7 +8,7 @@ export default function GuestThematicAreaPage() {
     return (
         <div style={{overflow: "auto", height: "100vh"}}>
             <GuestHeader />
-            <div className="px-20 py-16 bg-black text-white text-center text-[32px] font-bold">
+            <div className="px-8 md:px-20 py-16 bg-black text-white text-center text-[20px] md:text-[32px] font-bold">
                 Research and Report
             </div>
             <GuestResearchAdReportList />

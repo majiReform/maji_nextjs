@@ -34,19 +34,19 @@ const guestHeaderProperties: guestHeaderPropertiesInterface[] = [
         children: [
             {
                 text: "Who we are",
-                link: "/aboutus"
+                link: "/aboutus#aboutwhoweare"
             },
             {
                 text: "Our history and background",
-                link: "/aboutus"
+                link: "/aboutus#historyandbackground"
             },
             {
                 text: "Where we work",
-                link: "/aboutus"
+                link: "/aboutus#aboutwherewework"
             },
             {
                 text: "Our Methodology",
-                link: "/aboutus"
+                link: "/aboutus#ourmethodology"
             }
         ]
     },
@@ -55,19 +55,19 @@ const guestHeaderProperties: guestHeaderPropertiesInterface[] = [
         children: [
             {
                 text: "Enviromental Rights",
-                link: "/thematicarea"
+                link: "/thematicarea/bycategory/enviromental-rights"
             },
             {
                 text: "Human Rights",
-                link: "/thematicarea"
+                link: "/thematicarea/bycategory/human-rights"
             },
             {
                 text: "Technology",
-                link: "/thematicarea"
+                link: "/thematicarea/bycategory/technology"
             },
             {
                 text: "Gender Rights",
-                link: "/thematicarea"
+                link: "/thematicarea/bycategory/gender-rights"
             }
         ]
     },
@@ -92,7 +92,7 @@ const guestHeaderProperties: guestHeaderPropertiesInterface[] = [
 
 const contactUs = {
     text: "Contact Us",
-    link: "link"
+    link: "/#contactus"
 };
 
 function GuestHeader() {
@@ -155,7 +155,7 @@ function GuestHeader() {
                     <div className="relative w-[90px] h-[40px]">
                         <Image src="/maij_logo.png" fill={true} alt="Maji Logo" />
                     </div>
-                    <ImMenu onClick={() => { setShowMenu(!showMenu) }} />
+                    <ImMenu className="text-[20px]" onClick={() => { setShowMenu(!showMenu) }} />
                 </div>
                 <div className={showMenu ? "flex flex-col" : "hidden"}>
                     <Accordion
@@ -170,7 +170,7 @@ function GuestHeader() {
                         }}
                     >
                         <AccordionSummary
-                            expandIcon={<PiPlus />}
+                            expandIcon={<RxCaretDown />}
                             aria-controls={`panel1-content`}
                             id={`panel1-header`}
                         >
@@ -202,7 +202,7 @@ function GuestHeader() {
                         }}
                     >
                         <AccordionSummary
-                            expandIcon={<PiPlus />}
+                            expandIcon={<RxCaretDown />}
                             aria-controls={`panel2-content`}
                             id={`panel2-header`}
                         >
@@ -234,7 +234,7 @@ function GuestHeader() {
                         }}
                     >
                         <AccordionSummary
-                            expandIcon={<PiPlus />}
+                            expandIcon={<RxCaretDown />}
                             aria-controls={`panel3-content`}
                             id={`panel3-header`}
                         >
@@ -242,13 +242,13 @@ function GuestHeader() {
                         </AccordionSummary>
                         <AccordionDetails>
 
-                            <Link href="research">
+                            <Link href="researchandreport">
                                 <Typography className="mb-2">
                                     Research
                                 </Typography>
                             </Link>
 
-                            <Link href="report">
+                            <Link href="researchandreport">
                                 <Typography className="mb-2">
                                     Report
                                 </Typography>
@@ -268,7 +268,7 @@ function GuestHeader() {
                         }}
                     >
                         <AccordionSummary
-                            expandIcon={<PiPlus />}
+                            expandIcon={<RxCaretDown />}
                             aria-controls={`panel4-content`}
                             id={`panel4-header`}
                         >

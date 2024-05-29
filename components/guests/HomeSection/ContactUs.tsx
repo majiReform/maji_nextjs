@@ -2,7 +2,7 @@ import { MdEmail, MdPhone } from "react-icons/md";
 
 function GuestContactUs() {
     return (
-        <div className="bg-black rounded-[20px] text-white flex flex-col md:flex-row gap-8 mx-8 md:mx-20 my-10 p-8 md:p-20">
+        <div className="bg-black rounded-[20px] text-white flex flex-col md:flex-row gap-8 mx-8 md:mx-20 my-10 p-8 md:p-20" id="contactus">
             <div className="w-full md:w-1/2 flex flex-col gap-6 md:gap-10">
                 <div>
                     <div className="w-[80px] md:w-[200px] h-[10px] bg-yellow rounded-[10px] mb-2"></div>
