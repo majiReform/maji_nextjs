@@ -1,13 +1,29 @@
 "use client"
+import { guestThematicAreaList } from '@/lib/features/guestAPI/homePage';
+import { ThematicAreaInterface } from '@/lib/features/thematic/thematicSlice';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 import AliceCarousel from 'react-alice-carousel';
 
 function HeroSection() {
 
+    const [list, setList] = useState<ThematicAreaInterface[]>([]);
+    const [status, setStatus] = useState("loading");
+
+    const fetchHero = async () => {
+        const result = await guestThematicAreaList(1, 3);
+        // console.log(result.response.thematicAreas.results);
+        setList(result.response.thematicAreas.results);
+        setStatus("idle");
+    }
+
+    useEffect(() => {
+        fetchHero();
+    }, []);
 
 
     return (
-        <div>
+        <div style={{zIndex: "900"}}>
             <AliceCarousel
                 autoHeight
                 autoPlay
@@ -17,13 +33,13 @@ function HeroSection() {
                 infinite
                 autoPlayInterval={2000}
             >
-                {["", "", ""].map((value, index) => {
+                {list.map((value, index) => {
                     return (
                 <div key={index} className='relative h-[400px] md:h-[90vh] w-full'>
-                    <Image src="/hero_image.png" className='w-full h-screen' fill={true} alt="Hero section" style={{zIndex: "20"}} />
-                    <div className='bg-white bottom-0 mx-[20px] md:bottom-0 md:right-[40px] absolute md:w-1/2 p-4' style={{zIndex: "500"}}>
-                        <div className='font-bold text-[20px]'>Amnesty International Report Exposes Widespread Gender-Based Violence in Conflict Zones</div>
-                        <div className='text-[16px]'>A new report sheds light on the alarming prevalence of gender-based violence in conflict-affected areas around the world. The report documents cases of sexual violence, forced marriage, and other forms of abuse targeting women and girls.</div>
+                    <Image src={value.picture!!} className='w-full h-screen' fill={true} alt="Hero section" style={{zIndex: "200"}} />
+                    <div className='bg-white bottom-0 mx-[20px] md:bottom-0 md:right-[40px] w-[90%] absolute md:w-1/2 p-4' style={{zIndex: "900"}}>
+                        <div className='font-bold text-[20px]'>{value.title}</div>
+                        <div className='text-[16px]'>{value.details?.slice(0, 100)}...</div>
                     </div>
                 </div>
                     );

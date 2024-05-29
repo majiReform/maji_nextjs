@@ -7,9 +7,9 @@ function AboutUsSection() {
 
 
     return (
-        <div className='px-8 md:px-20 my-12'>
-            <div className='text-[30px] text-left md:text-[32px] font-bold'>
-                <div className='w-[200px] h-[10px] bg-yellow mb-2 rounded-[8px]'></div>
+        <div className='px-8 md:px-20 my-12' style={{zIndex: "100"}}>
+            <div className='text-left text-[20px] md:text-[32px] font-bold mb-4'>
+                <div className='w-[80px] md:w-[200px] h-[10px] bg-yellow mb-2 rounded-[8px]'></div>
                 About Us
             </div>
             <div className='w-full flex flex-col-reverse md:flex-row gap-8 items-center'>

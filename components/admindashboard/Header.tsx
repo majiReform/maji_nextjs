@@ -167,7 +167,7 @@ function AdminHeaderComponent() {
                     <MenuItem className="cursor-pointer" onClick={logoutButton}>Log out</MenuItem>
                 </Menu>
             </Dropdown>)}
-            <ImMenu className='block md:hidden' onClick={() => {dispatch(openSidebar())}} />
+            <ImMenu className='block md:hidden text-[20px]' onClick={() => {dispatch(openSidebar())}} />
         </div>
     );
 }

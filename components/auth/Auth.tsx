@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 
 function LeftAreaComponent() {
   return (
-    <div className="w-1/2 h-screen relative" style={{backgroundImage: `url('/auth_pic.jpeg')`, backgroundSize: "cover", backgroundPosition: "center"}}>
+    <div className="hidden md:block w-1/2 h-screen relative" style={{ backgroundImage: `url('/auth_pic.jpeg')`, backgroundSize: "cover", backgroundPosition: "center" }}>
       {/* <Image src="/auth_pic.jpeg" alt="people_shaing_hands" fill={true} style={{backgroundSize: "cover!important"}} /> */}
     </div>
   );
@@ -50,11 +50,11 @@ function LoginComponent() {
   return (
     <div className="flex justify-center items-center h-screen">
 
-      <div className="flex flex-col gap-8 w-1/2">
+      <div className="flex flex-col gap-8 w-[80%] md:w-[70%] lg:w-[60%]">
 
-      <div className="w-[140px] h-[60px] relative mx-auto">
-      <Image src="/maij_logo.png" fill={true} alt="Maij logo" />
-    </div>
+        <div className="w-[140px] h-[60px] relative mx-auto">
+          <Image src="/maij_logo.png" fill={true} alt="Maij logo" />
+        </div>
 
         <div>
           <input
@@ -63,7 +63,7 @@ function LoginComponent() {
             placeholder="Email"
             className="w-full bg-white py-3 px-4 rounded-[8px]"
             value={email}
-            onChange={(e) => {setEmail(e.target.value)}}
+            onChange={(e) => { setEmail(e.target.value) }}
           />
         </div>
 
@@ -74,15 +74,15 @@ function LoginComponent() {
             type="password"
             className="w-full bg-white py-3 px-4 rounded-[8px]"
             value={password}
-            onChange={(e) => {setPassword(e.target.value)}}
+            onChange={(e) => { setPassword(e.target.value) }}
           />
         </div>
 
         <div>
           <button
-          className={`w-full ${loginButtonState == "loading" ? "bg-adminbg" : !email || !password ? "bg-adminbg" : "bg-yellow"}  text-black shadow-none py-2 rounded-[8px] font-bold`}
-          onClick={handleLogin}
-          disabled={loginButtonState == "loading" ? true : !email || !password ? true : false}
+            className={`w-full ${loginButtonState == "loading" ? "bg-adminbg" : !email || !password ? "bg-adminbg" : "bg-yellow"}  text-black shadow-none py-2 rounded-[8px] font-bold`}
+            onClick={handleLogin}
+            disabled={loginButtonState == "loading" ? true : !email || !password ? true : false}
           >{loginButtonState == "loading" ? <SpinLoaderTwo /> : "Login"}</button>
         </div>
 
