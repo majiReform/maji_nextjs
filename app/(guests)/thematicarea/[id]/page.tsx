@@ -19,7 +19,6 @@ export default function GuestThematicAreaPage({params}: {params: {id: string}}) 
 
     const fetchIt = async () => {
         const result = await guestSingleThematicArea(params.id);
-        console.log(result.response.thematicArea);
         setRecord(result.response.thematicArea);
         setListState("idle");
     }

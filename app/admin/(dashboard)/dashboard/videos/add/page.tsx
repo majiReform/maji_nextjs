@@ -21,7 +21,6 @@ export default function Page() {
     const [youtube, setYoutube] = useState("");
 
     const hasReachedLimit = () => {
-        console.log(description.length, "of", maxwords);
         if (description.length > maxwords) {
             return true;
         }
@@ -38,8 +37,6 @@ export default function Page() {
         } else {
             setButtonDisabled(true);
         }
-
-        console.log(buttonDisabled);
 
     }, [youtube, description, title]);
 

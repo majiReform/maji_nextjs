@@ -23,14 +23,12 @@ export default function Media() {
 
     const fetchGallery = async () => {
         const result = await guestGalleryList(1, 8);
-        console.log(result.response.pictures.results);
         setgalleryList(result.response.pictures.results);
         setGalleryStatus("idle");
     }
 
     const fetchHero = async () => {
         const result = await guestVideosList(1, 3);
-        // console.log(result.response.videos.results[0]);
         setList(result.response.videos.results[0]);
         setVideoList(result.response.videos.results);
         setStatus("idle");

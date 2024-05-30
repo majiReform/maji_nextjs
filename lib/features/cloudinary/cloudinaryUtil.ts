@@ -29,38 +29,7 @@ async function uploadFile(file: any) {
 
 async function uploadFileToCloudinary(files: any, fileType="file") {
 
-
     return await uploadFile(files);
-
-
-    // if (files instanceof File) {
-
-    //     console.log(files);
-
-
-    // } else if (Array.isArray(files) && files.every((file) => file instanceof File)) {
-    //     const filesArray = Array.from(files);
-    //     const promises = filesArray.map(file => {
-    //         return uploadFile(file, fileType);
-    //     });
-
-    //     return Promise.all(promises)
-    //     .then((results) => {
-    //         return {
-    //             isSuccessful: true,
-    //             results
-    //         }
-    //     })
-    //     .catch((error) => {
-    //         console.log(error);
-    //         return {
-    //             isSuccesful: false,
-    //             error
-    //         }
-    //     });
-    // }
-
-    // console.log("File", files);
 
 }
 

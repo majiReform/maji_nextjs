@@ -12,8 +12,6 @@ export async function POST(request: NextRequest) {
 
         const admin = await userCollection.findOne({ email });
 
-        console.log(admin);
-
         if (!admin) {
             return NextResponse.json({
                 isSuccessful: false,
@@ -43,8 +41,6 @@ export async function POST(request: NextRequest) {
                 role: "admin"
             }
         });
-
-        console.log("Ses", session, "ses");
 
         cookies().set("session", session, {
             httpOnly: true,

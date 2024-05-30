@@ -24,8 +24,6 @@ export async function decypt(jwtValue: string) {
 export function getSesstion(): any {
     const session = cookies().get("session")?.value;
 
-    console.log("Session", session);
-
     if(!session) return null;
     return decypt(session);
 }
@@ -35,19 +33,8 @@ export async function updateSession(request: NextRequest) {
     try {
         
         const session = request.cookies.get("session");
-    
-        // console.log(session);
-    
-        // if(!session) {
-        //     return NextResponse.redirect(new URL("/admin/login", request.url));
-        // }
-    
+
         const decryptedPayload = await decypt(session!!.value);
-    
-        // console.log("Decrypted payload:", decryptedPayload);
-    
-        // console.log("Has expired");
-    
     
         const res = NextResponse.next();
         res.cookies.set({

@@ -19,14 +19,12 @@ function GuestMedia() {
 
     const fetchHero = async () => {
         const result = await guestVideosList(1, 1);
-        // console.log(result.response.videos.results[0]);
         setList(result.response.videos.results[0]);
         setStatus("idle");
     }
 
     const fetchGallery = async () => {
         const result = await guestGalleryList(1, 4);
-        console.log(result.response.pictures.results);
         setgalleryList(result.response.pictures.results);
         setGalleryStatus("idle");
     }

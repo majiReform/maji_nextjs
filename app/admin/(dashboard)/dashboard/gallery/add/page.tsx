@@ -46,8 +46,6 @@ export default function Page() {
             setButtonDisabled(false);
         }
 
-        console.log(pictureUrl);
-
     }, [pictureUrl]);
 
     const submitHandler = () => {
@@ -93,7 +91,6 @@ export default function Page() {
                             clientAllowedFormats: ["png", "jpg", "jpeg"]
                         }}
                         onSuccess={(result: any, widget) => {
-                            console.log(result)
                             if (result.event == "success") {
                                 setPictureUrl(result?.info.secure_url);  // { public_id, secure_url, etc }
                                 setOriginalPicture(result?.info.original_filename);

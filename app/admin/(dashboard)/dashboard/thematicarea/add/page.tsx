@@ -26,7 +26,6 @@ export default function Page() {
     const [originalFileName, setOriginalFileName] = useState("");
 
     const hasReachedLimit = () => {
-        console.log(semanticText.length, "of", maxwords);
         if (semanticText.length > maxwords) {
             return true;
         }
@@ -43,8 +42,6 @@ export default function Page() {
         } else {
             setButtonDisabled(true);
         }
-
-        console.log(buttonDisabled);
 
     }, [semanticText, category, title]);
 
@@ -94,7 +91,6 @@ export default function Page() {
                             sources: ["local", "dropbox"]
                         }}
                         onSuccess={(result: any, widget) => {
-                            console.log(result)
                             if (result.event == "success") {
                                 setpictureUrl(result!!.info.secure_url);  // { public_id, secure_url, etc }
                                 setOriginalFileName(result.info.original_filename);

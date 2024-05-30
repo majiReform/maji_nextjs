@@ -18,7 +18,6 @@ export default function GuestThematicAreaPage({params}: {params: {id: string}}) 
 
     const fetchIt = async () => {
         const result = await guestSingleResearch(params.id);
-        console.log(result.response.researchandreport);
         setRecord(result.response.researchandreport);
     }
 

@@ -71,8 +71,6 @@ const style = {
 
 function LogoutModal({openState, setOpen}: openStateInterface) {
 
-    console.log(openState);
-
     const router = useRouter();
     
     const handleClose = () => {

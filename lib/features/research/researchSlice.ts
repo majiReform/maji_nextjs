@@ -60,7 +60,6 @@ export const researchSlice = createAppSlice({
                 state.state = "loading";
             },
             fulfilled: (state, action) => {
-                console.log(action.payload.response.details.results);
                 state.value = action.payload.response.details.results;
                 state.state = "idle";
             },

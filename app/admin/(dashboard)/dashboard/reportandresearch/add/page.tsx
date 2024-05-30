@@ -30,7 +30,6 @@ export default function Page() {
     const [originalFileName, setOriginalFileName] = useState("");
 
     const hasReachedLimit = () => {
-        console.log(details.length, "of", maxwords);
         if (details.length > maxwords) {
             return true;
         }
@@ -47,8 +46,6 @@ export default function Page() {
         } else {
             setButtonDisabled(true);
         }
-
-        console.log(buttonDisabled);
 
     }, [details, category, title]);
 
@@ -99,7 +96,6 @@ export default function Page() {
                             clientAllowedFormats: ["png", "jpg", "jpeg"]
                         }}
                         onSuccess={(result: any, widget) => {
-                            console.log(result)
                             if (result.event == "success") {
                                 setPictureUrl(result?.info.secure_url);  // { public_id, secure_url, etc }
                                 setOriginalFileName(result?.info.original_filename);
@@ -132,7 +128,6 @@ export default function Page() {
                             clientAllowedFormats: ["docx", "doc", "txt", "pdf"]
                         }}
                         onSuccess={(result: any, widget) => {
-                            console.log(result)
                             if (result.event == "success") {
                                 setFileUrl(result!!.info.secure_url);  // { public_id, secure_url, etc }
                                 setOriginalFileNameTwo(result.info.original_filename);

@@ -18,7 +18,6 @@ export default function GuestThematicAreaByCategory({params}: {params: {category
 
     const fetchIt = async () => {
         const result = await guestThematicAreaListByCategory(params.category, 1, 10);
-        console.log(result.response.details.results);
         setList(result.response.details.results);
         setListState("idle");
     }

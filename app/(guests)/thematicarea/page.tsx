@@ -16,7 +16,6 @@ export default function GuestThematicAreaPage() {
 
     const fetchIt = async () => {
         const result = await guestThematicAreaList(1, 10);
-        console.log(result.response.details.results);
         setList(result.response.details.results);
         setListState("idle");
     }

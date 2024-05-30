@@ -73,7 +73,6 @@ function EditProfile() {
                             clientAllowedFormats: ["png", "jpg", "jpeg"]
                         }}
                         onSuccess={(result: any, widget) => {
-                            console.log(result)
                             if (result.event == "success") {
                                 updateProfilePicture(result?.info.secure_url);
                             } else {

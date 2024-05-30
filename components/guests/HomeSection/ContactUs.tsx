@@ -20,7 +20,6 @@ function GuestContactUs() {
             setEmail("");
             setMessage("");
         } catch (error) {
-            console.log(error);
             toast.error("An error has occurred while trying to send email.");
         } finally {
             setState("idle");

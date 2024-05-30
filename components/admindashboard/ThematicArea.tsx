@@ -46,8 +46,6 @@ const style = {
 
 function DeleteModal({openState, setOpen, id}: openStateInterface) {
 
-    console.log(openState, id);
-
     const dispatch = useAppDispatch();
     
     const handleClose = () => {

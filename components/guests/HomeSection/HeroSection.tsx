@@ -14,7 +14,6 @@ function HeroSection() {
 
     const fetchHero = async () => {
         const result = await guestThematicAreaList(1, 3);
-        // console.log(result.response.thematicAreas.results);
         setList(result.response.thematicAreas.results);
         setStatus("idle");
     }

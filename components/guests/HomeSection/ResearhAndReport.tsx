@@ -15,7 +15,6 @@ function GuestResearchAndReport() {
 
     const fetchHero = async () => {
         const result = await guestResearchList(1, 3);
-        // console.log(result.response.details.results);
         setList(result.response.details.results);
         setStatus("idle");
     }

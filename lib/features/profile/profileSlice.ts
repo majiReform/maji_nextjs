@@ -74,7 +74,6 @@ export const profileSlice = createAppSlice({
                 state.state = "loading";
             },
             fulfilled: (state, action) => {
-                console.log("Profile", action.payload.response.newProfilePicture, action.payload.status);
                 state.value.profilePicture = action.payload.response.newProfilePicture;
                 state.successMessage = "Profile picture update successful";
                 state.state = "success";
@@ -93,12 +92,10 @@ export const profileSlice = createAppSlice({
                 state.state = "loading";
             },
             fulfilled: (state, action) => {
-                console.log(action.payload.response);
                 state.state = "success";
                 state.successMessage = "Password update successful";
             },
             rejected: (state, action) => {
-                console.log("Error details:", action.error);
                 state.state = "failed";
                 if(action.error.code == "ERR_BAD_REQUEST") {
                     state.errorMessage = "Invalid current password";
