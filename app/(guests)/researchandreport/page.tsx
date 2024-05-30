@@ -1,3 +1,4 @@
+"use client"
 import { SpinLoader } from "@/components/LoadingAnimation/spinLoader";
 import { PaginateNumbers } from "@/components/admindashboard/PaginateNumbers";
 import { GuestFooter } from "@/components/guests/Footer";
