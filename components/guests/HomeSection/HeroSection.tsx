@@ -46,7 +46,7 @@ function HeroSection() {
                 {list.map((value, index) => {
                     return (
                         <div key={index} className='relative h-[400px] md:h-[90vh] w-full'>
-                            <Image src={value.picture!!} className='w-full h-screen' fill={true} alt="Hero section" style={{ zIndex: "200" }} />
+                            <Image src={value.picture!!} className='w-full h-screen' fill={true} alt="Hero section" style={{ zIndex: "200", backgroundRepeat: "no-repeat" }} />
                             <div className='bg-white bottom-0 mx-[20px] md:bottom-0 md:right-[40px] w-[90%] absolute md:w-1/2 p-4 flex flex-col gap-4' style={{ zIndex: "900" }}>
                                 <div className='flex justify-around md:justify-start md:gap-4 w-full'>
                                     <div className={`h-[10px] w-[100px] rounded-[10px] ${(index + 1) == 1 ? "bg-yellow" : "bg-greybg"}`}></div>
