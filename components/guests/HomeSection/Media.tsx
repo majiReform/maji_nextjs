@@ -72,7 +72,7 @@ function GuestMedia() {
             <div className="text-center mb-10 flex justify-between items-center">
                 <div>
                     <div className="w-[80px] md:w-[200px] h-[10px] bg-yellow rounded-[10px] mb-2"></div>
-                    <div className="text-[20px] md:text-[32px] font-bold font-bold">Media</div>
+                    <div className="text-[20px] md:text-[32px] font-bold font-bold text-left">Media</div>
                 </div>
                 <button className="flex gap-2 items-center" onClick={() => {router.push("/media")}}>See More <BsCaretRight /></button>
             </div>

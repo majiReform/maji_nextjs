@@ -13,8 +13,6 @@ interface Props {
 
 export default function Layout({ children }: Props) {
 
-    // "You are not logged in"
-
     return (
         <div className="flex h-screen overflow-hidden">
             <ToastContainer />

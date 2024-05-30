@@ -1,10 +1,11 @@
 "use client"
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import AliceCarousel from 'react-alice-carousel';
 
 function AboutUsSection() {
 
-
+    const router = useRouter();
 
     return (
         <div className='px-8 md:px-20 my-12' style={{zIndex: "100"}}>
@@ -18,12 +19,12 @@ function AboutUsSection() {
                 <div className='text-[16px] md:text-[20px]'>Using "human centered" methodologies and technologies, we democratize information, increase awareness, build capacity and works towards providing sustainable development. </div>
                 <div className='text-[16px] md:text-[20px]'>By the adoption of human centered methodologies, we are referring to a vertical process that supports the sustained interaction between marginalized groups, local communities, and government with a view to sustainably impacting them. </div>
                 <div className='text-center md:text-left'>
-                    <button className='w-fit px-8 py-2 border border-[2px] rounded-[8px] font-bold'>More About Maji</button>
+                    <button className='w-fit px-8 py-2 border border-[2px] rounded-[8px] font-bold' onClick={() => {router.push("/aboutus")}}>More About Maji</button>
                 </div>
             </div>
             <div className='w-full md:w-1/2 h-full'>
                 <div className=' relative h-[280px] md:h-[540px] w-full'>
-                    <Image src="/about_us_image.png" fill={true} alt='Abut us image' />
+                    <Image src="/about_us_image.png" fill={true} alt='About us image' />
                 </div>
             </div>
             </div>

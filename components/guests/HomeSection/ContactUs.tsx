@@ -1,6 +1,32 @@
+import { SpinLoaderTwo } from "@/components/LoadingAnimation/spinLoader";
+import { guestSendMessage } from "@/lib/features/guestAPI/homePage";
+import { use, useState } from "react";
 import { MdEmail, MdPhone } from "react-icons/md";
+import { toast } from "react-toastify";
 
 function GuestContactUs() {
+
+    const [fullName, setFullName] = useState("");
+    const [email, setEmail] = useState("");
+    const [message, setMessage] = useState("");
+    const [state, setState] = useState("idle");
+
+    const sendMessage = async () => {
+        try {
+            setState("loading");
+            await guestSendMessage(fullName, email, message);
+            toast.success("A message has been sent.");
+            setFullName("");
+            setEmail("");
+            setMessage("");
+        } catch (error) {
+            console.log(error);
+            toast.error("An error has occurred while trying to send email.");
+        } finally {
+            setState("idle");
+        }
+    }
+
     return (
         <div className="bg-black rounded-[20px] text-white flex flex-col md:flex-row gap-8 mx-8 md:mx-20 my-10 p-8 md:p-20" id="contactus">
             <div className="w-full md:w-1/2 flex flex-col gap-6 md:gap-10">
@@ -28,18 +54,18 @@ function GuestContactUs() {
             </div>
             <div className="flex flex-col gap-8 w-full md:w-1/2">
                 <div>
-                    <input type="text" className="w-full py-3 px-4 rounded-[10px] text-black" placeholder="Name" />
+                    <input type="text" className="w-full py-3 px-4 rounded-[10px] text-black" placeholder="Name" onChange={(e) => {setFullName(e.target.value)}} value={fullName} />
                 </div>
 
                 <div>
-                    <input type="text" className="w-full py-3 px-4 rounded-[10px] text-black" placeholder="Email Address" />
+                    <input type="text" className="w-full py-3 px-4 rounded-[10px] text-black" placeholder="Email Address" onChange={(e) => {setEmail(e.target.value)}} value={email} />
                 </div>
 
                 <div>
-                    <textarea className="w-full py-3 px-4 rounded-[10px] text-black" rows={8} placeholder="Message"></textarea>
+                    <textarea className="w-full py-3 px-4 rounded-[10px] text-black" rows={8} placeholder="Message" onChange={(e) => {setMessage(e.target.value)}} value={message}></textarea>
                 </div>
 
-                <button className="bg-yellow py-3 text-black font-bold rounded-[10px]">Send Message</button>
+                <button className="bg-yellow py-3 text-black font-bold rounded-[10px]" onClick={sendMessage}>{state == "loading" ? <SpinLoaderTwo /> : "Send Message"}</button>
             </div>
         </div>
     );

@@ -50,7 +50,7 @@ function LoginComponent() {
   return (
     <div className="flex justify-center items-center h-screen">
 
-      <div className="flex flex-col gap-8 w-[80%] md:w-[70%] lg:w-[60%]">
+      <div className="flex flex-col gap-8 w-[80%] md:w-[70%] md:w-[60%]">
 
         <div className="w-[140px] h-[60px] relative mx-auto">
           <Image src="/maij_logo.png" fill={true} alt="Maij logo" />

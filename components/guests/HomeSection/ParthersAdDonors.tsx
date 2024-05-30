@@ -1,5 +1,6 @@
 import Image from "next/image";
 import AliceCarousel from "react-alice-carousel";
+import Slider from "react-slick";
 
 
 interface PartnersListInterface {
@@ -36,28 +37,42 @@ const partnersList: PartnersListInterface[] = [
 
 function PartnersAndDonorsSection () {
 
-    const responsive = {
-        0: { items: 1 },
-        568: { items: 2 },
-        1024: { items: 3 },
-        1025: { items: 4 },
-        1026: { items: 5 },
-    };
+    const settings = {
+        infinite: true,
+        autoplay: true,
+        speed: 1000,
+        slidesToShow: 5,
+        slidesToScroll: 5,
+        responsive: [
+            {
+              breakpoint: 1024,
+              settings: {
+                slidesToShow: 5,
+                slidesToScroll: 5
+              }
+            },
+            {
+              breakpoint: 600,
+              settings: {
+                slidesToShow: 3,
+                slidesToScroll: 3
+              }
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+              }
+            }
+          ]
+      };
 
     return (
         <div className="bg-black px-20 py-8">
-            <div className="text-center">Our Partners and Donors</div>
-            <div className="flex justify-between">
-            <AliceCarousel
-                autoHeight
-                autoPlay
-                responsive={responsive}
-                // autoPlayControls
-                disableDotsControls
-                disableButtonsControls
-                mouseTracking
-                infinite
-                autoPlayInterval={2000}
+            <div className="text-center text-white mb-4 font-bold">Our Partners and Donors</div>
+            <Slider
+                {...settings}
             >
                 {partnersList.map((partner, index) => {
                 return (
@@ -69,9 +84,9 @@ function PartnersAndDonorsSection () {
                     </div>
                 );
             })}
-            </AliceCarousel>
-            
-            </div>
+            </Slider>
+            {/* <div className="flex justify-between">
+            </div> */}
         </div>
     );
 }

@@ -24,6 +24,7 @@ import { SpinLoader, SpinLoaderTwo } from '../LoadingAnimation/spinLoader';
 import { NoPicture } from './ProfilePictureStates';
 import { ImMenu } from 'react-icons/im';
 import { closeSidebar, openSidebar } from '@/lib/features/sidebar/sidebarSlice';
+import { IoMenuSharp } from 'react-icons/io5';
 
 function selectAreaHeader() {
 
@@ -167,7 +168,7 @@ function AdminHeaderComponent() {
                     <MenuItem className="cursor-pointer" onClick={logoutButton}>Log out</MenuItem>
                 </Menu>
             </Dropdown>)}
-            <ImMenu className='block md:hidden text-[20px]' onClick={() => {dispatch(openSidebar())}} />
+            <IoMenuSharp className='block md:hidden text-[25px]' onClick={() => {dispatch(openSidebar())}} />
         </div>
     );
 }

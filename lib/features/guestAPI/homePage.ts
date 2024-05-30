@@ -81,6 +81,18 @@ async function guestResearchListByCategory(category: string, page: number, limit
     };
 }
 
+async function guestSendMessage(fullName: string, email: string, message: string) {
+    const response = await axios.post(urlMaker(`/admin/api/guest/email`), {
+        from: email,
+        fullName,
+        subject: message
+    });
+    return {
+        response: response.data,
+        status: response.status
+    };
+}
+
 export {
     guestThematicAreaList,
     guestSingleThematicArea,
@@ -91,5 +103,6 @@ export {
     guestGalleryList,
     guestSingleGallery,
     guestThematicAreaListByCategory,
-    guestResearchListByCategory
+    guestResearchListByCategory,
+    guestSendMessage
 }

@@ -4,7 +4,9 @@ import { StoreProvider } from "./StoreProvider";
 
 import "@/styles/globals.css";
 import styles from "@/styles/mainlayout.module.css";
-import 'react-alice-carousel/lib/alice-carousel.css';
+// import 'react-alice-carousel/lib/alice-carousel.css';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 interface Props {
   readonly children: ReactNode;

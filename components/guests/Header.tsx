@@ -16,6 +16,7 @@ import { PiPlus } from "react-icons/pi";
 import Link from "next/link";
 import { BsMenuApp } from "react-icons/bs";
 import { ImMenu } from "react-icons/im";
+import { IoMenuSharp } from "react-icons/io5";
 
 type childrenType = {
     text: string
@@ -116,7 +117,7 @@ function GuestHeader() {
     return (
         <div style={{zIndex: "1800"}}>
             {/* Desktop header */}
-            <div className="hidden md:flex justify-between items-center px-20 py-4">
+            <div className="hidden md:flex justify-between items-center px-20 py-2">
                 <div className="relative w-[90px] h-[40px] cursor-pointer" onClick={() => {router.push("/")}}>
                     <Image src="/maij_logo.png" fill={true} alt="Maji Logo" />
                 </div>
@@ -151,11 +152,11 @@ function GuestHeader() {
 
             {/* Mobile header */}
             <div className="flex flex-col md:hidden w-full">
-                <div className="flex justify-between items-center px-8 py-4">
+                <div className="flex justify-between items-center px-8 py-2">
                     <div className="relative w-[90px] h-[40px] cursor-pointer" onClick={() => {router.push("/")}}>
                         <Image src="/maij_logo.png" fill={true} alt="Maji Logo" />
                     </div>
-                    <ImMenu className="text-[20px]" onClick={() => { setShowMenu(!showMenu) }} />
+                    <IoMenuSharp className="text-[25px]" onClick={() => { setShowMenu(!showMenu) }} />
                 </div>
                 <div className={showMenu ? "flex flex-col" : "hidden"}>
                     <Accordion
