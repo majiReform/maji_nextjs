@@ -4,7 +4,6 @@ import { guestThematicAreaList } from '@/lib/features/guestAPI/homePage';
 import { ThematicAreaInterface } from '@/lib/features/thematic/thematicSlice';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import AliceCarousel from 'react-alice-carousel';
 import Slider from "react-slick";
 
 function HeroSection() {
@@ -42,7 +41,6 @@ function HeroSection() {
         <div style={{ zIndex: "200" }}>
             <Slider {...settings}
             >
-
                 {list.map((value, index) => {
                     return (
                         <div key={index} className='relative h-[400px] md:h-[90vh] w-full'>

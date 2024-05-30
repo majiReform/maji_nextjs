@@ -1,5 +1,4 @@
 import Image from "next/image";
-import AliceCarousel from "react-alice-carousel";
 import Slider from "react-slick";
 
 
