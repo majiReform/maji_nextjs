@@ -117,7 +117,7 @@ function GuestHeader() {
         <div style={{zIndex: "1800"}}>
             {/* Desktop header */}
             <div className="hidden md:flex justify-between items-center px-20 py-4">
-                <div className="relative w-[90px] h-[40px]">
+                <div className="relative w-[90px] h-[40px] cursor-pointer" onClick={() => {router.push("/")}}>
                     <Image src="/maij_logo.png" fill={true} alt="Maji Logo" />
                 </div>
                 <div className="flex gap-8 justify-center">
@@ -139,7 +139,7 @@ function GuestHeader() {
                                         })}
                                     </Menu>
                                 </Dropdown>) : (
-                                    <button className='font-bold'>{value.text}</button>
+                                    <button className='font-bold' onClick={() => {router.push(value.link!!)}}>{value.text}</button>
                                 )}
                             </div>
                         );
@@ -152,7 +152,7 @@ function GuestHeader() {
             {/* Mobile header */}
             <div className="flex flex-col md:hidden w-full">
                 <div className="flex justify-between items-center px-8 py-4">
-                    <div className="relative w-[90px] h-[40px]">
+                    <div className="relative w-[90px] h-[40px] cursor-pointer" onClick={() => {router.push("/")}}>
                         <Image src="/maij_logo.png" fill={true} alt="Maji Logo" />
                     </div>
                     <ImMenu className="text-[20px]" onClick={() => { setShowMenu(!showMenu) }} />
@@ -242,13 +242,13 @@ function GuestHeader() {
                         </AccordionSummary>
                         <AccordionDetails>
 
-                            <Link href="researchandreport">
+                            <Link href="/researchandreport/bycategory/research">
                                 <Typography className="mb-2">
                                     Research
                                 </Typography>
                             </Link>
 
-                            <Link href="researchandreport">
+                            <Link href="/researchandreport/bycategory/report">
                                 <Typography className="mb-2">
                                     Report
                                 </Typography>

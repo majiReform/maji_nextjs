@@ -1,3 +1,4 @@
+import { SpinLoader } from "@/components/LoadingAnimation/spinLoader";
 import { guestResearchList } from "@/lib/features/guestAPI/homePage";
 import { ResearchAndReportInterface } from "@/lib/features/research/researchSlice";
 import { useRouter } from "next/navigation";
@@ -22,6 +23,14 @@ function GuestResearchAndReport() {
     useEffect(() => {
         fetchHero();
     }, []);
+
+    if(status == "loading") {
+        return (
+            <div className="h-screen w-full flex justify-center items-center">
+                <SpinLoader />
+            </div>
+        );
+    }
 
     const thematicarea = [
         {

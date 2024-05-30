@@ -66,6 +66,21 @@ async function guestSingleGallery(id: string) {
     };
 }
 
+async function guestThematicAreaListByCategory(category: string, page: number, limit: number) {
+    const response = await axios.get(urlMaker(`/admin/api/guest/thematic/category/${category}?page=${page}&limit=${limit}`));
+    return {
+        response: response.data,
+        status: response.status
+    };
+}
+async function guestResearchListByCategory(category: string, page: number, limit: number) {
+    const response = await axios.get(urlMaker(`/admin/api/guest/reportandresearch/category/${category}?page=${page}&limit=${limit}`));
+    return {
+        response: response.data,
+        status: response.status
+    };
+}
+
 export {
     guestThematicAreaList,
     guestSingleThematicArea,
@@ -74,5 +89,7 @@ export {
     guestVideosList,
     guestSingleVideo,
     guestGalleryList,
-    guestSingleGallery
+    guestSingleGallery,
+    guestThematicAreaListByCategory,
+    guestResearchListByCategory
 }

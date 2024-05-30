@@ -1,4 +1,5 @@
 "use client"
+import { SpinLoader } from '@/components/LoadingAnimation/spinLoader';
 import { guestThematicAreaList } from '@/lib/features/guestAPI/homePage';
 import { ThematicAreaInterface } from '@/lib/features/thematic/thematicSlice';
 import Image from 'next/image';
@@ -21,6 +22,13 @@ function HeroSection() {
         fetchHero();
     }, []);
 
+    if(status == "loading") {
+        return (
+            <div className="h-screen w-full flex justify-center items-center">
+                <SpinLoader />
+            </div>
+        );
+    }
 
     return (
         <div style={{zIndex: "200"}}>

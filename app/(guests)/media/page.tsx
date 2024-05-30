@@ -1,10 +1,12 @@
 "use client"
+import { SpinLoader } from "@/components/LoadingAnimation/spinLoader";
 import { GuestFooter } from "@/components/guests/Footer";
 import { GuestHeader } from "@/components/guests/Header";
 import { GalleryInterface } from "@/lib/features/gallery/gallerySlice";
 import { guestGalleryList, guestVideosList } from "@/lib/features/guestAPI/homePage";
 import { VideoInterface } from "@/lib/features/videos/videosSlice";
 import { YouTubeEmbed } from "@next/third-parties/google";
+import moment from "moment";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -16,6 +18,9 @@ export default function Media() {
     const [list, setList] = useState<VideoInterface>({});
     const [status, setStatus] = useState("loading");
 
+    const [videolist, setVideoList] = useState<VideoInterface[]>([]);
+    const [videostatus, setVideoStatus] = useState("loading");
+
     const fetchGallery = async () => {
         const result = await guestGalleryList(1, 8);
         console.log(result.response.pictures.results);
@@ -24,16 +29,26 @@ export default function Media() {
     }
 
     const fetchHero = async () => {
-        const result = await guestVideosList(1, 1);
+        const result = await guestVideosList(1, 3);
         // console.log(result.response.videos.results[0]);
         setList(result.response.videos.results[0]);
+        setVideoList(result.response.videos.results);
         setStatus("idle");
+        setVideoStatus("idle");
     }
 
     useEffect(() => {
         fetchHero();
         fetchGallery();
     }, []);
+
+    if(status == "loading" || galleryStatus == "loading" || videostatus == "loading") {
+        return (
+            <div className="h-screen w-full flex justify-center items-center">
+                <SpinLoader />
+            </div>
+        );
+    }
 
     const posts = [
         {
@@ -70,15 +85,15 @@ export default function Media() {
 
             <div className="mx-8 md:mx-20 my-10">
                 <div className="text-[16px] md:text-[32px] font-bold mb-2">Recent Videos</div>
-                {posts.map((post, index) => {
+                {videolist.map((post, index) => {
                     return (
                         <div className="mb-2" key={index}>
                             <div className="flex justify-between py-2">
                                 <div>
-                                    <div className="font-bold text-[14px]">Amnesty International Launches Global Campaign Against Torture</div>
-                                    <div className="text-[#737373] text-[14px]">{post.category} | {post.date}</div>
+                                    <div className="font-bold text-[14px]">{post.title}</div>
+                                    <div className="text-[#737373] text-[14px]">{moment(post.createdAt).format("LLLL")}</div>
                                 </div>
-                                <div className="relative h-[50px] w-[100px] rounded-[10px] overflow-hidden"><Image src={post.picture} fill={true} alt="Img" /></div>
+                                <div className="relative h-[80px] w-[140px] rounded-[10px] overflow-hidden"><YouTubeEmbed videoid={list.youtubeURL!!} params="controls=controls-1" style="width: 100%; height: 100%; background-size: cover; margin: 0 auto;" /></div>
                             </div>
                             <hr />
                         </div>

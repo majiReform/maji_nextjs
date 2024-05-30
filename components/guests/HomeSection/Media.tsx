@@ -1,3 +1,4 @@
+import { SpinLoader } from "@/components/LoadingAnimation/spinLoader";
 import { GalleryInterface } from "@/lib/features/gallery/gallerySlice";
 import { guestGalleryList, guestVideosList } from "@/lib/features/guestAPI/homePage";
 import { VideoInterface } from "@/lib/features/videos/videosSlice";
@@ -34,6 +35,14 @@ function GuestMedia() {
         fetchHero();
         fetchGallery();
     }, []);
+
+    if(galleryStatus == "loading") {
+        return (
+            <div className="h-screen w-full flex justify-center items-center">
+                <SpinLoader />
+            </div>
+        );
+    }
 
     const thematicarea = [
         {

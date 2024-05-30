@@ -1,11 +1,33 @@
+"use client"
 import { PaginateNumbers } from "@/components/admindashboard/PaginateNumbers";
 import { GuestFooter } from "@/components/guests/Footer";
 import { GuestHeader } from "@/components/guests/Header"
 import { ThematicAreaList } from "@/components/guests/ThematicAreaList";
 import { ThematicAreaRecentPosts } from "@/components/guests/ThematicAreaRecentPost";
+import { guestSingleResearch } from "@/lib/features/guestAPI/homePage";
+import { ResearchAndReportInterface } from "@/lib/features/research/researchSlice";
+import moment from "moment";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
-export default function GuestThematicAreaPage() {
+export default function GuestThematicAreaPage({params}: {params: {id: string}}) {
+
+    const [record, setRecord] = useState<ResearchAndReportInterface>({});
+    const [listState, setListState] = useState("loading");
+
+    const fetchIt = async () => {
+        const result = await guestSingleResearch(params.id);
+        console.log(result.response.researchandreport);
+        setRecord(result.response.researchandreport);
+    }
+
+    useEffect(() => {
+        fetchIt();
+    }, []);
+
+    const router = useRouter();
+
     return (
         <div style={{ overflow: "auto", height: "100vh" }}>
             <GuestHeader />
@@ -14,20 +36,20 @@ export default function GuestThematicAreaPage() {
             </div>
             <div className="mx-8 md:mx-20">
                 <div className="relative h-[140px] md:h-[400px] mt-8">
-                    <Image src="/image 14.png" fill={true} alt="Header Image" />
+                    <Image src={record.pictureURL!!} fill={true} alt="Header Image" />
                 </div>
                     <div className="py-4 flex justify-between items-center">
-                        <div className="text-[14px] md:text-[16px]">8th May, 2024</div>
-                        <button className="border border-[2px] py-1 px-6 md:py-2 md:px-4 rounded-[10px] font-bold">Dowload PDF</button>
+                        <div className="text-[14px] md:text-[16px]">{moment(record.createdAt).format("LLLL")}</div>
+                        <button className="border border-[2px] py-1 px-6 md:py-2 md:px-4 rounded-[10px] font-bold" onClick={() => {router.push(record.document!!)}}>Dowload PDF</button>
                     </div>
                 <div>
                     <hr />
                     <div className="py-4 text-left md:text-center font-bold text-[24px] md:text-[40px]">
-                        Amnesty International Launches Global Campaign Against Torture
+                        {record.title}
                     </div>
                     <hr />
                     <div className="my-4 text-[16px] md:text-[32px]">
-                    In an unprecedented move to confront one of the gravest violations of human rights, Amnesty International has launched the expansive and multifaceted global campaign "End Torture Now." With the alarming persistence of torture as a tool of repression and control in various corners of the globe, this initiative marks a watershed moment in the organization's storied history of defending human rights. The campaign, meticulously crafted over months of strategic planning and consultation, is designed to address the complex and multifaceted nature of torture while galvanizing international support for transformative change.
+                        {record.details}
                     </div>
                 </div>
             </div>

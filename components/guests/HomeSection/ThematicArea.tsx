@@ -1,4 +1,5 @@
 "use client"
+import { SpinLoader } from "@/components/LoadingAnimation/spinLoader";
 import { guestThematicAreaList } from "@/lib/features/guestAPI/homePage";
 import { ThematicAreaInterface } from "@/lib/features/thematic/thematicSlice";
 import { useRouter } from "next/navigation";
@@ -21,6 +22,14 @@ function GuestThematicArea () {
     useEffect(() => {
         fetchHero();
     }, []);
+
+    if(status == "loading") {
+        return (
+            <div className="h-screen w-full flex justify-center items-center">
+                <SpinLoader />
+            </div>
+        );
+    }
 
     const thematicarea = [
         {
