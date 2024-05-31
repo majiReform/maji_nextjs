@@ -44,7 +44,7 @@ function ChangePassword() {
 
     return (
         <div>
-            <div className="flex flex-col w-full md:w-[800px] gap-10 mx-auto py-20">
+            <div className="flex flex-col w-full xl:w-[800px] gap-10 mx-auto py-20">
 
                 <div className="relative w-[200px] h-[200px] rounded-full overflow-hidden mx-auto">
                 {profile.profilePicture ? (<Image src={profile.profilePicture} fill={true} alt="Profile picture" style={{zIndex: "20"}} />) : (<NoPicture />)}

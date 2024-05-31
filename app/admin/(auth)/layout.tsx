@@ -12,7 +12,7 @@ export default function Layout({children}: Props) {
         <div className="flex w-full bg-[#E6E6E6]">
             <ToastContainer />
             <LeftAreaComponent />
-            <div className="w-full md:w-1/2">{children}</div>
+            <div className="w-full xl:w-1/2">{children}</div>
         </div>
     );
 }

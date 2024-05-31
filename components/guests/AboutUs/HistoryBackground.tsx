@@ -2,15 +2,15 @@ import Image from "next/image";
 
 function HistoryAndBackground() {
     return (
-        <div className="mx-8 md:mx-20" id="historyandbackground">
+        <div className="mx-8 xl:mx-20" id="historyandbackground">
             <div>
-                <div className="text-center text-[20px] md:text-[32px] font-bold mb-4">History and Background</div>
+                <div className="text-center text-[20px] xl:text-[32px] font-bold mb-4">History and Background</div>
             </div>
             <div>
-                <div className="relative h-[180px] md:h-[400px] mb-8">
+                <div className="relative h-[180px] xl:h-[400px] mb-8">
                     <Image src="/image 17.png" fill={true} alt="Image 17" />
                 </div>
-                <div className="flex flex-col gap-8 text-[16px] md:text-[20px]">
+                <div className="flex flex-col gap-8 text-[16px] xl:text-[20px]">
                     <div>
                         The Media Awareness and Justice Initiative was initiated as a youth oriented project that sought to bring much needed capacity building and tranings to young people and marginalised groups across the Niger Delta.
                     </div>

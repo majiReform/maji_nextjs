@@ -54,9 +54,9 @@ function GuestThematicArea () {
     ];
 
     return (
-        <div className="py-8 mx-8 md:py-10 md:mx-20">
-            <div className="font-bold text[20px] md:text-[32px] text-center mb-10 w-full md:w-[60%] md:mx-auto">Using Technology to Empower Rural and urban last mile communities across Nigeria</div>
-            <div className="flex flex-col md:flex-row gap-6">
+        <div className="py-8 mx-8 xl:py-10 xl:mx-20">
+            <div className="font-bold text[20px] xl:text-[32px] text-center mb-10 w-full xl:w-[60%] xl:mx-auto">Using Technology to Empower Rural and urban last mile communities across Nigeria</div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {list.map((record) => {
                     return (
                         <div className="w-full bg-white relative border border-[#E6E6E6] rounded-[10px] overflow-hidden">

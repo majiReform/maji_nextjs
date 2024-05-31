@@ -64,7 +64,7 @@ function ThematicAreaList(props: {list: ThematicAreaInterface[]}) {
 
 
     return (
-        <div className='grid grid-cols-1 md:grid-cols-4 gap-8 py-10 mx-8 md:mx-20'>
+        <div className='grid grid-cols-1 xl:grid-cols-4 gap-8 py-10 mx-8 xl:mx-20'>
             {props.list.map((record) => {
                 return (
                     <div className="w-full bg-white relative rounded-[10px] overflow-hidden" style={{border: "1px solid grey"}}>

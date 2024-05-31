@@ -76,13 +76,13 @@ export default function Media() {
             <div className="px-20 py-16 bg-black text-white text-center text-[32px] font-bold">
                 Media
             </div>
-            <div className="mx-8 md:mx-20 h-fit my-8">
+            <div className="mx-8 xl:mx-20 h-fit my-8">
                 <YouTubeEmbed videoid={list.youtubeURL!!} params="controls=controls-1" style="width: 100%; height: 100%; background-size: cover; margin: 0 auto;" />
             </div>
-            <div className="mx-8 md:mx-20 text center font-bold text-[16px] md:text-[40px]">{list.title}</div>
+            <div className="mx-8 xl:mx-20 text center font-bold text-[16px] xl:text-[40px]">{list.title}</div>
 
-            <div className="mx-8 md:mx-20 my-10">
-                <div className="text-[16px] md:text-[32px] font-bold mb-2">Recent Videos</div>
+            <div className="mx-8 xl:mx-20 my-10">
+                <div className="text-[16px] xl:text-[32px] font-bold mb-2">Recent Videos</div>
                 {videolist.map((post, index) => {
                     return (
                         <div className="mb-2" key={index}>
@@ -98,12 +98,12 @@ export default function Media() {
                     );
                 })}
             </div>
-            <section className="mx-8 md:mx-20 my-10">
+            <section className="mx-8 xl:mx-20 my-10">
                 <div className="text-[32px] font-bold mb-2 text-center">Gallery</div>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
+                <div className="grid grid-cols-2 xl:grid-cols-4 gap-2 xl:gap-4">
                     {galleryList.map((picture, index) => {
                         return (
-                            <div className="relative h-[140px] md:h-[200px] w-full rounded-[10px] overflow-hidden" key={index}>
+                            <div className="relative h-[140px] xl:h-[200px] w-full rounded-[10px] overflow-hidden" key={index}>
                                 <Image src={picture.picture!!} fill={true} alt="Gallery image" />
                             </div>
                         );

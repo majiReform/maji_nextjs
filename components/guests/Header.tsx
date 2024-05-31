@@ -117,7 +117,7 @@ function GuestHeader() {
     return (
         <div style={{zIndex: "1800"}}>
             {/* Desktop header */}
-            <div className="hidden md:flex justify-between items-center px-20 py-2">
+            <div className="hidden lg:flex justify-between items-center px-8 xl:px-20 py-2">
                 <div className="relative w-[90px] h-[40px] cursor-pointer" onClick={() => {router.push("/")}}>
                     <Image src="/maij_logo.png" fill={true} alt="Maji Logo" />
                 </div>
@@ -132,7 +132,7 @@ function GuestHeader() {
                                         </div>
                                         <RxCaretDown className='h-[20px] w-[20px]' />
                                     </MenuButton>
-                                    <Menu className='bg-white flex flex-col p-4' style={{zIndex: "1800"}}>
+                                    <Menu className='bg-white flex flex-col p-2' style={{zIndex: "1800"}}>
                                         {value.children.map((child, indextwo) => {
                                             return (
                                                 <MenuItem className="cursor-pointer" key={indextwo} onClick={() => { router.push(child.link) }}>{child.text}</MenuItem>
@@ -151,7 +151,7 @@ function GuestHeader() {
             </div>
 
             {/* Mobile header */}
-            <div className="flex flex-col md:hidden w-full">
+            <div className="flex flex-col lg:hidden w-full">
                 <div className="flex justify-between items-center px-8 py-2">
                     <div className="relative w-[90px] h-[40px] cursor-pointer" onClick={() => {router.push("/")}}>
                         <Image src="/maij_logo.png" fill={true} alt="Maji Logo" />

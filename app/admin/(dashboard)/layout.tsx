@@ -17,7 +17,7 @@ export default function Layout({ children }: Props) {
         <div className="flex h-screen overflow-hidden">
             <ToastContainer />
             <AdminSidebarComponent />
-            <main className="w-full md:w-[85%] overflow-y-hidden">
+            <main className="w-full xl:w-[85%] overflow-y-hidden">
                 <AdminHeaderComponent />
                 <div className="h-[calc(100%_-_80px)] bg-adminbg overflow-y-auto p-4">{children}</div>
             </main>

@@ -24,8 +24,8 @@ function ThematicAreaRecentPosts() {
     ];
 
     return (
-        <div className="mx-8 md:mx-20 my-10">
-            <div className="text-[20px] md:text-[32px] font-bold mb-2">Recent Posts</div>
+        <div className="mx-8 xl:mx-20 my-10">
+            <div className="text-[20px] xl:text-[32px] font-bold mb-2">Recent Posts</div>
             {posts.map((post, index) => {
                 return (
                     <div className="mb-2" key={index}>

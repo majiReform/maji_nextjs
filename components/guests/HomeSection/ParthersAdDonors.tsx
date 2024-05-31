@@ -34,55 +34,60 @@ const partnersList: PartnersListInterface[] = [
     }
 ];
 
-function PartnersAndDonorsSection () {
+function PartnersAndDonorsSection() {
 
     const settings = {
         infinite: true,
         autoplay: true,
         speed: 1000,
-        slidesToShow: 5,
-        slidesToScroll: 5,
         responsive: [
             {
-              breakpoint: 1024,
-              settings: {
-                slidesToShow: 5,
-                slidesToScroll: 5
-              }
+                breakpoint: 2560,
+                settings: {
+                    slidesToShow: 5,
+                    slidesToScroll: 5
+                }
             },
             {
-              breakpoint: 600,
-              settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-              }
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3
+                }
             },
             {
-              breakpoint: 480,
-              settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-              }
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
             }
-          ]
-      };
+        ]
+    };
 
     return (
-        <div className="bg-black px-20 py-8">
+        <div className="bg-black px-8 md:px-20 py-8">
             <div className="text-center text-white mb-4 font-bold">Our Partners and Donors</div>
             <Slider
                 {...settings}
             >
                 {partnersList.map((partner, index) => {
-                return (
-                    <div key={index} className="px-8">
-                        <div className={`relative ${partner.pictureURL == "/United_States_Consulate_General_Lagos_1.png" ? "w-[120px]" : ""} h-[120px] mx-auto`}>
-                        <Image src={partner.pictureURL} fill={true} alt="Partner list" style={{backgroundSize: "contain", width: "100%"}} />
+                    return (
+                        <div key={index} className="px-8">
+                            <div className={`relative ${partner.pictureURL == "/United_States_Consulate_General_Lagos_1.png" ? "w-[120px]" : ""} h-[120px] mx-auto`}>
+                                <Image src={partner.pictureURL} fill={true} alt="Partner list" style={{ backgroundSize: "contain", width: "100%" }} />
+                            </div>
+                            <div className="text-white text-center text-[14px] mt-4">{partner.title}</div>
                         </div>
-                        <div className="text-white text-center text-[14px] mt-4">{partner.title}</div>
-                    </div>
-                );
-            })}
+                    );
+                })}
             </Slider>
             {/* <div className="flex justify-between">
             </div> */}

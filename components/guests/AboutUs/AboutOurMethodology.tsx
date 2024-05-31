@@ -31,15 +31,15 @@ function AboutOurMethodology() {
     ];
 
     return (
-        <div className="mx-8 md:mx-20 my-16" id="ourmethodology">
+        <div className="mx-8 xl:mx-20 my-16" id="ourmethodology">
             <div className="text-center">
-                <div className="text-center text-[20px] md:text-[32px] font-bold mb-4">Our Methodology</div>
+                <div className="text-center text-[20px] xl:text-[32px] font-bold mb-4">Our Methodology</div>
             </div>
-            <div className="flex flex-col md:flex-row gap-10 items-center">
-                <div className="w-full md:w-1/2 h-[400px] md:h-[600px] relative">
+            <div className="flex flex-col xl:flex-row gap-10 items-center">
+                <div className="w-full xl:w-1/2 h-[400px] xl:h-[600px] relative">
                     <Image src="/Group 366.png" fill={true} alt="Image 17" />
                 </div>
-                <div className="flex flex-col gap-4 md:gap-8 w-full md:w-1/2 text-[16px] md:text-[20px]">
+                <div className="flex flex-col gap-4 xl:gap-8 w-full xl:w-1/2 text-[16px] xl:text-[20px]">
                     <div>
                         Clearly, independent, community created initiatives and media is a crucial tool for rural and urban development. It helps a historically marginalized group represent itself on its own terms, which allows a fuller story to be made public.
                     </div>
@@ -76,7 +76,7 @@ function AboutOurMethodology() {
                                         aria-controls={`panel${index + 1}-content`}
                                         id={`panel${index + 1}-header`}
                                     >
-                                        <Typography className="font-bold text-[24px] md:text-[40px]">{writeup.title}</Typography>
+                                        <Typography className="font-bold text-[24px] xl:text-[40px]">{writeup.title}</Typography>
                                     </AccordionSummary>
                                     <AccordionDetails>
                                         <Typography>

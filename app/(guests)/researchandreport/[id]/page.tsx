@@ -30,24 +30,24 @@ export default function GuestThematicAreaPage({params}: {params: {id: string}}) 
     return (
         <div style={{ overflow: "auto", height: "100vh" }}>
             <GuestHeader />
-            <div className="px-8 md:px-20 py-16 bg-black text-white text-center text-[20px] md:text-[32px] font-bold">
+            <div className="px-8 xl:px-20 py-16 bg-black text-white text-center text-[20px] xl:text-[32px] font-bold">
                 Reseach and Report
             </div>
-            <div className="mx-8 md:mx-20">
-                <div className="relative h-[140px] md:h-[400px] mt-8">
+            <div className="mx-8 xl:mx-20">
+                <div className="relative h-[140px] xl:h-[400px] mt-8">
                     <Image src={record.pictureURL!!} fill={true} alt="Header Image" />
                 </div>
                     <div className="py-4 flex justify-between items-center">
-                        <div className="text-[14px] md:text-[16px]">{moment(record.createdAt).format("LLLL")}</div>
-                        <button className="border border-[2px] py-1 px-6 md:py-2 md:px-4 rounded-[10px] font-bold" onClick={() => {router.push(record.document!!)}}>Dowload PDF</button>
+                        <div className="text-[14px] xl:text-[16px]">{moment(record.createdAt).format("LLLL")}</div>
+                        <button className="border border-[2px] py-1 px-6 xl:py-2 xl:px-4 rounded-[10px] font-bold" onClick={() => {router.push(record.document!!)}}>Dowload PDF</button>
                     </div>
                 <div>
                     <hr />
-                    <div className="py-4 text-left md:text-center font-bold text-[24px] md:text-[40px]">
+                    <div className="py-4 text-left xl:text-center font-bold text-[24px] xl:text-[40px]">
                         {record.title}
                     </div>
                     <hr />
-                    <div className="my-4 text-[16px] md:text-[32px]">
+                    <div className="my-4 text-[16px] xl:text-[32px]">
                         {record.details}
                     </div>
                 </div>

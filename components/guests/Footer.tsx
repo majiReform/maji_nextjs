@@ -4,8 +4,8 @@ import { BsFacebook, BsInstagram, BsTwitter, BsYoutube } from "react-icons/bs";
 
 function GuestFooter() {
     return (
-        <div className="grid grid-cols-2 md:grid-cols-6 justify-center gap-4 px-8 md:px-20 py-14 bg-greybg">
-            <div className="col-span-2 md:col-span-2">
+        <div className="grid grid-cols-2 xl:grid-cols-6 justify-center gap-4 px-8 xl:px-20 py-14 bg-greybg">
+            <div className="col-span-2 xl:col-span-2">
                 <div className="relative h-[40px] w-[100px] mb-4">
                     <Image src="/maij_logo.png" fill={true} alt="Maji logo" />
                 </div>
@@ -30,7 +30,7 @@ function GuestFooter() {
                     <Link href="">Gender Rights</Link>
                 </div>
             </div>
-            <div className="col-span-2 md:col-span-1">
+            <div className="col-span-2 xl:col-span-1">
                 <div className="font-bold text-[16px]">Quick Links</div>
                 <div className="text-[14px] flex flex-col gap-2 mt-4">
                     <Link href="">Reports</Link>
@@ -38,7 +38,7 @@ function GuestFooter() {
                     <Link href="">Media</Link>
                 </div>
             </div>
-            <div className="col-span-2 md:col-span-1 flex flex-col gap-8">
+            <div className="col-span-2 xl:col-span-1 flex flex-col gap-8">
                 <div className="font-bold text-[16px]">Follow Us</div>
                 <div className="flex gap-8">
                     <a href=""><BsFacebook className="h-[40px] w-[40px]" /></a>

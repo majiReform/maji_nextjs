@@ -40,17 +40,17 @@ export default function GuestThematicAreaPage({params}: {params: {id: string}}) 
     return (
         <div style={{ overflow: "auto", height: "100vh" }}>
             <GuestHeader />
-            <div className="px-20 py-16 bg-black text-white text-center text-[20px] md:text-[32px] font-bold">
+            <div className="px-20 py-16 bg-black text-white text-center text-[20px] xl:text-[32px] font-bold">
                 Thematic Areas
             </div>
-            <div className="mx-8 md:mx-20">
-                <div className="relative h-[190px] md:h-[400px] mt-8">
+            <div className="mx-8 xl:mx-20">
+                <div className="relative h-[190px] xl:h-[400px] mt-8">
                     <Image src={record.picture!!} fill={true} alt="Header Image" />
                 </div>
                     <div className="py-4 text-[16px]">{moment(record.createdAt).format("LLLL")}</div>
                 <div>
                     <hr />
-                    <div className="py-4 text-left md:text-center font-bold text-[24px] md:text-[40px]">
+                    <div className="py-4 text-left xl:text-center font-bold text-[24px] xl:text-[40px]">
                         {record.title}
                     </div>
                     <hr />

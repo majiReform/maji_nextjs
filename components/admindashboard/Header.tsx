@@ -148,9 +148,9 @@ function AdminHeaderComponent() {
     return (
         <div className="flex justify-between items-center px-8 w-full h-[80px]">
             <LogoutModal  openState={openState} setOpen={setOpenState} />
-            <div className="font-bold md:text-xl">{selectAreaHeader()}</div>
+            <div className="font-bold xl:text-xl">{selectAreaHeader()}</div>
             {status == "loading" || status == "pre-load" ? (<SpinLoader />) : (<Dropdown>
-                <MenuButton className='flex items-center gap-1 md:gap-2 text-[14px]'>
+                <MenuButton className='flex items-center gap-1 xl:gap-2 text-[14px]'>
                     <div className='h-[45px] w-[45px] rounded-full relative overflow-hidden'>
                     {profile.profilePicture ? (<Image src={profile.profilePicture!!} fill={true} alt='Profile picture' />) : (<NoPicture />)}
                         
@@ -166,7 +166,7 @@ function AdminHeaderComponent() {
                     <MenuItem className="cursor-pointer" onClick={logoutButton}>Log out</MenuItem>
                 </Menu>
             </Dropdown>)}
-            <IoMenuSharp className='block md:hidden text-[25px]' onClick={() => {dispatch(openSidebar())}} />
+            <IoMenuSharp className='block xl:hidden text-[25px]' onClick={() => {dispatch(openSidebar())}} />
         </div>
     );
 }
