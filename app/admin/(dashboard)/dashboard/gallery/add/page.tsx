@@ -64,6 +64,11 @@ export default function Page() {
         }
     }, [status]);
 
+    const removeGalleryPic = () => {
+        setPictureUrl("");
+        setOriginalPicture("");
+    }
+
     return (
         <div>
             <div className='flex flex-col w-full xl:w-[800px] mx-auto py-20 gap-6'>
@@ -80,6 +85,7 @@ export default function Page() {
                     iconType='picture'
                     forId='research_upload_1'
                     fileUrl={originalPicture}
+                    clearFile={removeGalleryPic}
                     key={"research_file_upoload_1"}
                 >
                     <CldUploadButton

@@ -62,6 +62,10 @@ export default function Page() {
 
     }, [status]);
 
+    const removeFile = () => {
+        setpictureUrl("");
+        setOriginalFileName("");
+    }
 
     const inputClass = "p-3 rounded-[5px] border border-[0.5px] bg-adminbg border-[#878787]";
 
@@ -81,6 +85,7 @@ export default function Page() {
                     iconType='picture'
                     forId='thematic_upload_1'
                     fileUrl={originalFileName}
+                    clearFile={removeFile}
                     key={"thematic_file_upoload"}
                 >
                     <CldUploadButton

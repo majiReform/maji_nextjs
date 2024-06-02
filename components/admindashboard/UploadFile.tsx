@@ -26,6 +26,7 @@ interface UploadFileProps {
     forId: string
     iconType: "picture" | "file" | "others"
     fileUrl: string
+    clearFile: () => void
     fileTypes?: fileTypesType[]
     readonly children: ReactNode
 }
@@ -56,7 +57,7 @@ function UploadFile(props: UploadFileProps) {
             {props.fileUrl ? (
             <div className={`${!props.fileUrl ? "hidden" : "flex justify-between py-4 mt-2"}`}>
                 <div className="w-[90%]">{props.fileUrl.split("/")[props.fileUrl.split("/").length - 1]}</div>
-                <MdClose className="w-[10%]" />
+                <MdClose onClick={props.clearFile} className="w-[10%] block" />
             </div>
         ) : ""}
 

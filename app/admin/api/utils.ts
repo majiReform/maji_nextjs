@@ -6,7 +6,7 @@ const secretKey = process.env.AUTH_KEY;
 
 export async function encrypt(payload: JWTPayload) {
     return await new SignJWT(payload)
-    .setProtectedHeader({axl: "HS256"})
+    .setProtectedHeader({alg: "HS256"})
     .setIssuedAt()
     .setExpirationTime("1 hour from now")
     .sign(new TextEncoder().encode(secretKey));

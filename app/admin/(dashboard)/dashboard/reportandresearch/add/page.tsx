@@ -66,6 +66,16 @@ export default function Page() {
         }
     }, [status]);
 
+    const removePicture = () => {
+        setPictureUrl("");
+        setOriginalFileName("");
+    }
+    
+    const removeFile = () => {
+        setFileUrl("");
+        setOriginalFileNameTwo("");
+    }
+
     const inputClass = "p-3 rounded-[5px] border border-[0.5px] bg-adminbg border-[#878787]";
 
     return (
@@ -85,6 +95,7 @@ export default function Page() {
                     iconType='picture'
                     forId='research_upload_1'
                     fileUrl={originalFileName}
+                    clearFile={removePicture}
                     key={"research_file_upoload_1"}
                 >
                     <CldUploadButton
@@ -118,6 +129,7 @@ export default function Page() {
                     iconType='file'
                     forId='research_upload_2'
                     fileUrl={originalFileNameTwo}
+                    clearFile={removeFile}
                     key={"research_file_upoload_2"}
                 >
                     <CldUploadButton
