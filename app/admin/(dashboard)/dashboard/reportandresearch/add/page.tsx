@@ -47,7 +47,7 @@ export default function Page() {
             setButtonDisabled(true);
         }
 
-    }, [details, category, title]);
+    }, [details, category, title, fileUrl, pictureUrl]);
 
     const submitHandler = () => {
 
