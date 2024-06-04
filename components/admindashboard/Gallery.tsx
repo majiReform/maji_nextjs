@@ -91,6 +91,8 @@ function GalleryList(props: GalleryListprop) {
     const edit = () => { }
     
     const galleryValues = useAppSelector(selectValue);
+    const page = useAppSelector(selectPage);
+    const totalPages = useAppSelector(selectTotalPages);
 
     const dispatch = useAppDispatch();
 
@@ -135,8 +137,8 @@ function GalleryList(props: GalleryListprop) {
                 <DeleteModal openState={open} setOpen={setOpen} id={id} />
             </div>
             <PaginateNumbers
-                currentPage={selectPage}
-                totalPages={selectTotalPages}
+                currentPage={page}
+                totalPages={totalPages}
                 setPageAndMove={goToPage}
             />
         </div>
