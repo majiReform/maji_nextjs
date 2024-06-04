@@ -45,7 +45,11 @@ export default function Page() {
             title,
             details: description,
             youtubeURL: youtube.split("/")[youtube.split("/").length - 1]
-        }))
+        })).then(() => {
+            setTitle("");
+            setDescription("");
+            setYoutube("");
+        });
     }
 
     useEffect(() => {

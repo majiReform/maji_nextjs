@@ -57,7 +57,15 @@ export default function Page() {
             pictureURL: pictureUrl,
             document: fileUrl,
             details,
-        }))
+        })).then(() => {
+            setCategory("");
+            setTitle("");
+            setFileUrl("");
+            setDetails("");
+            setOriginalFileNameTwo("");
+            setPictureUrl("");
+            setOriginalFileName("");
+        });
     }
 
     useEffect(() => {
@@ -167,8 +175,8 @@ export default function Page() {
 
                 <div className='flex flex-col'>
                     <label htmlFor="select-category">Select category</label>
-                    <select className={inputClass} onChange={(e) => { setCategory(e.target.value) }}>
-                        <option>Choose a category</option>
+                    <select className={inputClass} value={category} onChange={(e) => { setCategory(e.target.value) }}>
+                        <option value="">Choose a category</option>
                         <option value="research">Research</option>
                         <option value="report">Report</option>
                     </select>
@@ -176,7 +184,7 @@ export default function Page() {
 
                 <div className='flex flex-col'>
                     <label htmlFor="area-title">Title</label>
-                    <input type="text" className={inputClass} onChange={(e) => { setTitle(e.target.value) }} placeholder='Enter a semantic title' />
+                    <input type="text" className={inputClass} value={title} onChange={(e) => { setTitle(e.target.value) }} placeholder='Enter a semantic title' />
                 </div>
 
                 <div className='flex flex-col'>

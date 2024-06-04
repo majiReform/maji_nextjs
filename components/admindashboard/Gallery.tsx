@@ -1,5 +1,5 @@
 "use client"
-import { remove, selectValue } from "@/lib/features/gallery/gallerySlice";
+import { remove, selectValue, selectPage, selectTotalPages, get } from "@/lib/features/gallery/gallerySlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 // import { Menu } from "@mui/material";
 import Image from "next/image";
@@ -92,6 +92,12 @@ function GalleryList(props: GalleryListprop) {
     
     const galleryValues = useAppSelector(selectValue);
 
+    const dispatch = useAppDispatch();
+
+    const goToPage = (page: number, limit: number) => {
+        dispatch(get({page, limit}));
+    }
+
     return (
         <div>
             <div className="text-right mb-4">
@@ -128,7 +134,11 @@ function GalleryList(props: GalleryListprop) {
                 })}
                 <DeleteModal openState={open} setOpen={setOpen} id={id} />
             </div>
-            <PaginateNumbers />
+            <PaginateNumbers
+                currentPage={selectPage}
+                totalPages={selectTotalPages}
+                setPageAndMove={goToPage}
+            />
         </div>
     );
 }

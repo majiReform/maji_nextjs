@@ -1,5 +1,5 @@
 "use client"
-import { get, remove, selectValue } from "@/lib/features/videos/videosSlice";
+import { get, remove, selectValue, selectPage, selectTotalPages } from "@/lib/features/videos/videosSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 // import { Menu } from "@mui/material";
 import Image from "next/image";
@@ -58,11 +58,6 @@ function DeleteModal({openState, setOpen, id}: openStateInterface) {
         setOpen(false);
     }
 
-    // useEffect(() => {
-
-    //     setOpen(openState)
-    // }, [openState]);
-
     return (
         <Modal
             open={openState}
@@ -99,9 +94,16 @@ function VideoList(props: videoListprop) {
     
     
     const edit = () => { }
+
+    const dispatch = useAppDispatch();
     
     const videos = useAppSelector(selectValue);
+    const page = useAppSelector(selectPage);
+    const totalPages = useAppSelector(selectTotalPages);
 
+    const goToPage = (page: number, limit: number) => {
+        dispatch(get({page, limit}));
+    }
     
 
     return (
@@ -142,7 +144,11 @@ function VideoList(props: videoListprop) {
                 })}
                 <DeleteModal openState={open} setOpen={setOpen} id={id} />
             </div>
-            <PaginateNumbers />
+            <PaginateNumbers
+                currentPage={page}
+                totalPages={totalPages}
+                setPageAndMove={goToPage}
+            />
         </div>
     );
 }

@@ -51,7 +51,10 @@ export default function Page() {
     const submitHandler = () => {
         dispatch(add({
             picture: pictureUrl
-        }))
+        })).then(() => {
+            setOriginalPicture("");
+            setPictureUrl("");
+        });
     }
 
     useEffect(() => {

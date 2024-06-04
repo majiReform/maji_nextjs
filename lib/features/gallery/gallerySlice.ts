@@ -15,7 +15,8 @@ export interface gallerySliceState {
     state: "idle" | "pre-load" | "loading" | "success" | "failed"
     single: object,
     errorMessage?: string,
-    page: number
+    page: number,
+    totalPages: number
 }
 
 const initialState: gallerySliceState = {
@@ -23,7 +24,8 @@ const initialState: gallerySliceState = {
     value: [],
     state: "pre-load",
     errorMessage: "",
-    page: 1
+    page: 1,
+    totalPages: 0
 };
 
 export const gallerySlice = createAppSlice({
@@ -58,6 +60,7 @@ export const gallerySlice = createAppSlice({
             fulfilled: (state, action) => {
                 state.value = action.payload.response.pictures.results;
                 state.page = action.payload.response.pictures.currentPage;
+                state.totalPages = action.payload.response.pictures.totalPages;
                 state.state = "idle";
             },
             rejected: (state, action) => {
@@ -105,6 +108,8 @@ export const gallerySlice = createAppSlice({
     selectors: {
         selectValue: (counter) => counter.value,
         selectStatus: (counter) => counter.state,
+        selectPage: (counter) => counter.page,
+        selectTotalPages: (counter) => counter.totalPages,
         singleValue: (counter) => counter.single,
         errorValue: (counter) => counter.errorMessage
     }
@@ -112,4 +117,4 @@ export const gallerySlice = createAppSlice({
 
 export const { add, remove, get, getSingle } = gallerySlice.actions;
 
-export const {selectValue, selectStatus, errorValue, singleValue} = gallerySlice.selectors;
+export const {selectValue, selectStatus, errorValue, singleValue, selectPage, selectTotalPages} = gallerySlice.selectors;

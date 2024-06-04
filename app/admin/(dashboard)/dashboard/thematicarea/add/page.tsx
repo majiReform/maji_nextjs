@@ -51,7 +51,13 @@ export default function Page() {
             title,
             picture: pictureUrl,
             details: semanticText
-        }));
+        })).then(() => {
+            setCategory("");
+            setSemanticText("");
+            setTitle("");
+            setpictureUrl("");
+            setOriginalFileName("");
+        });
     }
 
     useEffect(() => {
@@ -113,8 +119,8 @@ export default function Page() {
 
                 <div className='flex flex-col'>
                     <label htmlFor="select-category">Select category</label>
-                    <select className={inputClass} onChange={(e) => { setCategory(e.target.value) }}>
-                        <option>Select a category for your thematic area</option>
+                    <select className={inputClass} value={category} onChange={(e) => { setCategory(e.target.value) }}>
+                        <option value="">Select a category for your thematic area</option>
                         <option value="human-rights">Human Rights</option>
                         <option value="gender-rights">Gender Rights</option>
                         <option value="enviromental-rights">Enviromental Rights</option>
@@ -124,12 +130,12 @@ export default function Page() {
 
                 <div className='flex flex-col'>
                     <label htmlFor="area-title">Thematic Area Title</label>
-                    <input type="text" className={inputClass} onChange={(e) => { setTitle(e.target.value) }} placeholder='Enter a semantic title' />
+                    <input type="text" className={inputClass} value={title} onChange={(e) => { setTitle(e.target.value) }} placeholder='Enter a semantic title' />
                 </div>
 
                 <div className='flex flex-col'>
                     <label htmlFor="area-title">Thematic Area Body</label>
-                    <textarea className={inputClass} name="" id="" rows={12} placeholder='Type text here' value={semanticText} onChange={(e) => { setSemanticText(e.target.value) }}></textarea>
+                    <textarea className={inputClass} value={semanticText} name="" id="" rows={12} placeholder='Type text here' onChange={(e) => { setSemanticText(e.target.value) }}></textarea>
                     <div className='text-right'>
                         <small>{semanticText.length}/{maxwords}</small>
                     </div>

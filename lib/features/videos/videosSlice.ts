@@ -15,7 +15,8 @@ export interface videosSliceState {
     state: "idle" | "pre-load" | "loading" | "success" | "failed",
     single: object,
     errorMessage?: string,
-    page: number
+    page: number,
+    totalPages: number
 }
 
 const initialState: videosSliceState = {
@@ -23,7 +24,8 @@ const initialState: videosSliceState = {
     state: "pre-load",
     single: {},
     errorMessage: "",
-    page: 1
+    page: 1,
+    totalPages: 0
 };
 
 export const videosSlice = createAppSlice({
@@ -38,7 +40,7 @@ export const videosSlice = createAppSlice({
                 state.state = "loading";
             },
             fulfilled: (state, action) => {
-                if(state.value.length < 10) state.value.push(action.payload.response.addedDetails);
+                if (state.value.length < 10) state.value.push(action.payload.response.addedDetails);
                 state.state = "success";
             },
             rejected: (state, action) => {
@@ -55,6 +57,8 @@ export const videosSlice = createAppSlice({
             },
             fulfilled: (state, action) => {
                 state.value = action.payload.response.videos.results;
+                state.page = action.payload.response.videos.currentPage;
+                state.totalPages = action.payload.response.videos.totalPages;
                 state.state = "idle";
             },
             rejected: (state, action) => {
@@ -101,6 +105,8 @@ export const videosSlice = createAppSlice({
     }),
     selectors: {
         selectValue: (counter) => counter.value,
+        selectTotalPages: (counter) => counter.totalPages,
+        selectPage: (counter) => counter.page,
         selectStatus: (counter) => counter.state,
         selectSingle: (counter) => counter.single,
         errorValue: (counter) => counter.errorMessage,
@@ -109,4 +115,4 @@ export const videosSlice = createAppSlice({
 
 export const { add, remove, get, getSingle } = videosSlice.actions;
 
-export const {selectValue, selectStatus, selectSingle, errorValue} = videosSlice.selectors;
+export const { selectValue, selectStatus, selectSingle, errorValue, selectPage, selectTotalPages } = videosSlice.selectors;

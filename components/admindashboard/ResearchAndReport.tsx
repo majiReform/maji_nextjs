@@ -1,5 +1,5 @@
 "use client"
-import { remove, selectValue } from "@/lib/features/research/researchSlice";
+import { ResearchAndReportInterface, remove, selectValue, selectTotalPage, selectPage, get } from "@/lib/features/research/researchSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 // import { Menu } from "@mui/material";
 import Image from "next/image";
@@ -89,6 +89,8 @@ function DeleteModal({openState, setOpen, id}: openStateInterface) {
 function ResearchAndReportList(props: researchlistprop) {
 
     const research = useAppSelector(selectValue);
+    const totalPage = useAppSelector(selectTotalPage);
+    const currentPage = useAppSelector(selectPage);
 
     const router = useRouter();
 
@@ -96,12 +98,16 @@ function ResearchAndReportList(props: researchlistprop) {
     
 //   const handleOpen = () => setOpen(true);
 
+    const dispatch = useAppDispatch();
+
     const [id, setId] = useState("");
   
 
     const edit = () => { }
 
-    
+    const goToPage = (page:number, limit: number) => {
+        dispatch(get({page, limit}));
+    }
 
     return (
         <div>
@@ -113,7 +119,7 @@ function ResearchAndReportList(props: researchlistprop) {
             </div>
 
             <div className="grid grid-cols-1 xl:grid-cols-4 gap-8 z-40 mb-20">
-                {research.map((record) => {
+                {research.map((record:ResearchAndReportInterface) => {
                     return (
                         <div className="w-full p-4 bg-white relative">
                             <div className="w-full h-[240px] relative z-10" style={{ backgroundImage: `url("${record.pictureURL}")`, backgroundSize: "cover", backgroundRepeat: "no-repeat", borderRadius: "5px" }}>
@@ -127,7 +133,7 @@ function ResearchAndReportList(props: researchlistprop) {
                                         <BsThreeDotsVertical />
                                     </MenuButton>
                                     <Menu className='bg-white flex flex-col gap-8 p-4' style={{ zIndex: "80" }}>
-                                        <MenuItem className="cursor-pointer" onClick={edit}>View More</MenuItem>
+                                        <MenuItem className="cursor-pointer" onClick={() => {router.push(`/researchandreport/${record!!._id}`)}}>View More</MenuItem>
                                         {/* <MenuItem className="cursor-pointer" onClick={edit}>Edit</MenuItem> */}
                                         <MenuItem className="cursor-pointer text-deletebutton" onClick={() => { setId(record!!._id as string); setOpen(true) }}>Delete</MenuItem>
                                     </Menu>
@@ -139,7 +145,11 @@ function ResearchAndReportList(props: researchlistprop) {
                 })}
                 <DeleteModal openState={open} setOpen={setOpen} id={id} />
             </div>
-            <PaginateNumbers />
+            <PaginateNumbers
+                totalPages={totalPage}
+                currentPage={currentPage}
+                setPageAndMove={goToPage}
+            />
         </div>
     );
 }

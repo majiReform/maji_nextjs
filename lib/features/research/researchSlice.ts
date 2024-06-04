@@ -19,7 +19,8 @@ export interface researchSliceState {
     single: object,
     state: "idle" | "pre-load" | "loading" | "success" | "failed",
     errorMessage?: string,
-    page: number
+    page: number,
+    totalPages: number
 }
 
 export interface PageAndNumber { page: number, limit: number }
@@ -29,7 +30,8 @@ const initialState: researchSliceState = {
     state: "pre-load",
     single: {},
     errorMessage: "",
-    page: 1
+    page: 1,
+    totalPages: 0
 };
 
 export const researchSlice = createAppSlice({
@@ -61,6 +63,8 @@ export const researchSlice = createAppSlice({
             },
             fulfilled: (state, action) => {
                 state.value = action.payload.response.details.results;
+                state.page = action.payload.response.details.currentPage;
+                state.totalPages = action.payload.response.details.totalPages;
                 state.state = "idle";
             },
             rejected: (state, action) => {
@@ -108,6 +112,8 @@ export const researchSlice = createAppSlice({
     selectors: {
         selectValue: (counter) => counter.value,
         selectSingle: (counter) => counter.single,
+        selectTotalPage: (counter) => counter.totalPages,
+        selectPage: (counter) => counter.page,
         selectStatus: (counter) => counter.state,
         errorValue: (counter) => counter.errorMessage
     }
@@ -115,4 +121,4 @@ export const researchSlice = createAppSlice({
 
 export const { add, remove, get, getSingle } = researchSlice.actions;
 
-export const { selectValue, selectStatus, errorValue, selectSingle } = researchSlice.selectors;
+export const { selectValue, selectStatus, errorValue, selectSingle, selectTotalPage, selectPage } = researchSlice.selectors;

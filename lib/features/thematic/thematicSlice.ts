@@ -18,7 +18,8 @@ export interface thematicSliceState {
     single: object,
     state: "idle" | "pre-load" | "loading" | "success" | "failed",
     errorMessage?: string,
-    page: number
+    page: number,
+    totalPages: number
 }
 
 const initialState: thematicSliceState = {
@@ -26,7 +27,8 @@ const initialState: thematicSliceState = {
     single: {},
     state: "pre-load",
     errorMessage: "",
-    page: 1
+    page: 1,
+    totalPages: 0
 };
 
 export const thematicSlice = createAppSlice({
@@ -60,6 +62,7 @@ export const thematicSlice = createAppSlice({
             fulfilled: (state, action) => {
                 state.page = action.payload.response.thematicAreas.currentPage;
                 state.value = action.payload.response.thematicAreas.results;
+                state.totalPages = action.payload.response.thematicAreas.totalPages;
                 state.state = "idle";
             },
             rejected: (state, action) => {
@@ -109,10 +112,11 @@ export const thematicSlice = createAppSlice({
         selectSingle: (counter) => counter.single,
         selectStatus: (counter) => counter.state,
         selectPage: (counter) => counter.page,
+        selectTotalPages: (counter) => counter.totalPages,
         errorValue: (counter) => counter.errorMessage
     }
 });
 
 export const { add, remove, get, getSingle } = thematicSlice.actions;
 
-export const {selectValue, selectStatus, errorValue, selectPage, selectSingle} = thematicSlice.selectors;
+export const {selectValue, selectStatus, errorValue, selectPage, selectSingle, selectTotalPages} = thematicSlice.selectors;
