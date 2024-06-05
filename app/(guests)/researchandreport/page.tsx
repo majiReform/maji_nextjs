@@ -2,6 +2,7 @@
 import { SpinLoader } from "@/components/LoadingAnimation/spinLoader";
 import { PaginateNumbers } from "@/components/admindashboard/PaginateNumbers";
 import { GuestFooter } from "@/components/guests/Footer";
+import { GuestPaginateNumbers } from "@/components/guests/GuestPaginateNumbers";
 import { GuestHeader } from "@/components/guests/Header"
 import { GuestResearchAdReportList } from "@/components/guests/ResearchAndReportList";
 import { ThematicAreaList } from "@/components/guests/ThematicAreaList";
@@ -13,10 +14,14 @@ export default function GuestThematicAreaPage() {
 
     const [list, setList] = useState<ResearchAndReportInterface[]>([]);
     const [listState, setListState] = useState("loading");
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
 
     const fetchIt = async () => {
-        const result = await guestResearchList(1, 10);
+        const result = await guestResearchList(currentPage, 10);
         setList(result.response.details.results);
+        setCurrentPage(result.response.details.currentPage);
+        setTotalPages(result.response.details.totalPages);
         setListState("idle");
     }
 
@@ -39,7 +44,7 @@ export default function GuestThematicAreaPage() {
                 Research and Report
             </div>
             <GuestResearchAdReportList list={list} />
-            <PaginateNumbers />
+            <GuestPaginateNumbers />
             <GuestFooter />
         </div>
     );
