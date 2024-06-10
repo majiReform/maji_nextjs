@@ -104,8 +104,6 @@ export default function Media() {
                 <div className="grid grid-cols-2 xl:grid-cols-4 gap-2 xl:gap-4">
                     {galleryList.map((picture, index) => {
 
-
-
                         return (
                             <div className="relative h-[140px] xl:h-[200px] w-full rounded-[10px] overflow-hidden my-auto" key={index}>
                                 <div onClick={() => {handleOpen(index)}}><Image src={picture.picture!!} fill={true} alt="Gallery image" /></div>
