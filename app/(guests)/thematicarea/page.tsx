@@ -13,16 +13,25 @@ export default function GuestThematicAreaPage() {
 
     const [list, setList] = useState<ThematicAreaInterface[]>([]);
     const [listState, setListState] = useState("loading");
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
 
     const fetchIt = async () => {
         const result = await guestThematicAreaList(1, 10);
         setList(result.response.details.results);
+        setCurrentPage(result.response.details.currentPage);
+        setTotalPages(result.response.details.totalPages);
         setListState("idle");
     }
 
     useEffect(() => {
         fetchIt();
     }, []);
+
+    const gotoPage = (page:number, _limit: number) => {
+        setCurrentPage(page);
+        fetchIt();
+    }
 
     if(listState == "loading") {
         return (
@@ -39,7 +48,11 @@ export default function GuestThematicAreaPage() {
                 Thematic Areas
             </div>
             <ThematicAreaList list={list} />
-            <GuestPaginateNumbers />
+            <GuestPaginateNumbers
+                currentPage={currentPage}
+                totalPages={totalPages}
+                setPageAndMove={gotoPage}
+            />
             <GuestFooter />
         </div>
     );

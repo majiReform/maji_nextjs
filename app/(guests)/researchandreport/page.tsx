@@ -29,6 +29,11 @@ export default function GuestThematicAreaPage() {
         fetchIt();
     }, []);
 
+    const gotoPage = (page:number, _limit: number) => {
+        setCurrentPage(page);
+        fetchIt();
+    }
+
     if(listState == "loading") {
         return (
             <div className="h-screen w-full flex justify-center items-center">
@@ -44,7 +49,11 @@ export default function GuestThematicAreaPage() {
                 Research and Report
             </div>
             <GuestResearchAdReportList list={list} />
-            <GuestPaginateNumbers />
+            <GuestPaginateNumbers
+                currentPage={currentPage}
+                totalPages={totalPages}
+                setPageAndMove={gotoPage}
+            />
             <GuestFooter />
         </div>
     );

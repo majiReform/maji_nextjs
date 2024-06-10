@@ -2,6 +2,7 @@
 import { PaginateNumbers } from "@/components/admindashboard/PaginateNumbers";
 import { GuestFooter } from "@/components/guests/Footer";
 import { GuestHeader } from "@/components/guests/Header"
+import { ResearchAndReportRecentPosts } from "@/components/guests/ResearchAndReportRecentPost";
 import { ThematicAreaList } from "@/components/guests/ThematicAreaList";
 import { ThematicAreaRecentPosts } from "@/components/guests/ThematicAreaRecentPost";
 import { guestSingleResearch } from "@/lib/features/guestAPI/homePage";
@@ -52,7 +53,7 @@ export default function GuestThematicAreaPage({params}: {params: {id: string}}) 
                     </div>
                 </div>
             </div>
-            <ThematicAreaRecentPosts />
+            <ResearchAndReportRecentPosts />
             <GuestFooter />
         </div>
     );

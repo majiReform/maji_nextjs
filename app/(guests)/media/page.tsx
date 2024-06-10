@@ -9,6 +9,25 @@ import { YouTubeEmbed } from "@next/third-parties/google";
 import moment from "moment";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import { MdClose } from "react-icons/md";
+
+const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: "90%",
+    height: "90%",
+    margin: "auto auto",
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+};
 
 export default function Media() {
 
@@ -28,7 +47,7 @@ export default function Media() {
     }
 
     const fetchHero = async () => {
-        const result = await guestVideosList(1, 3);
+        const result = await guestVideosList(1, 1);
         setList(result.response.videos.results[0]);
         setVideoList(result.response.videos.results);
         setStatus("idle");
@@ -40,35 +59,17 @@ export default function Media() {
         fetchGallery();
     }, []);
 
-    if(status == "loading" || galleryStatus == "loading" || videostatus == "loading") {
+    const [open, setOpen] = useState(-1);
+    const handleOpen = (index: number) => setOpen(index);
+    const handleClose = () => setOpen(-1);
+
+    if (status == "loading" || galleryStatus == "loading" || videostatus == "loading") {
         return (
             <div className="h-screen w-full flex justify-center items-center">
                 <SpinLoader />
             </div>
         );
     }
-
-    const posts = [
-        {
-            title: "Amnesty International Launches Global Campaign Against Torture",
-            picture: "/image 14.png",
-            category: "Human Rght",
-            date: "7th May, 2024"
-        },
-        {
-            title: "Amnesty International Launches Global Campaign Against Torture",
-            picture: "/image 14.png",
-            category: "Gender Right",
-            date: "7th May, 2024"
-        },
-        {
-            title: "Amnesty International Launches Global Campaign Against Torture",
-            picture: "/image 14.png",
-            category: "Technology",
-            date: "7th May, 2024"
-        }
-    ];
-
 
     return (
         <div style={{ overflow: "auto", height: "100vh" }}>
@@ -102,9 +103,25 @@ export default function Media() {
                 <div className="text-[32px] font-bold mb-2 text-center">Gallery</div>
                 <div className="grid grid-cols-2 xl:grid-cols-4 gap-2 xl:gap-4">
                     {galleryList.map((picture, index) => {
+
+
+
                         return (
-                            <div className="relative h-[140px] xl:h-[200px] w-full rounded-[10px] overflow-hidden" key={index}>
-                                <Image src={picture.picture!!} fill={true} alt="Gallery image" />
+                            <div className="relative h-[140px] xl:h-[200px] w-full rounded-[10px] overflow-hidden my-auto" key={index}>
+                                <div onClick={() => {handleOpen(index)}}><Image src={picture.picture!!} fill={true} alt="Gallery image" /></div>
+                                <Modal
+                                    open={open == index}
+                                    onClose={handleClose}
+                                    aria-labelledby="modal-modal-title"
+                                    aria-describedby="modal-modal-description"
+                                    style={{margin: "auto"}}
+                                >
+                                    <Box sx={style}>
+                                    {/* <Image src={picture.picture!!} fill={true} alt="Gallery image" style={{backgroundSize: "contain!important"}} /> */}
+                                    <div style={{backgroundImage: `url("${picture.picture!!}")`, backgroundSize: "contain", width: "100%", height: "100%", margin: "auto", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}></div>
+                                    <div className="absolute top-[20px] right-[20px]" onClick={handleClose}><MdClose /></div>
+                                    </Box>
+                                </Modal>
                             </div>
                         );
                     })}

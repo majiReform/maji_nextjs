@@ -17,49 +17,6 @@ function GuestResearchAdReportList(props: {list: ResearchAndReportInterface[]}) 
 
     const router = useRouter();
 
-    const thematicarea = [
-        {
-            title: "This is a title",
-            category: "Gender Right",
-            picture: "/auth_pic.jpeg"
-        },
-        {
-            title: "This is a title",
-            category: "Gender Right",
-            picture: "/auth_pic.jpeg"
-        },
-        {
-            title: "This is a title",
-            category: "Gender Right",
-            picture: "/auth_pic.jpeg"
-        },
-        {
-            title: "This is a title",
-            category: "Research",
-            picture: "/auth_pic.jpeg"
-        },
-        {
-            title: "This is a title",
-            category: "Research",
-            picture: "/auth_pic.jpeg"
-        },
-        {
-            title: "This is a title",
-            category: "Research",
-            picture: "/auth_pic.jpeg"
-        },
-        {
-            title: "This is a title",
-            category: "Research",
-            picture: "/auth_pic.jpeg"
-        },
-        {
-            title: "This is a title",
-            category: "Research",
-            picture: "/auth_pic.jpeg"
-        }
-    ];
-
     return (
         <div className='grid grid-cols-1 xl:grid-cols-2 xl:grid-cols-3 gap-8 py-8 xl:py-10 mx-8 xl:mx-20'>
             {props.list.map((record) => {
