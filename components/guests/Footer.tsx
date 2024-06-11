@@ -45,6 +45,7 @@ function GuestFooter() {
                     {/* <a href=""><BsInstagram className="h-[40px] w-[40px]" /></a> */}
                     <a href="https://twitter.com/MediaMaji"><BsTwitter className="h-[40px] w-[40px]" /></a>
                     {/* <a href=""><BsYoutube className="h-[40px] w-[40px]" /></a> */}
+                    {/* <a href=""><BsYoutube className="h-[40px] w-[40px]" /></a> */}
                 </div>
                 <div className="flex gap-2">
                 <Link href="">Contact Us</Link>|<Link href="">Privacy Policy</Link>
