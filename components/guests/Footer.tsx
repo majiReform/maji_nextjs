@@ -41,10 +41,10 @@ function GuestFooter() {
             <div className="col-span-2 xl:col-span-1 flex flex-col gap-8">
                 <div className="font-bold text-[16px]">Follow Us</div>
                 <div className="flex gap-8">
-                    <a href=""><BsFacebook className="h-[40px] w-[40px]" /></a>
-                    <a href=""><BsInstagram className="h-[40px] w-[40px]" /></a>
-                    <a href=""><BsTwitter className="h-[40px] w-[40px]" /></a>
-                    <a href=""><BsYoutube className="h-[40px] w-[40px]" /></a>
+                    <a href="https://www.facebook.com/Media4JusticeNG"><BsFacebook className="h-[40px] w-[40px]" /></a>
+                    {/* <a href=""><BsInstagram className="h-[40px] w-[40px]" /></a> */}
+                    <a href="https://twitter.com/MediaMaji"><BsTwitter className="h-[40px] w-[40px]" /></a>
+                    {/* <a href=""><BsYoutube className="h-[40px] w-[40px]" /></a> */}
                 </div>
                 <div className="flex gap-2">
                 <Link href="">Contact Us</Link>|<Link href="">Privacy Policy</Link>
