@@ -31,6 +31,9 @@ export function getSesstion(): any {
 export async function updateSession(request: NextRequest) {
 
     try {
+
+        const allowedOrigins = (process.env.ALLOWED_ORIGINS)!!.split(",");
+
         
         const session = request.cookies.get("session");
 
@@ -44,6 +47,13 @@ export async function updateSession(request: NextRequest) {
             sameSite: "strict",
             maxAge: 7 * 24 * 60 * 60
         });
+
+        const origin = request.headers.get('origin') ?? ''
+    const isAllowedOrigin = allowedOrigins.includes(origin)
+
+    if (isAllowedOrigin) {
+        res.headers.set('Access-Control-Allow-Origin', origin)
+      }
     
         return res;
 
