@@ -4,7 +4,7 @@ import { GuestFooter } from "@/components/guests/Footer";
 import { GuestHeader } from "@/components/guests/Header"
 import { ThematicAreaList } from "@/components/guests/ThematicAreaList";
 import { GuestPaginateNumbers } from '@/components/guests/GuestPaginateNumbers';
-import { usePathname, useRouter } from 'next/navigation';
+import { useParams, usePathname, useRouter } from 'next/navigation';
 import { guestThematicAreaListByCategory } from '@/lib/features/guestAPI/homePage';
 import { ThematicAreaInterface } from '@/lib/features/thematic/thematicSlice';
 import { SpinLoader } from '@/components/LoadingAnimation/spinLoader';
@@ -25,6 +25,8 @@ export default function GuestThematicAreaByCategory({params}: {params: {category
         setTotalPages(result.response.details.totalPages);
         setListState("idle");
     }
+
+    const parameter = useParams();
 
     useEffect(() => {
         fetchIt();
@@ -47,7 +49,7 @@ export default function GuestThematicAreaByCategory({params}: {params: {category
         <div style={{overflow: "auto", height: "100vh"}}>
             <GuestHeader />
             <div className="px-20 py-16 bg-black text-white text-center text-[32px] font-bold">
-                Thematic Areas
+                {(parameter.category as string).split("-").map((value: string) => value[0].toLocaleUpperCase() + value.slice(1)).join(" ")}
             </div>
             <ThematicAreaList list={list} />
             <GuestPaginateNumbers

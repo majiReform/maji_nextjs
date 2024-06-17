@@ -105,19 +105,21 @@ export default function Media() {
                     {galleryList.map((picture, index) => {
 
                         return (
-                            <div className="relative h-[140px] xl:h-[200px] w-full rounded-[10px] overflow-hidden my-auto" key={index}>
-                                <div onClick={() => {handleOpen(index)}}><Image src={picture.picture!!} fill={true} alt="Gallery image" /></div>
+                            <div className="relative h-[140px] md:h-[180px] xl:h-[200px] w-full rounded-[10px] overflow-hidden my-auto" key={index}>
+                                <div onClick={() => { handleOpen(index) }} style={{ width: "100%", height: "100%" }}>
+                                    <img src={picture.picture!!} style={{ width: "100%", height: "100%", backgroundSize: "cover", backgroundPosition: "center" }} alt="Gallery image" />
+                                </div>
                                 <Modal
                                     open={open == index}
                                     onClose={handleClose}
                                     aria-labelledby="modal-modal-title"
                                     aria-describedby="modal-modal-description"
-                                    style={{margin: "auto"}}
+                                    style={{ margin: "auto" }}
                                 >
                                     <Box sx={style}>
-                                    {/* <Image src={picture.picture!!} fill={true} alt="Gallery image" style={{backgroundSize: "contain!important"}} /> */}
-                                    <div style={{backgroundImage: `url("${picture.picture!!}")`, backgroundSize: "contain", width: "100%", height: "100%", margin: "auto", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}></div>
-                                    <div className="absolute top-[20px] right-[20px]" onClick={handleClose}><MdClose /></div>
+                                        {/* <Image src={picture.picture!!} fill={true} alt="Gallery image" style={{backgroundSize: "contain!important"}} /> */}
+                                        <div style={{ backgroundImage: `url("${picture.picture!!}")`, backgroundSize: "contain", width: "100%", height: "100%", margin: "auto", backgroundRepeat: "no-repeat", backgroundPosition: "center" }}></div>
+                                        <div className="absolute top-[20px] right-[20px]" onClick={handleClose}><MdClose /></div>
                                     </Box>
                                 </Modal>
                             </div>

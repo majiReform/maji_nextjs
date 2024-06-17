@@ -55,7 +55,7 @@ class MongoDBQueryHelper<T> {
             const db = await this.connect();
             const collection = db.collection(this.collectionName);
             const { limit = 0, skip = 0 } = options;
-            return await collection.find(query).skip(skip).limit(limit).toArray() as T[];
+            return await collection.find(query).skip(skip).limit(limit).sort({createdAt: -1}).toArray() as T[];
         } catch (error: any) {
             throw new Error(`Error counting documents: ${error.message}`);
         }
@@ -130,7 +130,7 @@ class MongoDBQueryHelper<T> {
           const results = await collection
             .find(query)
             .skip(skip)
-            .limit(limit).toArray();
+            .limit(limit).sort({createdAt: -1}).toArray();
     
           return {
             totalPages,

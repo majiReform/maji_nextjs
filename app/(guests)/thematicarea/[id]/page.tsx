@@ -44,8 +44,8 @@ export default function GuestThematicAreaPage({params}: {params: {id: string}}) 
                 Thematic Areas
             </div>
             <div className="mx-8 xl:mx-20">
-                <div className="relative h-[190px] xl:h-[400px] mt-8">
-                    <Image src={record.picture!!} fill={true} alt="Header Image" />
+                <div className="relative h-[200px] md:h-[320px] xl:h-[600px] mt-8" style={{backgroundImage: `url("${record.picture!!}")`, backgroundSize: "cover", backgroundPosition: "center"}}>
+                    {/* <Image src={record.picture!!} fill={true} alt="Header Image" /> */}
                 </div>
                     <div className="py-4 text-[16px]">{moment(record.createdAt).format("LLLL")}</div>
                 <div>
