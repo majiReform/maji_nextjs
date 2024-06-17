@@ -8,7 +8,8 @@ function HistoryAndBackground() {
             </div>
             <div>
                 <div className="relative h-[180px] xl:h-[400px] mb-8">
-                    <Image src="/image 17.png" fill={true} alt="Image 17" />
+                    {/* <Image src="/image 17.png" fill={true} alt="Image 17" /> */}
+                    <img src="/image 17.png" style={{ zIndex: "20", backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat", width: "100%" }} alt="Image 17" />
                 </div>
                 <div className="flex flex-col gap-8 text-[16px] xl:text-[20px]">
                     <div>

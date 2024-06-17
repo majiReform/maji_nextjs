@@ -2,9 +2,10 @@ import Image from "next/image";
 
 function GuestAboutHeader() {
     return (
-        <div className="px-8 py-20 xl:px-20 xl:py-40 relative flex justify-center items-center" style={{zIndex: "10"}}>
-            <Image src="/image 14.png" fill={true} alt="Im" className="absolute left-0 top-0" style={{zIndex: "10", position: "absolute"}} />
-            <div style={{zIndex: "50"}} className="absolute top-[50%] left-8 xl:left-20 text-white font-bold">About Us</div>
+        <div className="relative flex justify-center items-center bg-black" style={{zIndex: "10"}}>
+            {/* <Image src="/image 14.png" fill={true} alt="Im" className="absolute left-0 top-0" style={{zIndex: "10", position: "absolute"}} /> */}
+            <img src="/image 14.png" style={{ zIndex: "20", backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat", width: "100%" }} alt="Image 17" />
+            <div style={{zIndex: "50"}} className="absolute my-auto text-left left-16 md:left-24 xl:left-30 font-bold text-white text-[16px] md:text-[24px]">About Us</div>
         </div>
     );
 }
