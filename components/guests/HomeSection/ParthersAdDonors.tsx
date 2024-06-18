@@ -29,8 +29,48 @@ const partnersList: PartnersListInterface[] = [
         title: "Mozilla Foundation"
     },
     {
-        pictureURL: "/Meliore_Foundation_logo_1.png",
+        pictureURL: "/Meliore Foundation logo.jpg",
         title: "The Meliore Foundation"
+    },
+    {
+        pictureURL: "/New Media Advocacy Project.png",
+        title: "New Media Advocacy Project"
+    },
+    {
+        pictureURL: "/Open Culture Foundation.png",
+        title: "Open Culture Foundation"
+    },
+    {
+        pictureURL: "/National Democratic Institute.png",
+        title: "National Democratic Institute"
+    },
+    {
+        pictureURL: "/Stakeholder Democracy Network.png",
+        title: "Stakeholder Democracy Network"
+    },
+    {
+        pictureURL: "/Lush Charity.jpg",
+        title: "Lush Charity"
+    },
+    {
+        pictureURL: "/Collaborative Media Advocacy Platform.jpg",
+        title: "Collaborative Media Advocacy Platform"
+    },
+    {
+        pictureURL: "/Environmental Rights Action.png",
+        title: "Environmental Rights Action"
+    },
+    {
+        pictureURL: "/Home Of Mother Earth Foundation.jpg",
+        title: "Home Of Mother Earth Foundation"
+    },
+    {
+        pictureURL: "/National Endownment for Democracy.png",
+        title: "National Endownment for Democracy"
+    },
+    {
+        pictureURL: "/Global Green Grants Funds.jpg",
+        title: "Global Green Grants Funds.jpg"
     }
 ];
 

@@ -18,15 +18,15 @@ function AboutOurMethodology() {
         },
         {
             title: "02",
-            body: "An established, ongoing dialogue with participants all along the process of conceiving, planning, implementing and evaluating the project."
+            body: "A rootedness in the community's daily life."
         },
         {
             title: "03",
-            body: "An established, ongoing dialogue with participants all along the process of conceiving, planning, implementing and evaluating the project."
+            body: "A respect for cultural identity. The community should assimilate any new tools of information technology without jeopardizing local values (or language)."
         },
         {
             title: "04",
-            body: "An established, ongoing dialogue with participants all along the process of conceiving, planning, implementing and evaluating the project."
+            body: "A contribution to the strengthening of democratic values and culture thus reinforcing community-based organizations and social movements by allowing the majority to have their voice heard."
         }
     ];
 
