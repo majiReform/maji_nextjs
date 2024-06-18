@@ -1,7 +1,7 @@
 import { createAppSlice } from "@/lib/createAppSlice";
 import type { AppThunk } from "@/lib/store";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { addGallery, deleteGallery, galleryList, singleGallery } from "./galleryAPI";
+import { addGallery, deleteGallery, editGallery, galleryList, singleGallery } from "./galleryAPI";
 
 export interface GalleryInterface {
     _id?: string,
@@ -43,6 +43,24 @@ export const gallerySlice = createAppSlice({
                 if(state.value.length < 10) {
                     state.value.push(action.payload.response.newPicture);
                 }
+                state.state = "success";
+            },
+            rejected: (state, action) => {
+                state.state = "failed";
+                state.errorMessage = action.error.message;
+            }
+        }),
+        edit: create.asyncThunk(
+            async (payload: GalleryInterface) => {
+                return await editGallery(payload);
+            }, {
+            pending: (state) => {
+                state.state = "loading";
+            },
+            fulfilled: (state, _action) => {
+                // if(state.value.length < 10) {
+                //     state.value.push(action.payload.response.newPicture);
+                // }
                 state.state = "success";
             },
             rejected: (state, action) => {
@@ -115,6 +133,6 @@ export const gallerySlice = createAppSlice({
     }
 });
 
-export const { add, remove, get, getSingle } = gallerySlice.actions;
+export const { add, edit, remove, get, getSingle } = gallerySlice.actions;
 
 export const {selectValue, selectStatus, errorValue, singleValue, selectPage, selectTotalPages} = gallerySlice.selectors;

@@ -149,6 +149,7 @@ function AdminHeaderComponent() {
         <div className="flex justify-between items-center px-8 w-full h-[80px]">
             <LogoutModal  openState={openState} setOpen={setOpenState} />
             <div className="font-bold xl:text-xl">{selectAreaHeader()}</div>
+            <div className='flex items-center gap-4'>
             {status == "loading" || status == "pre-load" ? (<SpinLoader />) : (<Dropdown>
                 <MenuButton className='flex items-center gap-1 xl:gap-2 text-[14px]'>
                     <div className='h-[45px] w-[45px] rounded-full relative overflow-hidden'>
@@ -167,6 +168,7 @@ function AdminHeaderComponent() {
                 </Menu>
             </Dropdown>)}
             <IoMenuSharp className='block xl:hidden text-[25px]' onClick={() => {dispatch(openSidebar())}} />
+            </div>
         </div>
     );
 }

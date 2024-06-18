@@ -26,6 +26,14 @@ async function addResearch(payload: ResearchAndReportInterface) {
     };
 }
 
+async function editResearch(payload: ResearchAndReportInterface) {
+    const response = await axios.put(urlMaker(`/admin/api/dashboard/researchandreport/${payload._id}`), payload);
+    return {
+        response: response.data,
+        status: response.status
+    };
+}
+
 async function deleteResearch(id: string) {
     const response = await axios.delete(urlMaker(`/admin/api/dashboard/researchandreport/${id}`));
     return {
@@ -38,5 +46,6 @@ export {
     researchList,
     singleResearch,
     addResearch,
+    editResearch,
     deleteResearch
 }

@@ -7,7 +7,7 @@ function HistoryAndBackground() {
                 <div className="text-center text-[20px] xl:text-[32px] font-bold mb-4">History and Background</div>
             </div>
             <div>
-                <div className="relative h-[180px] xl:h-[400px] mb-8 overflow-hidden rounded-lg">
+                <div className="relative h-[180px] md:h-[290px] xl:h-[400px] mb-8 overflow-hidden rounded-lg">
                     {/* <Image src="/image 17.png" fill={true} alt="Image 17" /> */}
                     <img src="/image 17.png" style={{ zIndex: "20", backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat", width: "100%" }} alt="Image 17" />
                 </div>

@@ -1,7 +1,7 @@
 import { createAppSlice } from "@/lib/createAppSlice";
 import type { AppThunk } from "@/lib/store";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { addThematicArea, deleteThematicArea, singleThematicArea, thematicAreaList } from "./thematicAPI";
+import { addThematicArea, deleteThematicArea, editThematicArea, singleThematicArea, thematicAreaList } from "./thematicAPI";
 
 export interface ThematicAreaInterface {
     _id?: string
@@ -38,6 +38,23 @@ export const thematicSlice = createAppSlice({
         add: create.asyncThunk(
             async (payload: ThematicAreaInterface) => {
                 return await addThematicArea(payload);
+            }, {
+            pending: (state) => {
+                state.state = "loading";
+            },
+            fulfilled: (state, action) => {
+                
+                if(state.value.length < 10) state.value.push(action.payload.response.addedDetails);
+                state.state = "success";
+            },
+            rejected: (state, action) => {
+                state.state = "failed";
+                state.errorMessage = action.error.message;
+            }
+        }),
+        edit: create.asyncThunk(
+            async (payload: ThematicAreaInterface) => {
+                return await editThematicArea(payload);
             }, {
             pending: (state) => {
                 state.state = "loading";
@@ -117,6 +134,6 @@ export const thematicSlice = createAppSlice({
     }
 });
 
-export const { add, remove, get, getSingle } = thematicSlice.actions;
+export const { add, edit, remove, get, getSingle } = thematicSlice.actions;
 
 export const {selectValue, selectStatus, errorValue, selectPage, selectSingle, selectTotalPages} = thematicSlice.selectors;

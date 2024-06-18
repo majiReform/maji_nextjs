@@ -26,6 +26,14 @@ async function addGallery(payload: GalleryInterface) {
     };
 }
 
+async function editGallery(payload: GalleryInterface) {
+    const response = await axios.put(urlMaker(`/admin/api/dashboard/gallery/${payload._id}`), payload);
+    return {
+        response: response.data,
+        status: response.status
+    };
+}
+
 async function deleteGallery(id: string) {
     const response = await axios.delete(urlMaker(`/admin/api/dashboard/gallery/${id}`));
     return {
@@ -38,5 +46,6 @@ export {
     galleryList,
     singleGallery,
     addGallery,
+    editGallery,
     deleteGallery
 }

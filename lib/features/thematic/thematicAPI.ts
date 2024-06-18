@@ -26,6 +26,14 @@ async function addThematicArea(payload: ThematicAreaInterface) {
     };
 }
 
+async function editThematicArea(payload: ThematicAreaInterface) {
+    const response = await axios.put(urlMaker(`/admin/api/dashboard/thematicarea/${payload._id}`), payload);
+    return {
+        response: response.data,
+        status: response.status
+    };
+}
+
 async function deleteThematicArea(id: string) {
     const response = await axios.delete(urlMaker(`/admin/api/dashboard/thematicarea/${id}`));
     return {
@@ -38,5 +46,6 @@ export {
     thematicAreaList,
     singleThematicArea,
     addThematicArea,
+    editThematicArea,
     deleteThematicArea
 }

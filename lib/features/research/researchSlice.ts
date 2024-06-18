@@ -1,7 +1,7 @@
 import { createAppSlice } from "@/lib/createAppSlice";
 import type { AppThunk } from "@/lib/store";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { addResearch, deleteResearch, researchList, singleResearch } from "./researchAPI";
+import { addResearch, deleteResearch, editResearch, researchList, singleResearch } from "./researchAPI";
 
 export interface ResearchAndReportInterface {
     _id?: string
@@ -41,6 +41,22 @@ export const researchSlice = createAppSlice({
         add: create.asyncThunk(
             async (payload: ResearchAndReportInterface) => {
                 return await addResearch(payload);
+            }, {
+            pending: (state) => {
+                state.state = "loading";
+            },
+            fulfilled: (state, action) => {
+                if(state.value.length < 10) state.value.push(action.payload.response.details);
+                state.state = "success";
+            },
+            rejected: (state, action) => {
+                state.state = "failed";
+                state.errorMessage = action.error.message;
+            }
+        }),
+        edit: create.asyncThunk(
+            async (payload: ResearchAndReportInterface) => {
+                return await editResearch(payload);
             }, {
             pending: (state) => {
                 state.state = "loading";
@@ -119,6 +135,6 @@ export const researchSlice = createAppSlice({
     }
 });
 
-export const { add, remove, get, getSingle } = researchSlice.actions;
+export const { add, edit, remove, get, getSingle } = researchSlice.actions;
 
 export const { selectValue, selectStatus, errorValue, selectSingle, selectTotalPage, selectPage } = researchSlice.selectors;

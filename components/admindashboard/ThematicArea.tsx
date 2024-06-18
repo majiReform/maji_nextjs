@@ -100,8 +100,6 @@ function ThematicAreaList(props: thematicarealistprop) {
     const [id, setId] = useState("");
   
 
-    const edit = () => { }
-
     const dispatch = useAppDispatch();
 
 
@@ -136,11 +134,10 @@ function ThematicAreaList(props: thematicarealistprop) {
                                     </MenuButton>
                                     <Menu className='bg-white flex flex-col gap-8 p-4' style={{ zIndex: "80" }}>
                                         <MenuItem className="cursor-pointer" onClick={() => {router.push(`/thematicarea/${record!!._id}`)}}>View More</MenuItem>
-                                        {/* <MenuItem className="cursor-pointer" onClick={edit}>Edit</MenuItem> */}
+                                        <MenuItem className="cursor-pointer" onClick={() => {router.push(`/admin/dashboard/thematicarea/${record!!._id}`)}}>Edit</MenuItem>
                                         <MenuItem className="cursor-pointer text-deletebutton" onClick={() => { setId(record!!._id as string); setOpen(true) }}>Delete</MenuItem>
                                     </Menu>
                                 </Dropdown>
-
                             </div>
                         </div>
                     );

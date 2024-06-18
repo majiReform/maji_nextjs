@@ -103,7 +103,6 @@ function ResearchAndReportList(props: researchlistprop) {
     const [id, setId] = useState("");
   
 
-    const edit = () => { }
 
     const goToPage = (page:number, limit: number) => {
         dispatch(get({page, limit}));
@@ -134,7 +133,7 @@ function ResearchAndReportList(props: researchlistprop) {
                                     </MenuButton>
                                     <Menu className='bg-white flex flex-col gap-8 p-4' style={{ zIndex: "80" }}>
                                         <MenuItem className="cursor-pointer" onClick={() => {router.push(`/researchandreport/${record!!._id}`)}}>View More</MenuItem>
-                                        {/* <MenuItem className="cursor-pointer" onClick={edit}>Edit</MenuItem> */}
+                                        <MenuItem className="cursor-pointer" onClick={() => {router.push(`/admin/dashboard/reportandresearch/${record!!._id}`)}}>Edit</MenuItem>
                                         <MenuItem className="cursor-pointer text-deletebutton" onClick={() => { setId(record!!._id as string); setOpen(true) }}>Delete</MenuItem>
                                     </Menu>
                                 </Dropdown>
