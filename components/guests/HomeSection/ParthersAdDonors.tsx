@@ -9,19 +9,19 @@ interface PartnersListInterface {
 
 const partnersList: PartnersListInterface[] = [
     {
-        pictureURL: "/Association_For_Progressive_Communications_1.png",
+        pictureURL: "/Association For Progressive Communications.jpg",
         title: "Association For Progressive Communications"
     },
     {
-        pictureURL: "/Leighday_and_Co_Solicitors_UK_1.png",
+        pictureURL: "/Leighday and Co Solicitors UK.jpg",
         title: "Leighday and Co Solicitors UK"
     },
     {
-        pictureURL: "/French_Embassy_in_Nigeria_1.png",
+        pictureURL: "/French Embassy in Nigeria.jpg",
         title: "French Embassy In Nigeria"
     },
     {
-        pictureURL: "/United_States_Consulate_General_Lagos_1.png",
+        pictureURL: "/United States Consulate General Lagos.png",
         title: "United State Consulate Lagos"
     },
     {
@@ -122,7 +122,7 @@ function PartnersAndDonorsSection() {
                     return (
                         <div key={index} className="px-8">
                             <div className={`relative ${partner.pictureURL == "/United_States_Consulate_General_Lagos_1.png" ? "w-[120px]" : ""} h-[120px] mx-auto`}>
-                                <Image src={partner.pictureURL} fill={true} alt="Partner list" style={{ backgroundSize: "contain", width: "100%" }} />
+                                <img src={partner.pictureURL} alt="Partner list" className="mx-auto" style={{ backgroundSize: "contain", width: "auto", height: "100%" }} />
                             </div>
                             <div className="text-white text-center text-[14px] mt-4">{partner.title}</div>
                         </div>

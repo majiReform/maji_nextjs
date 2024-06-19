@@ -78,7 +78,7 @@ function GuestMedia() {
                 <div className="w-full h-full xl:w-1/2">
                     <YouTubeEmbed videoid={list.youtubeURL!! as string} params="controls=controls-1" style="width: 100%; height: 100%;" />
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-full w-full xl:w-1/2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 h-full w-full xl:w-1/2">
                     {galleryList.map((record) => {
                         return (
                             <div className="w-full h-[200px] lg:h-[320px] bg-white relative border border-[#E6E6E6] rounded-[10px] overflow-hidden">
