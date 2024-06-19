@@ -40,7 +40,7 @@ function AboutOurMethodology() {
 
                 <div className="h-[220px] w-[240px] md:h-[320px] md:w-[400px] xl:h-[600px] xl:w-[620px] mx-auto relative">
                     {/* <Image src="/Group 366.png" fill={true} alt="Image 17" /> */}
-                    <img src="/Group 366.png" style={{ zIndex: "20", backgroundSize: "contain", backgroundPosition: "center", backgroundRepeat: "no-repeat", width: "100%", height: "100%" }} alt="Image 17" />
+                    <img src="/Group 366.png" className="rounded-lg" style={{ zIndex: "20", backgroundSize: "contain", backgroundPosition: "center", backgroundRepeat: "no-repeat", width: "100%", height: "auto" }} alt="Image 17" />
                 </div>
                 </div>
                 <div className="flex flex-col gap-4 xl:gap-8 w-full xl:w-1/2 text-[16px] xl:text-[20px]">

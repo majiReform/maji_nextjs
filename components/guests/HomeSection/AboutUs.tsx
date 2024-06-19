@@ -21,9 +21,9 @@ function AboutUsSection() {
                     <button className='w-fit px-8 py-2 border border-[2px] rounded-[8px] font-bold' onClick={() => {router.push("/aboutus")}}>More About Maji</button>
                 </div>
             </div>
-            <div className='w-full xl:w-1/2 h-full'>
-                <div className=' relative h-[280px] w-[320px] lg:h-[380px] lg:w-[520px] xl:h-[400px] lx:w-full mx-auto'>
-                    <Image src="/about_us_image.png" fill={true} alt='About us image' />
+            <div className='w-full xl:w-1/2 gap-8 h-full'>
+                <div className=' relative w-full mx-auto'>
+                    <img src="/about_us_image.png" alt='About us image' className='my-auto rounded-lg' style={{backgroundSize: "contain", height: "auto", width: "100%"}} />
                 </div>
             </div>
             </div>
