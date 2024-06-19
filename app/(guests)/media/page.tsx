@@ -81,6 +81,7 @@ export default function Media() {
                 <YouTubeEmbed videoid={list.youtubeURL!!} params="controls=controls-1" style="width: 100%; height: 100%; background-size: cover; margin: 0 auto;" />
             </div>
             <div className="mx-8 xl:mx-20 text center font-bold text-[16px] xl:text-[40px]">{list.title}</div>
+            <div className="mx-8 xl:mx-20">{list.details}</div>
 
             <div className="mx-8 xl:mx-20 my-10">
                 <div className="text-[16px] xl:text-[32px] font-bold mb-2">Recent Videos</div>
@@ -99,7 +100,7 @@ export default function Media() {
                     );
                 })}
             </div>
-            <section className="mx-8 xl:mx-20 my-10">
+            <section className="mx-8 xl:mx-20 my-10" id="gallery">
                 <div className="text-[32px] font-bold mb-2 text-center">Gallery</div>
                 <div className="grid grid-cols-2 xl:grid-cols-4 gap-2 xl:gap-4">
                     {galleryList.map((picture, index) => {

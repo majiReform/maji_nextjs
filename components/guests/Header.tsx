@@ -85,7 +85,7 @@ const guestHeaderProperties: guestHeaderPropertiesInterface[] = [
             },
             {
                 text: "Gallery",
-                link: "/media"
+                link: "/media#gallery"
             }
         ]
     }
@@ -118,7 +118,7 @@ function GuestHeader() {
         <div style={{zIndex: "1800"}}>
             {/* Desktop header */}
             <div className="hidden lg:flex justify-between items-center px-8 xl:px-20 py-2">
-                <div className="relative w-[90px] h-[40px] cursor-pointer" onClick={() => {router.push("/")}}>
+                <div className="relative w-[180px] h-[60px] cursor-pointer" onClick={() => {router.push("/")}}>
                     <Image src="/maij_logo.png" fill={true} alt="Maji Logo" />
                 </div>
                 <div className="flex gap-8 justify-center">
