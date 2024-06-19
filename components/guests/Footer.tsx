@@ -6,7 +6,7 @@ function GuestFooter() {
     return (
         <div className="grid grid-cols-2 xl:grid-cols-6 justify-center gap-4 px-8 xl:px-20 py-14 bg-greybg">
             <div className="col-span-2 xl:col-span-2">
-                <div className="relative h-[40px] w-[100px] mb-4">
+                <div className="relative h-[60px] w-[180px] mb-4">
                     <Image src="/maij_logo.png" fill={true} alt="Maji logo" />
                 </div>
                 <div className="text-[14px]">The Media Awareness and Justice Initiative (MAJI) is a Nigerian organization committed to empowering marginalized communities through participatory media and advocacy. They focus on Human, Gender, and Environmental Rights, Inclusive Governance, Youth Development, and Community Health, supporting independent media projects and citizen journalism. MAJI's approach emphasizes ongoing dialogue, community engagement, and democratic values for sustainable social change.</div>
