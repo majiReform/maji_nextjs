@@ -154,7 +154,7 @@ export default function Media() {
                     );
                 })}
             </div> */}
-            <div className='grid grid-cols-1 sm:grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-8 py-8 xl:py-10 mx-8 xl:mx-20'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 py-8 xl:py-10 mx-8 xl:mx-20'>
             {videolist.map((record) => {
                 return (
                     <div className="w-full bg-white relative rounded-[10px] overflow-hidden">
@@ -180,7 +180,7 @@ export default function Media() {
             </div>
             <section className="mx-8 xl:mx-20 my-10" id="gallery">
                 <div className="text-[32px] font-bold mb-2 text-center">Gallery</div>
-                <div className="grid grid-cols-2 xl:grid-cols-4 gap-2 xl:gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 xl:gap-4">
                     {galleryList.map((picture, index) => {
 
                         return (
