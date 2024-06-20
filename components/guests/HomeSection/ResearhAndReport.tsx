@@ -4,6 +4,7 @@ import { ResearchAndReportInterface } from "@/lib/features/research/researchSlic
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BsCaretRight } from "react-icons/bs";
+import fileSaver from "file-saver";
 
 function GuestResearchAndReport() {
 
@@ -31,24 +32,6 @@ function GuestResearchAndReport() {
         );
     }
 
-    const thematicarea = [
-        {
-            picture: "/auth_pic.jpeg",
-            title: "Amnesty International Launches Global Campaign Against Torture",
-            category: "Human Right"
-        },
-        {
-            picture: "/auth_pic.jpeg",
-            title: "Amnesty International Launches Global Campaign Against Torture",
-            category: "Human Right"
-        },
-        {
-            picture: "/auth_pic.jpeg",
-            title: "Amnesty International Launches Global Campaign Against Torture",
-            category: "Human Right"
-        }
-    ];
-
     return (
         <div className="py-10 pl-8 xl:px-20 bg-[#F6F4F4]">
             <div className="text-center mb-10 pr-8 xl:pr-0 flex justify-between items-center">
@@ -70,7 +53,7 @@ function GuestResearchAndReport() {
                                 <div className="font-bold" style={{ textWrap: "wrap" }}>{record.title!!.length > 100 ? record.title?.slice(0, 100) + "..." : record.title}</div>
                                 <div className="flex gap-2">
                                 <button className="bg-yellow w-full text-black rounded-[10px] py-2 font-bold" onClick={() => {router.push(`/researchandreport/${record._id}`)}}>Read</button>
-                                <button className="block xl:hidden border border-[2px] w-full text-black rounded-[10px] py-2 font-bold" onClick={() => {router.push(record.document!!)}}>Download PDF</button>
+                                <button className="block xl:hidden border border-[2px] w-full text-black rounded-[10px] py-2 font-bold" onClick={() => {fileSaver.saveAs(record.document!!)}}>Download PDF</button>
                                 </div>
                             </div>
                         </div>

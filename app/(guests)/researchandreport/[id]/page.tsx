@@ -11,6 +11,7 @@ import moment from "moment";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import fileSaver from "file-saver";
 
 export default function GuestThematicAreaPage({params}: {params: {id: string}}) {
 
@@ -41,7 +42,7 @@ export default function GuestThematicAreaPage({params}: {params: {id: string}}) 
                 </div>
                     <div className="py-4 flex justify-between items-center">
                         <div className="text-[14px] xl:text-[16px]">{moment(record.createdAt).format("LLLL")}</div>
-                        <button className="border border-[2px] py-1 px-6 xl:py-2 xl:px-4 rounded-[10px] font-bold" onClick={() => {router.push(record.document!!)}}>Dowload PDF</button>
+                        <button className="border border-[2px] py-1 px-6 xl:py-2 xl:px-4 rounded-[10px] font-bold" onClick={() => {fileSaver.saveAs(record.document!!)}}>Download PDF</button>
                     </div>
                 <div>
                     <hr />

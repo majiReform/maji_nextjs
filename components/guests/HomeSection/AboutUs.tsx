@@ -18,7 +18,7 @@ function AboutUsSection() {
                 <div className='text-[16px] xl:text-[20px]'>Using "human centered" methodologies and technologies, we democratize information, increase awareness, build capacity and works towards providing sustainable development. </div>
                 <div className='text-[16px] xl:text-[20px]'>By the adoption of human centered methodologies, we are referring to a vertical process that supports the sustained interaction between marginalized groups, local communities, and government with a view to sustainably impacting them. </div>
                 <div className='text-center xl:text-left'>
-                    <button className='w-fit px-8 py-2 border border-[2px] rounded-[8px] font-bold' onClick={() => {router.push("/aboutus")}}>More About Maji</button>
+                    <button className='w-fit px-8 py-2 border border-[2px] rounded-[8px] font-bold' onClick={() => {router.push("/aboutus")}}>More About MAJI</button>
                 </div>
             </div>
             <div className='w-full xl:w-1/2 gap-8 h-full'>
