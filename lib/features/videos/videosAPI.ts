@@ -18,6 +18,14 @@ async function singleVideo(id: string) {
     };
 }
 
+async function editVideo(payload: VideoInterface) {
+    const response = await axios.put(urlMaker(`/admin/api/dashboard/video/${payload._id}`), payload);
+    return {
+        response: response.data,
+        status: response.status
+    };
+}
+
 async function addVideo(payload: VideoInterface) {
     const response = await axios.post(urlMaker("/admin/api/dashboard/video"), payload);
     return {
@@ -38,5 +46,6 @@ export {
     videosList,
     singleVideo,
     addVideo,
+    editVideo,
     deleteVideo
 }

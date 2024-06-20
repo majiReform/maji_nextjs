@@ -91,9 +91,6 @@ function VideoList(props: videoListprop) {
     //   const handleOpen = () => setOpen(true);
     
     const [id, setId] = useState("");
-    
-    
-    const edit = () => { }
 
     const dispatch = useAppDispatch();
     
@@ -132,8 +129,8 @@ function VideoList(props: videoListprop) {
                                         <BsThreeDotsVertical />
                                     </MenuButton>
                                     <Menu className='bg-white flex flex-col gap-8 p-4' style={{ zIndex: "80" }}>
-                                        <MenuItem className="cursor-pointer" onClick={edit}>View More</MenuItem>
-                                        <MenuItem className="cursor-pointer" onClick={edit}>Edit</MenuItem>
+                                        <MenuItem className="cursor-pointer" onClick={() => {router.push(`/media/videos/${record!!._id as string}`)}}>View More</MenuItem>
+                                        <MenuItem className="cursor-pointer" onClick={() => {router.push(`/admin/dashboard/videos/${record!!._id as string}`)}}>Edit</MenuItem>
                                         <MenuItem className="cursor-pointer text-deletebutton" onClick={() => { setId(record!!._id as string); setOpen(true) }}>Delete</MenuItem>
                                     </Menu>
                                 </Dropdown>

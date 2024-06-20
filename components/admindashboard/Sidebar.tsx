@@ -57,7 +57,7 @@ function AdminSidebarComponent () {
     return (
         <div className={`xl:flex xl:flex-col w-full absolute ${isSidebarOpen ? "flex flex-col" : "hidden"} xl:relative xl:w-[15%] gap-20 py-4 bg-white h-screen`} style={{zIndex: "200"}}>
             <div className="flex items-center">
-            <div className="relative h-[40px] w-[100px] mx-auto">
+            <div className="relative h-[40px] w-[140px] mx-auto">
                 <Image src="/maij_logo.png" fill={true} alt="Maij logo" />
             </div>
             <MdClose className="mr-4 xl:hidden" onClick={() => {dispatch(closeSidebar())}} />

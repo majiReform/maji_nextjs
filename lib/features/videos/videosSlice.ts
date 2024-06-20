@@ -1,5 +1,5 @@
 import { createAppSlice } from "@/lib/createAppSlice";
-import { addVideo, deleteVideo, singleVideo, videosList } from "./videosAPI";
+import { addVideo, deleteVideo, editVideo, singleVideo, videosList } from "./videosAPI";
 
 export interface VideoInterface {
     _id?: string,
@@ -84,6 +84,23 @@ export const videosSlice = createAppSlice({
             }
         }
         ),
+        edit: create.asyncThunk(
+            async (payload: VideoInterface) => {
+                return await editVideo(payload);
+            }, {
+            pending: (state) => {
+                state.state = "loading";
+            },
+            fulfilled: (state, action) => {
+                // state.single = action.payload.response;
+                state.state = "success";
+            },
+            rejected: (state, action) => {
+                state.state = "failed";
+                state.errorMessage = action.error.message;
+            }
+        }
+        ),
         remove: create.asyncThunk(
             async (payload: string) => {
                 return await deleteVideo(payload);
@@ -113,6 +130,6 @@ export const videosSlice = createAppSlice({
     }
 });
 
-export const { add, remove, get, getSingle } = videosSlice.actions;
+export const { add, remove, edit, get, getSingle } = videosSlice.actions;
 
 export const { selectValue, selectStatus, selectSingle, errorValue, selectPage, selectTotalPages } = videosSlice.selectors;

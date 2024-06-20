@@ -35,8 +35,9 @@ export default function GuestThematicAreaPage({params}: {params: {id: string}}) 
                 Reseach and Report
             </div>
             <div className="mx-8 xl:mx-20">
-                <div className="relative h-[140px] xl:h-[400px] mt-8">
-                    <Image src={record.pictureURL!!} fill={true} alt="Header Image" />
+                <div className="relative h-[200px] md:h-[320px] xl:h-[600px] mt-8" style={{backgroundImage: `url("${record.pictureURL!!}")`, backgroundSize: "cover", backgroundPosition: "center"}}>
+                    {/* <Image src={record.pictureURL!!} fill={true} alt="Header Image" /> */}
+                    
                 </div>
                     <div className="py-4 flex justify-between items-center">
                         <div className="text-[14px] xl:text-[16px]">{moment(record.createdAt).format("LLLL")}</div>
@@ -48,7 +49,7 @@ export default function GuestThematicAreaPage({params}: {params: {id: string}}) 
                         {record.title}
                     </div>
                     <hr />
-                    <div className="my-4 text-[16px] xl:text-[32px]">
+                    <div className="my-4 text-[16px]">
                         {record.details}
                     </div>
                 </div>
