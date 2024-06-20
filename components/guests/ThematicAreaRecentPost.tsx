@@ -29,10 +29,10 @@ function ThematicAreaRecentPosts() {
             <div className="text-[20px] xl:text-[32px] font-bold mb-2">Recent Posts</div>
             {recentPost.map((post, index) => {
                 return (
-                    <div className="mb-2" key={index} onClick={() => {router.push(`/thematicarea/${post._id}`)}}>
+                    <div className="mb-2" key={index}>
                         <div className="flex justify-between py-2">
                             <div>
-                                <div className="font-bold">{post.title}</div>
+                                <div className="font-bold cursor-pointer" onClick={() => {router.push(`/thematicarea/${post._id}`)}}>{post.title}</div>
                                 <div className="text-sm text-[#737373]">{post.category!!.split("-").map(word => word[0].toLocaleUpperCase() + word.slice(1)).join(" ")} | {moment(post.createdAt).format("Do MMMM, YYYY")}</div>
                             </div>
                             <div className="relative h-[50px] w-[100px] rounded-[10px] overflow-hidden" style={{backgroundImage: `url("${post.picture!!}")`, backgroundSize: "cover"}}></div>

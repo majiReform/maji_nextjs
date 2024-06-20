@@ -51,7 +51,7 @@ async function guestSingleVideo(id: string) {
 }
 
 async function guestGalleryList(page: number, limit: number) {
-    const response = await axios.get(urlMaker(`/admin/api/guest/gallery?page=${page}&limit${limit}`));
+    const response = await axios.get(urlMaker(`/admin/api/guest/gallery?page=${page}&limit=${limit}`));
     return {
         response: response.data,
         status: response.status

@@ -18,7 +18,7 @@ function GuestResearchAdReportList(props: {list: ResearchAndReportInterface[]}) 
     const router = useRouter();
 
     return (
-        <div className='grid grid-cols-1 xl:grid-cols-2 xl:grid-cols-3 gap-8 py-8 xl:py-10 mx-8 xl:mx-20'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8 py-8 xl:py-10 mx-8 xl:mx-20'>
             {props.list.map((record) => {
                 return (
                     <div className="w-full bg-white relative rounded-[10px] overflow-hidden">
