@@ -12,7 +12,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function GuestThematicAreaPage({params}: {params: {id: string}}) {
+export default function GuestThematicAreaPage({ params }: { params: { id: string } }) {
 
     const [record, setRecord] = useState<ThematicAreaInterface>({});
     const [listState, setListState] = useState("loading");
@@ -29,7 +29,7 @@ export default function GuestThematicAreaPage({params}: {params: {id: string}}) 
 
     const router = useRouter();
 
-    if(listState == "loading") {
+    if (listState == "loading") {
         return (
             <div className="h-screen w-full flex justify-center items-center">
                 <SpinLoader />
@@ -44,10 +44,10 @@ export default function GuestThematicAreaPage({params}: {params: {id: string}}) 
                 Thematic Areas
             </div>
             <div className="mx-8 xl:mx-20">
-                <div className="relative h-[200px] md:h-[320px] xl:h-[600px] mt-8" style={{backgroundImage: `url("${record.picture!!}")`, backgroundSize: "cover", backgroundPosition: "center"}}>
+                <div className="relative h-[200px] md:h-[320px] xl:h-[600px] mt-8" style={{ backgroundImage: `url("${record.picture!!}")`, backgroundSize: "cover", backgroundPosition: "center" }}>
                     {/* <Image src={record.picture!!} fill={true} alt="Header Image" /> */}
                 </div>
-                    <div className="py-4 text-[16px]">{moment(record.createdAt).format("LLLL")}</div>
+                <div className="py-4 text-[16px]">{moment(record.createdAt).format("LLLL")}</div>
                 <div>
                     <hr />
                     <div className="py-4 text-left xl:text-center font-bold text-[24px] xl:text-[40px]">
@@ -55,7 +55,9 @@ export default function GuestThematicAreaPage({params}: {params: {id: string}}) 
                     </div>
                     <hr />
                     <div className="my-4 text-[16px]">
-                    {record.details}
+                        <pre>
+                            {record.details}
+                        </pre>
                     </div>
                 </div>
             </div>

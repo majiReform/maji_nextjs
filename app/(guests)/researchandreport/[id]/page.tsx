@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import fileSaver from "file-saver";
 
-export default function GuestThematicAreaPage({params}: {params: {id: string}}) {
+export default function GuestThematicAreaPage({ params }: { params: { id: string } }) {
 
     const [record, setRecord] = useState<ResearchAndReportInterface>({});
     const [listState, setListState] = useState("loading");
@@ -36,14 +36,14 @@ export default function GuestThematicAreaPage({params}: {params: {id: string}}) 
                 Reseach and Report
             </div>
             <div className="mx-8 xl:mx-20">
-                <div className="relative h-[200px] md:h-[320px] xl:h-[600px] mt-8" style={{backgroundImage: `url("${record.pictureURL!!}")`, backgroundSize: "cover", backgroundPosition: "center"}}>
+                <div className="relative h-[200px] md:h-[320px] xl:h-[600px] mt-8" style={{ backgroundImage: `url("${record.pictureURL!!}")`, backgroundSize: "cover", backgroundPosition: "center" }}>
                     {/* <Image src={record.pictureURL!!} fill={true} alt="Header Image" /> */}
-                    
+
                 </div>
-                    <div className="py-4 flex justify-between items-center">
-                        <div className="text-[14px] xl:text-[16px]">{moment(record.createdAt).format("LLLL")}</div>
-                        <button className="border border-[2px] py-1 px-6 xl:py-2 xl:px-4 rounded-[10px] font-bold" onClick={() => {fileSaver.saveAs(record.document!!)}}>Download PDF</button>
-                    </div>
+                <div className="py-4 flex justify-between items-center">
+                    <div className="text-[14px] xl:text-[16px]">{moment(record.createdAt).format("LLLL")}</div>
+                    <button className="border border-[2px] py-1 px-6 xl:py-2 xl:px-4 rounded-[10px] font-bold" onClick={() => { fileSaver.saveAs(record.document!!) }}>Download PDF</button>
+                </div>
                 <div>
                     <hr />
                     <div className="py-4 text-left xl:text-center font-bold text-[24px] xl:text-[40px]">
@@ -51,7 +51,9 @@ export default function GuestThematicAreaPage({params}: {params: {id: string}}) 
                     </div>
                     <hr />
                     <div className="my-4 text-[16px]">
-                        {record.details}
+                        ,<pre>
+                            {record.details}
+                        </pre>
                     </div>
                 </div>
             </div>
