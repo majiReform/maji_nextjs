@@ -52,7 +52,7 @@ function LoginComponent() {
 
       <div className="flex flex-col gap-8 w-[80%] xl:w-[70%] xl:w-[60%]">
 
-        <div className="w-[140px] h-[60px] relative mx-auto">
+        <div className="w-[180px] h-[60px] relative mx-auto">
           <Image src="/maij_logo.png" fill={true} alt="Maij logo" />
         </div>
 

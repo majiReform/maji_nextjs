@@ -3,7 +3,7 @@ import { urlMaker } from "../urlMaker/urlMaker";
 import { GalleryInterface } from "./gallerySlice";
 
 async function galleryList(page: number, limit: number) {
-    const response = await axios.get(urlMaker(`/admin/api/dashboard/gallery?page=${page}&limit${limit}`));
+    const response = await axios.get(urlMaker(`/admin/api/dashboard/gallery?page=${page}&limit=${limit}`));
     return {
         response: response.data,
         status: response.status

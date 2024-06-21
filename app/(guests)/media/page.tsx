@@ -38,13 +38,13 @@ export default function Media() {
     const [moreGalleryLoading, setMoreGalleryLoading] = useState(false);
     const [moreGallery, setMoreGallery] = useState(false);
 
-    
+
     const [videolist, setVideoList] = useState<VideoInterface[]>([]);
     const [videostatus, setVideoStatus] = useState("loading");
     const [videoPage, setVideoPage] = useState(1);
     const [moreVideosLoading, setMoreVideosLoading] = useState(false);
     const [moreVideos, setMoreVideos] = useState(false);
-    
+
     const router = useRouter();
 
     const [status, setStatus] = useState("loading");
@@ -55,7 +55,7 @@ export default function Media() {
         console.log(result.response.pictures);
         setgalleryList(result.response.pictures.results);
         setGalleryStatus("idle");
-        if(result.response.pictures.currentPage < result.response.pictures.totalPages) {
+        if (result.response.pictures.currentPage < result.response.pictures.totalPages) {
             setMoreGallery(true);
         } else {
             setMoreGallery(false);
@@ -69,7 +69,7 @@ export default function Media() {
         // setList(result.response.videos.results[0]);
         // console.log(result.response.videos);
         setgalleryList(galleryList.concat(result.response.pictures.results));
-        if(result.response.pictures.currentPage < result.response.pictures.totalPages) {
+        if (result.response.pictures.currentPage < result.response.pictures.totalPages) {
             setMoreGallery(true);
         } else {
             setMoreGallery(false);
@@ -85,7 +85,7 @@ export default function Media() {
         setVideoList(result.response.videos.results);
         setStatus("idle");
         setVideoStatus("idle");
-        if(result.response.videos.currentPage < result.response.videos.totalPages) {
+        if (result.response.videos.currentPage < result.response.videos.totalPages) {
             setMoreVideos(true);
         } else {
             setMoreVideos(false);
@@ -101,7 +101,7 @@ export default function Media() {
         setStatus("idle");
         setVideoStatus("idle");
         setMoreVideosLoading(false);
-        if(result.response.videos.currentPage < result.response.videos.totalPages) {
+        if (result.response.videos.currentPage < result.response.videos.totalPages) {
             setMoreVideos(true);
         } else {
             setMoreVideos(false);
@@ -155,27 +155,27 @@ export default function Media() {
                 })}
             </div> */}
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 py-8 xl:py-10 mx-8 xl:mx-20'>
-            {videolist.map((record) => {
-                return (
-                    <div className="w-full bg-white relative rounded-[10px] overflow-hidden">
-                        <div className="w-full h-[240px] relative z-10 rounded-t-[10px]" style={{ backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center", overflow: "hidden" }}>
-                            {/* <Image src={record.picture} fill={true} alt="Thematic picture list" className="z-10" /> */}
-                            <YouTubeEmbed videoid={record.youtubeURL!!} params="controls=controls-1" style="width: 100%; height: 100%; background-size: cover; margin: 0 auto;" />
-                        </div>
-                        <div>
-                            <div className="pt-4 flex justify-between w-full">
-                                <div className="font-bold" style={{ textWrap: "wrap" }}>{record.title!!.length > 100 ? record.title?.slice(0, 100) + "..." : record.title}</div>
+                {videolist.map((record) => {
+                    return (
+                        <div className="w-full bg-white relative rounded-[10px] overflow-hidden">
+                            <div className="w-full h-[240px] relative z-10 rounded-t-[10px]" style={{ backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center", overflow: "hidden" }}>
+                                {/* <Image src={record.picture} fill={true} alt="Thematic picture list" className="z-10" /> */}
+                                <YouTubeEmbed videoid={record.youtubeURL!!} params="controls=controls-1" style="width: 100%; height: 100%; background-size: cover; margin: 0 auto;" />
                             </div>
-                            <button className='bg-yellow text-black w-full py-2 my-4 font-bold rounded-[10px]' onClick={() => {router.push(`/media/videos/${record._id}`)}}>Watch</button>
+                            <div>
+                                <div className="pt-4 flex justify-between w-full">
+                                    <div className="font-bold" style={{ textWrap: "wrap" }}>{record.title!!.length > 100 ? record.title?.slice(0, 100) + "..." : record.title}</div>
+                                </div>
+                                <button className='bg-yellow text-black w-full py-2 my-4 font-bold rounded-[10px]' onClick={() => { router.push(`/media/videos/${record._id}`) }}>Watch</button>
+                            </div>
                         </div>
-                    </div>
-                );
-            })}
-        </div>
-        {moreVideosLoading && <SpinLoaderTwo />}
+                    );
+                })}
+            </div>
+            {moreVideosLoading && <SpinLoaderTwo />}
             <div className="mx-8 xl:mx-20 text-right">
-                {moreVideos ? (<button onClick={() => {fetchHeroByPage(videoPage + 1)}}>See More Videos</button>) : (<button onClick={() => {fetchHero()}}>See Less Videos</button>)}
-            
+                {moreVideos ? (<button onClick={() => { fetchHeroByPage(videoPage + 1) }}>See More Videos</button>) : (<button onClick={() => { fetchHero() }}>See Less Videos</button>)}
+
 
             </div>
             <section className="mx-8 xl:mx-20 my-10" id="gallery">
@@ -206,10 +206,10 @@ export default function Media() {
                     })}
                 </div>
             </section>
-            {moreGalleryLoading&& <SpinLoaderTwo />}
+            {moreGalleryLoading && <SpinLoaderTwo />}
             <div className="mx-8 xl:mx-20 text-right">
-                {moreGallery ? (<button onClick={() => {fetchGalleryByPage(galleryPage + 1)}}>See More Pictures</button>) : (<button onClick={() => {fetchGallery()}}>See Less Pictures</button>)}
-            
+                {moreGallery ? (<button onClick={() => { fetchGalleryByPage(galleryPage + 1) }}>See More Pictures</button>) : (<button onClick={() => { fetchGallery() }}>See Less Pictures</button>)}
+
 
             </div>
             <GuestFooter />

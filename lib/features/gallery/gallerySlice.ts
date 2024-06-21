@@ -80,6 +80,7 @@ export const gallerySlice = createAppSlice({
                 state.page = action.payload.response.pictures.currentPage;
                 state.totalPages = action.payload.response.pictures.totalPages;
                 state.state = "idle";
+
             },
             rejected: (state, action) => {
                 state.state = "failed";
