@@ -33,8 +33,8 @@ function GuestFooter() {
             <div className="col-span-2 xl:col-span-1">
                 <div className="font-bold text-[16px]">Quick Links</div>
                 <div className="text-[14px] flex flex-col gap-2 mt-4">
-                    <Link href="/researchandreport.bycategory/report">Reports</Link>
-                    <Link href="/researchandreport.bycategory/research">Research</Link>
+                    <Link href="/researchandreport/bycategory/report">Reports</Link>
+                    <Link href="/researchandreport/bycategory/research">Research</Link>
                     <Link href="/media">Media</Link>
                 </div>
             </div>
