@@ -88,7 +88,7 @@ export default function Media() {
             <div className="mx-8 xl:mx-20 h-fit my-8">
                 <YouTubeEmbed videoid={list.youtubeURL!!} params="controls=controls-1" style="width: 100%; height: 100%; background-size: cover; margin: 0 auto;" />
             </div>
-            <div className="mx-8 xl:mx-20 text center font-bold text-[16px] xl:text-[40px]">{list.title}</div>
+            <div className="mx-8 xl:mx-20 text center font-bold text-[16px] xl:text-[40px] w-full">{list.title}</div>
             <div className="mx-8 xl:mx-20"><pre>{list.details}</pre></div>
 
             <div className="mx-8 xl:mx-20 my-10">
