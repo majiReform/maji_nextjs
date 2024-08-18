@@ -8,7 +8,7 @@ export interface ThematicAreaInterface {
     category?: string
     title?: string
     picture?: string
-    details?: string
+    details?: string | Buffer
     createdAt?: Date
     updatedAt?: Date
 }

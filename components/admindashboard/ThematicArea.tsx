@@ -102,6 +102,8 @@ function ThematicAreaList(props: thematicarealistprop) {
 
     const dispatch = useAppDispatch();
 
+    console.log(thematicarea);
+
 
     const goToPage = (page: number, limit: number) => {
         console.log(page, limit);
@@ -119,7 +121,7 @@ function ThematicAreaList(props: thematicarealistprop) {
             </div>
 
             <div className="grid grid-cols-1 xl:grid-cols-4 gap-8 z-40 mb-20">
-                {thematicarea.map((record: ThematicAreaInterface) => {
+                {thematicarea.length > 0 && thematicarea.map((record: ThematicAreaInterface) => {
                     return (
                         <div className="w-full p-4 bg-white relative">
                             <div className="w-full h-[240px] relative z-10" style={{ backgroundImage: `url("${record.picture}")`, backgroundSize: "cover", backgroundRepeat: "no-repeat", borderRadius: "5px", backgroundPosition: "center" }}>

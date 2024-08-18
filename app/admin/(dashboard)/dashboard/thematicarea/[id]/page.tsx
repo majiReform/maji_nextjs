@@ -64,7 +64,7 @@ export default function Page() {
             setpictureUrl("");
             setOriginalFileName("");
         });
-        toast.success("Edit Successful");
+
         setTimeout(() => {
             router.push("/admin/dashboard/thematicarea");
         }, 4000);
@@ -72,7 +72,7 @@ export default function Page() {
 
     useEffect(() => {
         if (status == "success") {
-            toast.success("Thematic area added successfully");
+            toast.success("Thematic area edited successfully");
         }
     }, [status]);
 
@@ -87,6 +87,8 @@ export default function Page() {
         console.log("Thematic area result", result.response.thematicArea);
 
         const { title, picture, category, details } = result.response.thematicArea;
+
+        console.log("Result:", title, picture, category, details);
 
         setCategory(category);
         setSemanticText(details);
