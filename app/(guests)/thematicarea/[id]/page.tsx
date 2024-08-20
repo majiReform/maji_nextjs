@@ -55,7 +55,7 @@ export default function GuestThematicAreaPage({ params }: { params: { id: string
                     </div>
                     <hr />
                     <div className="my-4 text-[16px] w-full">
-                            <pre className="text-pretty">
+                            <pre className="w-fit text-pretty">
                                 {record.details}
                             </pre>
                        
