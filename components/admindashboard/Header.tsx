@@ -40,6 +40,8 @@ function selectAreaHeader() {
         return "Gallery";
     } else if(path.includes("/admin/dashboard/settings")) {
         return "Settings";
+    } else if(path.includes("/admin/dashboard/news")) {
+        return "News";
     } else {
         return "--";
     }

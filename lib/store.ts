@@ -8,10 +8,11 @@ import { videosSlice } from "./features/videos/videosSlice";
 import { gallerySlice } from "./features/gallery/gallerySlice";
 import { profileSlice } from "./features/profile/profileSlice";
 import { sidebarSlice } from "./features/sidebar/sidebarSlice";
+import { newsSlice } from "./features/news/newsSlice";
 
 // `combineSlices` automatically combines the reducers using
 // their `reducerPath`s, therefore we no longer need to call `combineReducers`.
-const rootReducer = combineSlices(counterSlice, quotesApiSlice, thematicSlice, researchSlice, videosSlice, gallerySlice, profileSlice, sidebarSlice);
+const rootReducer = combineSlices(counterSlice, quotesApiSlice, thematicSlice, researchSlice, videosSlice, gallerySlice, profileSlice, sidebarSlice, newsSlice);
 // Infer the `RootState` type from the root reducer
 export type RootState = ReturnType<typeof rootReducer>;
 

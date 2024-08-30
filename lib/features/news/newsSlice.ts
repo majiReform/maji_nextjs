@@ -1,11 +1,10 @@
 import { createAppSlice } from "@/lib/createAppSlice";
 import type { AppThunk } from "@/lib/store";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { addThematicArea, deleteThematicArea, editThematicArea, singleThematicArea, thematicAreaList } from "./thematicAPI";
+import { newsList, addNews, deleteNews, editNews, singleNews } from "./newsAPI";
 
-export interface ThematicAreaInterface {
+export interface NewsInterface {
     _id?: string
-    category?: string
     title?: string
     picture?: string
     details?: string | Buffer
@@ -13,8 +12,8 @@ export interface ThematicAreaInterface {
     updatedAt?: Date
 }
 
-export interface thematicSliceState {
-    value: ThematicAreaInterface[],
+export interface newsSliceState {
+    value: NewsInterface[],
     single: object,
     state: "idle" | "pre-load" | "loading" | "success" | "failed",
     errorMessage?: string,
@@ -22,7 +21,7 @@ export interface thematicSliceState {
     totalPages: number
 }
 
-const initialState: thematicSliceState = {
+const initialState: newsSliceState = {
     value: [],
     single: {},
     state: "pre-load",
@@ -31,20 +30,21 @@ const initialState: thematicSliceState = {
     totalPages: 0
 };
 
-export const thematicSlice = createAppSlice({
-    name: "thematic",
+export const newsSlice = createAppSlice({
+    name: "news",
     initialState,
     reducers: (create) => ({
         add: create.asyncThunk(
-            async (payload: ThematicAreaInterface) => {
-                return await addThematicArea(payload);
+            async (payload: NewsInterface) => {
+                await addNews(payload);
+                return payload;
             }, {
             pending: (state) => {
                 state.state = "loading";
             },
             fulfilled: (state, _action) => {
                 
-                // if(state.value.length < 10) state.value.push(action.payload.response.addedDetails);
+                // if(state.value.length < 10) state.value.push(action.payload);
                 state.state = "success";
             },
             rejected: (state, action) => {
@@ -53,8 +53,8 @@ export const thematicSlice = createAppSlice({
             }
         }),
         edit: create.asyncThunk(
-            async (payload: ThematicAreaInterface) => {
-                await editThematicArea(payload);
+            async (payload: NewsInterface) => {
+                await editNews(payload);
                 return payload;
             }, {
             pending: (state) => {
@@ -72,15 +72,16 @@ export const thematicSlice = createAppSlice({
         }),
         get: create.asyncThunk(
             async (payload: { page: number, limit: number }) => {
-                return await thematicAreaList(payload.page, payload.limit);
+                return await newsList(payload.page, payload.limit);
             }, {
             pending: (state) => {
                 state.state = "loading";
             },
             fulfilled: (state, action) => {
-                state.page = action.payload.response.thematicAreas.currentPage;
-                state.value = action.payload.response.thematicAreas.results;
-                state.totalPages = action.payload.response.thematicAreas.totalPages;
+                console.log(action.payload.response);
+                state.page = action.payload.response.news.currentPage;
+                state.value = action.payload.response.news.results;
+                state.totalPages = action.payload.response.news.totalPages;
                 state.state = "idle";
             },
             rejected: (state, action) => {
@@ -91,7 +92,7 @@ export const thematicSlice = createAppSlice({
         ),
         getSingle: create.asyncThunk(
             async (payload: string) => {
-                return await singleThematicArea(payload);
+                return await singleNews(payload);
             }, {
             pending: (state) => {
                 state.state = "loading";
@@ -108,7 +109,7 @@ export const thematicSlice = createAppSlice({
         ),
         remove: create.asyncThunk(
             async (payload: string) => {
-                return await deleteThematicArea(payload);
+                return await deleteNews(payload);
             }, {
             pending: (state) => {
                 state.state = "loading";
@@ -135,6 +136,6 @@ export const thematicSlice = createAppSlice({
     }
 });
 
-export const { add, edit, remove, get, getSingle } = thematicSlice.actions;
+export const { add, edit, remove, get, getSingle } = newsSlice.actions;
 
-export const {selectValue, selectStatus, errorValue, selectPage, selectSingle, selectTotalPages} = thematicSlice.selectors;
+export const {selectValue, selectStatus, errorValue, selectPage, selectSingle, selectTotalPages} = newsSlice.selectors;

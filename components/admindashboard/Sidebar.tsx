@@ -35,6 +35,10 @@ function SidebarButton() {
             name: "Gallery",
             path: "/admin/dashboard/gallery"
         },
+        {
+            name: "News",
+            path: "/admin/dashboard/news"
+        }
     ];
 
     return (

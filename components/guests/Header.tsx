@@ -88,7 +88,11 @@ const guestHeaderProperties: guestHeaderPropertiesInterface[] = [
                 link: "/media#gallery"
             }
         ]
-    }
+    },
+    {
+        text: "News",
+        link: "/news"
+    },
 ];
 
 const contactUs = {
