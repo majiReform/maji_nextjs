@@ -51,7 +51,7 @@ export default function GuestThematicAreaPage({ params }: { params: { id: string
                     </div>
                     <hr />
                     <div className="my-4 text-[16px] w-full">
-                    <pre className="w-fit text-pretty" style={{maxWidth: `calc(${window.innerWidth} - 20px)`, wordBreak:"break-word"}}>
+                    <pre className="w-fit text-pretty" style={{maxWidth: `calc(${window.innerWidth} - 20px)`, wordBreak:"break-word", overflowWrap: "break-word"}}>
                         {record.details}
                     </pre>
                         
