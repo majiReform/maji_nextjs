@@ -17,6 +17,22 @@ async function guestSingleThematicArea(id: string) {
     };
 }
 
+async function guestNewsList(page: number, limit: number) {
+    const response = await axios.get(urlMaker(`/admin/api/guest/news?page=${page}&limit=${limit}`));
+    return {
+        response: response.data,
+        status: response.status
+    };
+}
+
+async function guestSingleNews(id: string) {
+    const response = await axios.get(urlMaker(`/admin/api/guest/news/${id}`));
+    return {
+        response: response.data,
+        status: response.status
+    };
+}
+
 async function guestResearchList(page: number, limit: number) {
     const response = await axios.get(urlMaker(`/admin/api/guest/reportandresearch?page=${page}&limit=${limit}`));
     return {
@@ -32,6 +48,7 @@ async function guestSingleResearch(id: string) {
         status: response.status
     };
 }
+
 
 
 async function guestVideosList(page: number, limit: number) {
@@ -96,6 +113,8 @@ async function guestSendMessage(fullName: string, email: string, message: string
 export {
     guestThematicAreaList,
     guestSingleThematicArea,
+    guestNewsList,
+    guestSingleNews,
     guestResearchList,
     guestSingleResearch,
     guestVideosList,

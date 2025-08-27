@@ -1,12 +1,12 @@
 import { SpinLoader } from "@/components/LoadingAnimation/spinLoader";
-import { guestResearchList } from "@/lib/features/guestAPI/homePage";
+import { guestNewsList } from "@/lib/features/guestAPI/homePage";
 import { NewsInterface } from "@/lib/features/news/newsSlice";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BsCaretRight } from "react-icons/bs";
 import fileSaver from "file-saver";
 
-function GuestResearchAndReport() {
+function GuestNews() {
 
 
     const [list, setList] = useState<NewsInterface[]>([]);
@@ -15,7 +15,7 @@ function GuestResearchAndReport() {
     const router = useRouter();
 
     const fetchHero = async () => {
-        const result = await guestResearchList(1, 3);
+        const result = await guestNewsList(1, 3);
         setList(result.response.details.results);
         setStatus("idle");
     }
@@ -37,9 +37,9 @@ function GuestResearchAndReport() {
             <div className="text-center mb-10 pr-8 xl:pr-0 flex justify-between items-center">
                 <div>
                     <div className="w-[80px] xl:w-[200px] h-[10px] bg-yellow rounded-[10px] mb-2"></div>
-                    <div className="text-[20px] xl:text-[32px] font-bold font-bold">Research and Report</div>
+                    <div className="text-[20px] xl:text-[32px] font-bold font-bold"> News </div>
                 </div>
-                <button className="flex gap-2 items-center" onClick={() => {router.push("/researchandreport")}}>See More <BsCaretRight /></button>
+                <button className="flex gap-2 items-center" onClick={() => {router.push("/news")}}>See More <BsCaretRight /></button>
             </div>
             <div className="flex gap-8 w-full overflow-x-auto">
                 {list.map((record) => {
@@ -52,7 +52,7 @@ function GuestResearchAndReport() {
                             <div className="pt-4 flex flex-col justify-between w-full p-4 gap-4">
                                 <div className="font-bold" style={{ textWrap: "wrap" }}>{record.title!!.length > 100 ? record.title?.slice(0, 100) + "..." : record.title}</div>
                                 <div className="flex">
-                                <button className="bg-yellow w-full text-black rounded-[10px] py-2 font-bold" onClick={() => {router.push(`/researchandreport/${record._id}`)}}>Read</button>
+                                <button className="bg-yellow w-full text-black rounded-[10px] py-2 font-bold" onClick={() => {router.push(`/news/${record._id}`)}}>Read</button>
                                 {/* <button className="block xl:hidden border border-[2px] w-full text-black rounded-[10px] py-2 font-bold" onClick={() => {fileSaver.saveAs(record.!!)}}>Download PDF</button> */}
                                 </div>
                             </div>
@@ -66,6 +66,6 @@ function GuestResearchAndReport() {
 
 
 export {
-    GuestResearchAndReport
+    GuestNews
 }
 
