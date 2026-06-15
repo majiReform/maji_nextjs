@@ -1,6 +1,6 @@
 import { newsCollection } from "@/models/News";
 import { thematicAreaCollection } from "@/models/ThematicArea";
-import { logIt } from "app/admin/api/utils";
+import { logIt } from "../../../../utils";
 import { NextRequest, NextResponse } from "next/server";
 
 interface ParamsInterface {

@@ -1,6 +1,6 @@
 import { researchAndReportAreaCollection } from "@/models/ResearchAndReport";
 import { thematicAreaCollection } from "@/models/ThematicArea";
-import { logIt } from "app/admin/api/utils";
+import { logIt } from "../../../../utils";
 import { NextRequest, NextResponse } from "next/server";
 
 interface ParamsInterface {
