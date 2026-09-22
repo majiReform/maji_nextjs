@@ -44,6 +44,7 @@ export async function updateSession(request: NextRequest) {
             name: "session",
             value: await encrypt(decryptedPayload),
             httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
             sameSite: "strict",
             maxAge: 7 * 24 * 60 * 60
         });
